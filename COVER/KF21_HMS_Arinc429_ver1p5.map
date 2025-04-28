@@ -1,0 +1,1400 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.1                     
+******************************************************************************
+>> Linked Fri Apr 25 17:22:36 2025
+
+OUTPUT FILE NAME:   <KF21_HMS_Arinc429_ver1p5.out>
+ENTRY POINT SYMBOL: "code_start"  address: 00080000
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  RAMM0                 00000123   000002dd  00000000  000002dd  RWIX
+  RAMLS0                00008000   00000800  00000128  000006d8  RWIX
+  RAMLS1                00008800   00000800  00000000  00000800  RWIX
+  RAMLS2                00009000   00000800  00000000  00000800  RWIX
+  RAMLS3                00009800   00000800  00000000  00000800  RWIX
+  RAMLS4                0000a000   00000800  00000000  00000800  RWIX
+  RAMD0                 0000b000   00000800  00000000  00000800  RWIX
+  RAMGS14               0001a000   00001000  00000000  00001000  RWIX
+  RAMGS15               0001b000   00000ff8  00000000  00000ff8  RWIX
+  BEGIN                 00080000   00000002  00000002  00000000  RWIX
+  FLASHA                00080002   00001ffe  000001cf  00001e2f  RWIX
+  FLASHB                00082000   00002000  00001ffc  00000004  RWIX
+  FLASHC                00084000   00002000  00001fff  00000001  RWIX
+  FLASHD                00086000   00002000  00001cfc  00000304  RWIX
+  FLASHE                00088000   00008000  00000000  00008000  RWIX
+  FLASHF                00090000   00008000  0000102c  00006fd4  RWIX
+  FLASHG                00098000   00008000  00000000  00008000  RWIX
+  FLASHH                000a0000   00008000  00000000  00008000  RWIX
+  FLASHI                000a8000   00008000  00000000  00008000  RWIX
+  FLASHJ                000b0000   00008000  00000000  00008000  RWIX
+  FLASHK                000b8000   00002000  00000000  00002000  RWIX
+  FLASHL                000ba000   00002000  00000000  00002000  RWIX
+  FLASHM                000bc000   00002000  00000000  00002000  RWIX
+  FLASHN                000be000   00001ff0  00000000  00001ff0  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+PAGE 1:
+  BOOT_RSVD             00000002   00000121  00000000  00000121  RWIX
+  RAMM1                 00000400   000003f8  000003f8  00000000  RWIX
+  RAMLS5                0000a800   00000800  00000800  00000000  RWIX
+  RAMD1                 0000b800   00000800  00000000  00000800  RWIX
+  RAMGS0                0000c000   00001000  0000004b  00000fb5  RWIX
+  RAMGS1                0000d000   00001000  00000000  00001000  RWIX
+  RAMGS2                0000e000   00001000  00000000  00001000  RWIX
+  RAMGS3                0000f000   00001000  00000000  00001000  RWIX
+  RAMGS4                00010000   00001000  00000000  00001000  RWIX
+  RAMGS5                00011000   00001000  00000000  00001000  RWIX
+  RAMGS6                00012000   00001000  00000000  00001000  RWIX
+  RAMGS7                00013000   00001000  00000000  00001000  RWIX
+  RAMGS8                00014000   00001000  00000000  00001000  RWIX
+  RAMGS9                00015000   00001000  00000000  00001000  RWIX
+  RAMGS10               00016000   00001000  00000000  00001000  RWIX
+  RAMGS11               00017000   00001000  00000000  00001000  RWIX
+  RAMGS12               00018000   00001000  00000000  00001000  RWIX
+  RAMGS13               00019000   00001000  00000000  00001000  RWIX
+  CPU2TOCPU1RAM         0003f800   00000400  00000000  00000400  RWIX
+  CPU1TOCPU2RAM         0003fc00   00000400  00000000  00000400  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00080000    00000002     
+                  00080000    00000002     F2837xD_CodeStartBranch.obj (codestart)
+
+.cinit     0    00080008    000001cf     
+                  00080008    00000030     csu_calibration_mode.obj (.cinit)
+                  00080038    00000027     csu_fluxMeasurement.obj (.cinit:_gConstant_B)
+                  0008005f    0000001a     csu_fluxMeasurement.obj (.cinit)
+                  00080079    00000013     csu_accelMeasurement.obj (.cinit:_gConstant_A)
+                  0008008c    00000013     cvgc_357E2FE0.obj (.cinit:_moduleId_0)
+                  0008009f    00000013     csu_accelMeasurement.obj (.cinit)
+                  000800b2    0000000f     device.obj (.cinit)
+                  000800c1    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  000800cf    0000000d     lib_mhsUart.obj (.cinit)
+                  000800dc    0000000c     csu_angle_calculation.obj (.cinit)
+                  000800e8    00000009     csu_factory_mode.obj (.cinit)
+                  000800f1    00000005     HI_3587_arinc.obj (.cinit)
+                  000800f6    00000005     rts2800_fpu32.lib : _lock.c.obj (.cinit:__lock)
+                  000800fb    00000005                       : _lock.c.obj (.cinit:__unlock)
+                  00080100    00000005     board.obj (.cinit)
+                  00080105    00000005     c2000ware_libraries.obj (.cinit)
+                  0008010a    00000005     csu_Cbit.obj (.cinit)
+                  0008010f    00000005     csu_calibrationData.obj (.cinit)
+                  00080114    00000005     csu_init.obj (.cinit)
+                  00080119    00000005     csu_mhs_Status_trans.obj (.cinit)
+                  0008011e    00000005     csu_operation_mode.obj (.cinit)
+                  00080123    00000005     csu_status_mode.obj (.cinit)
+                  00080128    00000005     csu_tempMeasurement.obj (.cinit)
+                  0008012d    00000005     csu_test_status_trans.obj (.cinit)
+                  00080132    00000005     csu_voltageMeasurement.obj (.cinit)
+                  00080137    00000005     lib_mhsAdc.obj (.cinit)
+                  0008013c    00000005     lib_mhsEpwm.obj (.cinit)
+                  00080141    00000005     lib_mhsI2c.obj (.cinit)
+                  00080146    00000005     lib_mhsStd.obj (.cinit)
+                  0008014b    00000005     main.obj (.cinit)
+                  00080150    00000005     rts2800_fpu32.lib : strtok.c.obj (.cinit)
+                  00080155    00000004     main.obj (.cinit:_cstmCoverageData_0DC65A3D22428040AFC52CB5761B19A7)
+                  00080159    00000004     lib_mhsUart.obj (.cinit:_cstmCoverageData_2776491CAB7DB37DF48DE415BE984ADA)
+                  0008015d    00000004     HI_3587_arinc.obj (.cinit:_cstmCoverageData_3C4FCE89F61E224C8CD4B1FFB3EE3071)
+                  00080161    00000004     lib_mhsI2c.obj (.cinit:_cstmCoverageData_42B66B76300BC27B6B2F9051DD913913)
+                  00080165    00000004     csu_tempMeasurement.obj (.cinit:_cstmCoverageData_52B5D08D97D1FBC04F4505E0A256A0CD)
+                  00080169    00000004     csu_voltageMeasurement.obj (.cinit:_cstmCoverageData_5CC98B042206066B80C2C459ED7468F9)
+                  0008016d    00000004     csu_status_mode.obj (.cinit:_cstmCoverageData_6B515824061214E72B4D470154AB6A25)
+                  00080171    00000004     c2000ware_libraries.obj (.cinit:_cstmCoverageData_6D9F6A71EB213365E1594D890AF5929D)
+                  00080175    00000004     csu_Cbit.obj (.cinit:_cstmCoverageData_703DA1B233D357912E4AEB106C6B1FF1)
+                  00080179    00000004     csu_calibration_mode.obj (.cinit:_cstmCoverageData_7981556161BEB81F8E3D7967D1833727)
+                  0008017d    00000004     csu_accelMeasurement.obj (.cinit:_cstmCoverageData_827FDBC9095FD5130ED2D67109AE4B32)
+                  00080181    00000004     lib_mhsStd.obj (.cinit:_cstmCoverageData_A4F71B7B5ACCE729659412C9CA715DAA)
+                  00080185    00000004     lib_mhsAdc.obj (.cinit:_cstmCoverageData_AB725A56AFCB1BE7EC2F679342555F49)
+                  00080189    00000004     csu_angle_calculation.obj (.cinit:_cstmCoverageData_AC47AEDC19E2E57CFA9AA8EF3D3539BB)
+                  0008018d    00000004     board.obj (.cinit:_cstmCoverageData_B001B348403BA1C9CFC62469D01906F9)
+                  00080191    00000004     csu_calibrationData.obj (.cinit:_cstmCoverageData_B3D6C16D9DB64B49F996632B4CFC7881)
+                  00080195    00000004     csu_factory_mode.obj (.cinit:_cstmCoverageData_BBAFD5DEFF81CF2D122B974C8526D40E)
+                  00080199    00000004     csu_operation_mode.obj (.cinit:_cstmCoverageData_C58349DC45A2EB4D483F37EF64F4C33F)
+                  0008019d    00000004     csu_test_status_trans.obj (.cinit:_cstmCoverageData_C6284055858BEC9E137247B046DBA43B)
+                  000801a1    00000004     lib_mhsEpwm.obj (.cinit:_cstmCoverageData_C6957451A54EAC135DC106993B2776D7)
+                  000801a5    00000004     csu_init.obj (.cinit:_cstmCoverageData_E16054ED388F153209D2D04E084BEBF5)
+                  000801a9    00000004     csu_fluxMeasurement.obj (.cinit:_cstmCoverageData_E67CF5F0A746BC260692F6E49744B86C)
+                  000801ad    00000004     csu_mhs_Status_trans.obj (.cinit:_cstmCoverageData_E89648F4DFB3158321B1A197E56A0B90)
+                  000801b1    00000004     libcstm_357E2FE0.obj (.cinit:_cv_data)
+                  000801b5    00000004     lib_mhsAdc.obj (.cinit:_ema)
+                  000801b9    00000004     csu_calibration_mode.obj (.cinit:_maxB$8)
+                  000801bd    00000004     csu_calibration_mode.obj (.cinit:_maxB_1$10)
+                  000801c1    00000004     csu_calibration_mode.obj (.cinit:_maxB_2$11)
+                  000801c5    00000004     csu_calibration_mode.obj (.cinit:_minB$9)
+                  000801c9    00000004     lib_mhsUart.obj (.cinit:_rDataPointA)
+                  000801cd    00000004     libcstm_357E2FE0.obj (.cinit)
+                  000801d1    00000004     rts2800_fpu32.lib : errno.c.obj (.cinit)
+                  000801d5    00000002     --HOLE-- [fill = 0]
+
+.pinit     0    00082000    00000004     
+                  00082000    00000002     cvgc_357E2FE0.obj (.pinit)
+                  00082002    00000002     --HOLE-- [fill = 0]
+
+.stack     1    00000400    000003f8     UNINITIALIZED
+                  00000400    000003f8     --HOLE--
+
+.reset     0    003fffc0    00000002     DSECT
+                  003fffc0    00000002     rts2800_fpu32.lib : boot28.asm.obj (.reset)
+
+.pinit     0    00082000    00000000     UNINITIALIZED
+
+.TI.ramfunc 
+*          0    00086000    00000128     RUN ADDR = 00008000
+                  00086000    00000043     driverlib_coff.lib : flash.obj (.TI.ramfunc:_Flash_initModule)
+                  00086043    0000002c                        : flash.obj (.TI.ramfunc:_Flash_setBankPowerMode)
+                  0008606f    00000024                        : flash.obj (.TI.ramfunc:_Flash_setWaitstates)
+                  00086093    0000001d                        : flash.obj (.TI.ramfunc:_Flash_setPumpPowerMode)
+                  000860b0    00000018                        : flash.obj (.TI.ramfunc:_Flash_disableCache)
+                  000860c8    00000018                        : flash.obj (.TI.ramfunc:_Flash_disablePrefetch)
+                  000860e0    00000017                        : flash.obj (.TI.ramfunc:_Flash_enableCache)
+                  000860f7    00000017                        : flash.obj (.TI.ramfunc:_Flash_enablePrefetch)
+                  0008610e    00000016                        : flash.obj (.TI.ramfunc:_Flash_enableECC)
+                  00086124    00000004                        : sysctl.obj (.TI.ramfunc)
+
+GETBUFFER 
+*          0    0003f800    00000000     DSECT
+
+GETWRITEIDX 
+*          0    0003f800    00000000     DSECT
+
+PUTREADIDX 
+*          0    0003f800    00000000     DSECT
+
+.text.1    0    00082008    00001ff8     
+                  00082008    00000f37     csu_factory_mode.obj (.text)
+                  00082f3f    000004c3     i2cLib_FIFO_master_interrupt.obj (.text)
+                  00083402    000004a6     board.obj (.text)
+                  000838a8    00000486     csu_calibrationData.obj (.text)
+                  00083d2e    00000299     csu_angle_calculation.obj (.text)
+                  00083fc7    00000038     main.obj (.text:retain)
+                  00083fff    00000001     rts2800_fpu32.lib : startup.c.obj (.text)
+
+.text.2    0    00084000    00001fff     
+                  00084000    000003f9     device.obj (.text)
+                  000843f9    0000038c     rts2800_fpu32.lib : e_powf.c.obj (.text)
+                  00084785    0000036e     csu_calibration_mode.obj (.text)
+                  00084af3    00000340     lib_mhsAdc.obj (.text)
+                  00084e33    00000231     lib_mhsAdc.obj (.text:retain)
+                  00085064    00000206     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_setClock)
+                  0008526a    000001db     csu_fluxMeasurement.obj (.text)
+                  00085445    000001d8     csu_test_status_trans.obj (.text)
+                  0008561d    000001c6     i2c_ex6_eeprom_interrupt.obj (.text)
+                  000857e3    000001a9     lib_mhsEpwm.obj (.text)
+                  0008598c    000001a8     HI_3587_arinc.obj (.text)
+                  00085b34    000001a2     csu_init.obj (.text)
+                  00085cd6    0000019a     csu_mhs_Status_trans.obj (.text)
+                  00085e70    00000186     csu_Cbit.obj (.text)
+                  00085ff6    00000009     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_serviceWatchdog)
+
+.text.3    0    00086128    00001bd4     
+                  00086128    00000122     lib_mhsStd.obj (.text)
+                  0008624a    0000010e     lib_mhsI2c.obj (.text)
+                  00086358    00000101     main.obj (.text)
+                  00086459    000000f7     libcstm_357E2FE0.obj (.text)
+                  00086550    000000f5     rts2800_fpu32.lib : e_asinf.c.obj (.text)
+                  00086645    000000ca                       : s_atanf.c.obj (.text)
+                  0008670f    000000b1     csu_accelMeasurement.obj (.text)
+                  000867c0    000000ac     csu_status_mode.obj (.text)
+                  0008686c    000000ab     csu_voltageMeasurement.obj (.text)
+                  00086917    000000a6     csu_operation_mode.obj (.text)
+                  000869bd    000000a5     lib_mhsUart.obj (.text:retain)
+                  00086a62    0000009c     rts2800_fpu32.lib : fd_add28.asm.obj (.text)
+                  00086afe    00000092                       : e_sqrt.c.obj (.text)
+                  00086b90    0000008b                       : fd_div28.asm.obj (.text)
+                  00086c1b    0000008a     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_selectXTAL)
+                  00086ca5    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
+                  00086d2d    00000083                       : fd_mpy28.asm.obj (.text)
+                  00086db0    00000082     i2c_ex6_eeprom_interrupt.obj (.text:retain)
+                  00086e32    0000007f     driverlib_coff.lib : interrupt.obj (.text:_Interrupt_clearIFR)
+                  00086eb1    0000006f                        : adc.obj (.text:_ADC_setINLTrim)
+                  00086f20    00000068                        : sysctl.obj (.text:_SysCtl_getDeviceParametric)
+                  00086f88    00000064                        : i2c.obj (.text:_I2C_initController)
+                  00086fec    00000063     rts2800_fpu32.lib : s_cosf.c.obj (.text)
+                  0008704f    00000060     driverlib_coff.lib : adc.obj (.text:_ADC_setOffsetTrim)
+                  000870af    0000005d     csu_tempMeasurement.obj (.text)
+                  0008710c    0000005c     driverlib_coff.lib : spi.obj (.text:_SPI_setConfig)
+                  00087168    00000058     rts2800_fpu32.lib : s_scalbnf.c.obj (.text)
+                  000871c0    00000056                       : boot28.asm.obj (.text)
+                  00087216    00000052     driverlib_coff.lib : gpio.obj (.text:_GPIO_setPadConfig)
+                  00087268    00000051                        : sysctl.obj (.text:_SysCtl_getClock)
+                  000872b9    0000004e                        : interrupt.obj (.text:_Interrupt_disable)
+                  00087307    00000048                        : sysctl.obj (.text:_SysCtl_selectOscSource)
+                  0008734f    00000045                        : sci.obj (.text:_SCI_clearInterruptStatus)
+                  00087394    00000044                        : sci.obj (.text:_SCI_enableInterrupt)
+                  000873d8    00000042     lib_mhsUart.obj (.text)
+                  0008741a    00000041     driverlib_coff.lib : sci.obj (.text:_SCI_writeCharArray)
+                  0008745b    0000003e                        : sci.obj (.text:_SCI_setConfig)
+                  00087499    0000003d                        : interrupt.obj (.text:_Interrupt_initModule)
+                  000874d6    0000003c     cvgc_357E2FE0.obj (.text)
+                  00087512    0000003b     driverlib_coff.lib : sci.obj (.text:_SCI_readCharArray)
+                  0008754d    00000037                        : gpio.obj (.text:_GPIO_setControllerCore)
+                  00087584    00000037                        : gpio.obj (.text:_GPIO_setPinConfig)
+                  000875bb    00000037                        : gpio.obj (.text:_GPIO_setQualificationMode)
+                  000875f2    00000037                        : interrupt.obj (.text:_Interrupt_enable)
+                  00087629    00000031                        : gpio.obj (.text:_GPIO_setDirectionMode)
+                  0008765a    00000031     rts2800_fpu32.lib : atoi.c.obj (.text)
+                  0008768b    0000002f     driverlib_coff.lib : adc.obj (.text:_ADC_setMode)
+                  000876ba    0000002c                        : i2c.obj (.text:_I2C_disableInterrupt)
+                  000876e6    0000002b                        : i2c.obj (.text:_I2C_enableInterrupt)
+                  00087711    0000002a     rts2800_fpu32.lib : fd_cmp28.asm.obj (.text)
+                  0008773b    0000002a                       : l_div28.asm.obj (.text)
+                  00087765    00000029                       : exit.c.obj (.text)
+                  0008778e    00000027                       : e_sqrtf.c.obj (.text)
+                  000877b5    00000026     driverlib_coff.lib : flash.obj (.text:_Flash_setBankPowerUpDelay)
+                  000877db    00000026     rts2800_fpu32.lib : strtok.c.obj (.text)
+                  00087801    00000024                       : cpy_tbl.c.obj (.text)
+                  00087825    00000023                       : fd_tofsfpu32.asm.obj (.text)
+                  00087848    00000021     driverlib_coff.lib : sysctl.obj (.text:_CPUTimer_selectClockSource)
+                  00087869    00000021                        : i2c.obj (.text:_I2C_clearInterruptStatus)
+                  0008788a    00000021                        : i2c.obj (.text:_I2C_getInterruptStatus)
+                  000878ab    00000021     rts2800_fpu32.lib : fd_toi28.asm.obj (.text)
+                  000878cc    00000020     driverlib_coff.lib : sci.obj (.text:_SCI_isFIFOEnabled)
+                  000878ec    0000001f                        : sysctl.obj (.text:_CPUTimer_getTimerOverflowStatus)
+                  0008790b    0000001f     rts2800_fpu32.lib : fd_tol28.asm.obj (.text)
+                  0008792a    0000001e     driverlib_coff.lib : interrupt.obj (.text:_Interrupt_initVectorTable)
+                  00087948    0000001d     rts2800_fpu32.lib : i_tofd28.asm.obj (.text)
+                  00087965    0000001d                       : memcpy.c.obj (.text)
+                  00087982    0000001c                       : fs_tofdfpu32.asm.obj (.text)
+                  0008799e    0000001b     driverlib_coff.lib : adc.obj (.text:_ADC_isBaseValid)
+                  000879b9    0000001b                        : sci.obj (.text:_SCI_isBaseValid)
+                  000879d4    0000001b     rts2800_fpu32.lib : fd_toul28.asm.obj (.text)
+                  000879ef    0000001a     driverlib_coff.lib : sysctl.obj (.text:_CPUTimer_startTimer)
+                  00087a09    0000001a                        : sci.obj (.text:_SCI_isDataAvailableNonFIFO)
+                  00087a23    0000001a                        : sci.obj (.text:_SCI_isSpaceAvailableNonFIFO)
+                  00087a3d    0000001a                        : sysctl.obj (.text:_SysCtl_getLowSpeedClock)
+                  00087a57    0000001a     rts2800_fpu32.lib : fd_tou28.asm.obj (.text)
+                  00087a71    00000018     driverlib_coff.lib : sci.obj (.text:_SCI_disableModule)
+                  00087a89    00000018                        : sci.obj (.text:_SCI_performSoftwareReset)
+                  00087aa1    00000018     rts2800_fpu32.lib : ll_aox28.asm.obj (.text)
+                  00087ab9    00000017     driverlib_coff.lib : cputimer.obj (.text:_CPUTimer_isBaseValid)
+                  00087ad0    00000017                        : sysctl.obj (.text:_CPUTimer_isBaseValid)
+                  00087ae7    00000017                        : spi.obj (.text:_SPI_isBaseValid)
+                  00087afe    00000017     rts2800_fpu32.lib : s_fabs.c.obj (.text)
+                  00087b15    00000017                       : u_tofd28.asm.obj (.text)
+                  00087b2c    00000016                       : strncmp.c.obj (.text)
+                  00087b42    00000014     driverlib_coff.lib : sysctl.obj (.text:_CPUTimer_stopTimer)
+                  00087b56    00000014                        : sci.obj (.text:_SCI_getRxFIFOStatus)
+                  00087b6a    00000014                        : sci.obj (.text:_SCI_getTxFIFOStatus)
+                  00087b7e    00000014     c2000ware_libraries.obj (.text)
+                  00087b92    00000013     driverlib_coff.lib : cputimer.obj (.text:_CPUTimer_setEmulationMode)
+                  00087ba5    00000013                        : i2c.obj (.text:_I2C_isBaseValid)
+                  00087bb8    00000013                        : sci.obj (.text:_SCI_enableModule)
+                  00087bcb    00000012                        : sysctl.obj (.text:_CPUTimer_clearOverflowFlag)
+                  00087bdd    00000012                        : sysctl.obj (.text:_CPUTimer_disableInterrupt)
+                  00087bef    00000012     rts2800_fpu32.lib : args_main.c.obj (.text)
+                  00087c01    00000011     driverlib_coff.lib : sysctl.obj (.text:_CPUTimer_setPeriod)
+                  00087c12    00000011     rts2800_fpu32.lib : s_copysignf.c.obj (.text)
+                  00087c23    00000010     driverlib_coff.lib : flash.obj (.text:_Flash_isCtrlBaseValid)
+                  00087c33    00000010                        : flash.obj (.text:_Flash_isECCBaseValid)
+                  00087c43    0000000f                        : sysctl.obj (.text:_SysCtl_pollCpuTimer)
+                  00087c52    0000000e                        : gpio.obj (.text:_GPIO_isPinValid)
+                  00087c60    0000000e                        : interrupt.obj (.text:_Interrupt_defaultHandler)
+                  00087c6e    0000000e     rts2800_fpu32.lib : fd_sub28.asm.obj (.text)
+                  00087c7c    0000000e                       : strcspn.c.obj (.text)
+                  00087c8a    0000000e                       : strspn.c.obj (.text)
+                  00087c98    0000000d     driverlib_coff.lib : interrupt.obj (.text:_Interrupt_disableGlobal)
+                  00087ca5    0000000d                        : interrupt.obj (.text:_Interrupt_enableGlobal)
+                  00087cb2    0000000b                        : sysctl.obj (.text:_SysCtl_isMCDClockFailureDetected)
+                  00087cbd    0000000b     rts2800_fpu32.lib : u_div28.asm.obj (.text)
+                  00087cc8    00000009                       : _lock.c.obj (.text)
+                  00087cd1    00000009                       : strcat.c.obj (.text)
+                  00087cda    00000008     F2837xD_CodeStartBranch.obj (.text)
+                  00087ce2    00000008     rts2800_fpu32.lib : strlen.c.obj (.text)
+                  00087cea    00000007     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_resetMCD)
+                  00087cf1    00000005     rts2800_fpu32.lib : strcpy.c.obj (.text)
+                  00087cf6    00000002     driverlib_coff.lib : interrupt.obj (.text:_Interrupt_illegalOperationHandler)
+                  00087cf8    00000002                        : interrupt.obj (.text:_Interrupt_nmiHandler)
+                  00087cfa    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+
+.econst    0    00090000    0000102c     
+                  00090000    00000125     board.obj (.econst:.string)
+                  00090125    00000101     rts2800_fpu32.lib : ctype.c.obj (.econst:.string:__ctypes_)
+                  00090226    000000e1     csu_init.obj (.econst:.string)
+                  00090307    00000001     csu_factory_mode.obj (.econst:.string:_$P$T12$14)
+                  00090308    000000c2     driverlib_coff.lib : sysctl.obj (.econst:.string)
+                  000903ca    000000bf                        : flash.obj (.econst:.string)
+                  00090489    00000001     csu_factory_mode.obj (.econst:.string:_$P$T13$15)
+                  0009048a    000000bc     driverlib_coff.lib : gpio.obj (.econst:.string)
+                  00090546    000000bb                        : sci.obj (.econst:.string)
+                  00090601    00000001     csu_factory_mode.obj (.econst:.string:_$P$T26$28)
+                  00090602    000000bb     driverlib_coff.lib : spi.obj (.econst:.string)
+                  000906bd    00000001     csu_factory_mode.obj (.econst:.string:_$P$T27$29)
+                  000906be    00000099     HI_3587_arinc.obj (.econst:.string)
+                  00090757    00000001     csu_factory_mode.obj (.econst:.string:_$P$T33$35)
+                  00090758    00000066     i2cLib_FIFO_master_interrupt.obj (.econst:.string)
+                  000907be    00000063     driverlib_coff.lib : interrupt.obj (.econst:.string)
+                  00090821    00000001     csu_factory_mode.obj (.econst:.string:_$P$T34$36)
+                  00090822    00000062     driverlib_coff.lib : cputimer.obj (.econst:.string)
+                  00090884    0000005d                        : adc.obj (.econst:.string)
+                  000908e1    00000001     csu_factory_mode.obj (.econst:.string:_$P$T50$52)
+                  000908e2    0000005d     driverlib_coff.lib : i2c.obj (.econst:.string)
+                  0009093f    00000001     csu_factory_mode.obj (.econst:.string:_$P$T51$53)
+                  00090940    00000055     csu_status_mode.obj (.econst:.string)
+                  00090995    00000001     csu_test_status_trans.obj (.econst:_$P$T0$1)
+                  00090996    00000055     lib_mhsAdc.obj (.econst:.string)
+                  000909eb    00000001     csu_test_status_trans.obj (.econst:_$P$T2$3)
+                  000909ec    00000055     lib_mhsEpwm.obj (.econst:.string)
+                  00090a41    00000001     csu_test_status_trans.obj (.econst:_$P$T3$4)
+                  00090a42    00000055     lib_mhsI2c.obj (.econst:.string)
+                  00090a97    00000001     --HOLE-- [fill = 0]
+                  00090a98    00000055     lib_mhsUart.obj (.econst:.string)
+                  00090aed    00000001     --HOLE-- [fill = 0]
+                  00090aee    00000055     main.obj (.econst:.string)
+                  00090b43    00000001     --HOLE-- [fill = 0]
+                  00090b44    00000043     i2c_ex6_eeprom_interrupt.obj (.econst:.string)
+                  00090b87    00000001     --HOLE-- [fill = 0]
+                  00090b88    00000032     rts2800_fpu32.lib : e_powf.c.obj (.econst)
+                  00090bba    00000028     csu_Cbit.obj (.econst)
+                  00090be2    00000018     csu_calibration_mode.obj (.econst:_$P$T0$12)
+                  00090bfa    00000018     csu_angle_calculation.obj (.econst)
+                  00090c12    00000018     csu_voltageMeasurement.obj (.econst)
+                  00090c2a    00000014     csu_factory_mode.obj (.econst:.string)
+                  00090c3e    00000014     csu_calibration_mode.obj (.econst)
+                  00090c52    00000014     rts2800_fpu32.lib : e_asinf.c.obj (.econst)
+                  00090c66    00000013     csu_factory_mode.obj (.econst:.string:_$P$T4$6)
+                  00090c79    00000001     --HOLE-- [fill = 0]
+                  00090c7a    00000013     device.obj (.econst:.string)
+                  00090c8d    00000011     csu_factory_mode.obj (.econst:.string:_$P$T16$18)
+                  00090c9e    00000011     csu_factory_mode.obj (.econst:.string:_$P$T17$19)
+                  00090caf    00000011     csu_factory_mode.obj (.econst:.string:_$P$T18$20)
+                  00090cc0    00000011     csu_factory_mode.obj (.econst:.string:_$P$T19$21)
+                  00090cd1    00000011     csu_factory_mode.obj (.econst:.string:_$P$T20$22)
+                  00090ce2    00000011     csu_factory_mode.obj (.econst:.string:_$P$T21$23)
+                  00090cf3    00000011     csu_factory_mode.obj (.econst:.string:_$P$T22$24)
+                  00090d04    00000011     csu_factory_mode.obj (.econst:.string:_$P$T23$25)
+                  00090d15    00000011     csu_factory_mode.obj (.econst:.string:_$P$T24$26)
+                  00090d26    00000011     csu_factory_mode.obj (.econst:.string:_$P$T25$27)
+                  00090d37    00000011     csu_factory_mode.obj (.econst:.string:_$P$T30$32)
+                  00090d48    00000011     csu_factory_mode.obj (.econst:.string:_$P$T31$33)
+                  00090d59    00000011     csu_factory_mode.obj (.econst:.string:_$P$T32$34)
+                  00090d6a    00000011     c2000ware_libraries.obj (.econst:.string)
+                  00090d7b    00000001     --HOLE-- [fill = 0]
+                  00090d7c    00000011     csu_Cbit.obj (.econst:.string)
+                  00090d8d    00000001     --HOLE-- [fill = 0]
+                  00090d8e    00000011     csu_accelMeasurement.obj (.econst:.string)
+                  00090d9f    00000001     --HOLE-- [fill = 0]
+                  00090da0    00000011     csu_angle_calculation.obj (.econst:.string)
+                  00090db1    00000001     --HOLE-- [fill = 0]
+                  00090db2    00000011     csu_calibrationData.obj (.econst:.string)
+                  00090dc3    00000001     --HOLE-- [fill = 0]
+                  00090dc4    00000011     csu_calibration_mode.obj (.econst:.string)
+                  00090dd5    00000001     --HOLE-- [fill = 0]
+                  00090dd6    00000011     csu_fluxMeasurement.obj (.econst:.string)
+                  00090de7    00000001     --HOLE-- [fill = 0]
+                  00090de8    00000011     csu_mhs_Status_trans.obj (.econst:.string)
+                  00090df9    00000001     --HOLE-- [fill = 0]
+                  00090dfa    00000011     csu_operation_mode.obj (.econst:.string)
+                  00090e0b    00000001     --HOLE-- [fill = 0]
+                  00090e0c    00000011     csu_tempMeasurement.obj (.econst:.string)
+                  00090e1d    00000001     --HOLE-- [fill = 0]
+                  00090e1e    00000011     csu_test_status_trans.obj (.econst:.string)
+                  00090e2f    00000001     --HOLE-- [fill = 0]
+                  00090e30    00000011     csu_voltageMeasurement.obj (.econst:.string)
+                  00090e41    00000001     --HOLE-- [fill = 0]
+                  00090e42    00000011     lib_mhsStd.obj (.econst:.string)
+                  00090e53    00000010     csu_factory_mode.obj (.econst:.string:_$P$T3$5)
+                  00090e63    00000001     --HOLE-- [fill = 0]
+                  00090e64    00000010     lib_mhsAdc.obj (.econst)
+                  00090e74    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T37$39)
+                  00090e80    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T38$40)
+                  00090e8c    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T39$41)
+                  00090e98    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T40$42)
+                  00090ea4    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T41$43)
+                  00090eb0    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T42$44)
+                  00090ebc    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T43$45)
+                  00090ec8    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T44$46)
+                  00090ed4    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T45$47)
+                  00090ee0    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T46$48)
+                  00090eec    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T47$49)
+                  00090ef8    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T48$50)
+                  00090f04    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T49$51)
+                  00090f10    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T54$56)
+                  00090f1c    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T55$57)
+                  00090f28    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T56$58)
+                  00090f34    0000000c     csu_calibrationData.obj (.econst)
+                  00090f40    0000000c     csu_test_status_trans.obj (.econst)
+                  00090f4c    0000000c     main.obj (.econst)
+                  00090f58    0000000c     rts2800_fpu32.lib : e_sqrt.c.obj (.econst)
+                  00090f64    0000000a                       : s_atanf.c.obj (.econst:_aT)
+                  00090f6e    00000008     csu_factory_mode.obj (.econst:.string:_$P$T15$17)
+                  00090f76    00000008     csu_factory_mode.obj (.econst:.string:_$P$T29$31)
+                  00090f7e    00000008     csu_factory_mode.obj (.econst:.string:_$P$T36$38)
+                  00090f86    00000008     csu_factory_mode.obj (.econst:.string:_$P$T53$55)
+                  00090f8e    00000008     rts2800_fpu32.lib : s_atanf.c.obj (.econst:_atanhi)
+                  00090f96    00000008                       : s_atanf.c.obj (.econst:_atanlo)
+                  00090f9e    00000008     csu_init.obj (.econst)
+                  00090fa6    00000008     csu_status_mode.obj (.econst)
+                  00090fae    00000007     csu_factory_mode.obj (.econst:.string:_$P$T0$2)
+                  00090fb5    00000007     csu_factory_mode.obj (.econst:.string:_$P$T7$9)
+                  00090fbc    00000006     csu_factory_mode.obj (.econst:.string:_$P$T1$3)
+                  00090fc2    00000006     csu_factory_mode.obj (.econst:.string:_$P$T5$7)
+                  00090fc8    00000006     csu_factory_mode.obj (.econst:.string:_$P$T6$8)
+                  00090fce    00000006     csu_factory_mode.obj (.econst:.string:_$P$T8$10)
+                  00090fd4    00000006     rts2800_fpu32.lib : s_scalbnf.c.obj (.econst)
+                  00090fda    00000005     csu_factory_mode.obj (.econst:.string:_$P$T10$12)
+                  00090fdf    00000005     csu_factory_mode.obj (.econst:.string:_$P$T11$13)
+                  00090fe4    00000005     csu_factory_mode.obj (.econst:.string:_$P$T2$4)
+                  00090fe9    00000005     csu_factory_mode.obj (.econst:.string:_$P$T9$11)
+                  00090fee    00000005     libcstm_357E2FE0.obj (.econst:.string)
+                  00090ff3    00000004     csu_factory_mode.obj (.econst:.string:_$P$T14$16)
+                  00090ff7    00000004     csu_factory_mode.obj (.econst:.string:_$P$T28$30)
+                  00090ffb    00000004     csu_factory_mode.obj (.econst:.string:_$P$T35$37)
+                  00090fff    00000004     csu_factory_mode.obj (.econst:.string:_$P$T52$54)
+                  00091003    00000001     --HOLE-- [fill = 0]
+                  00091004    00000004     rts2800_fpu32.lib : e_powf.c.obj (.econst:_bp)
+                  00091008    00000004                       : e_powf.c.obj (.econst:_dp_h)
+                  0009100c    00000004                       : e_powf.c.obj (.econst:_dp_l)
+                  00091010    00000004     csu_fluxMeasurement.obj (.econst)
+                  00091014    00000004     csu_mhs_Status_trans.obj (.econst)
+                  00091018    00000004     rts2800_fpu32.lib : s_atanf.c.obj (.econst)
+                  0009101c    00000002     csu_factory_mode.obj (.econst:.string:_$P$T57$59)
+                  0009101e    00000002     csu_factory_mode.obj (.econst:.string:_$P$T58$60)
+                  00091020    00000002     csu_factory_mode.obj (.econst:.string:_$P$T59$61)
+                  00091022    00000002     csu_factory_mode.obj (.econst:.string:_$P$T60$62)
+                  00091024    00000002     csu_factory_mode.obj (.econst:.string:_$P$T61$63)
+                  00091026    00000002     csu_factory_mode.obj (.econst:.string:_$P$T62$64)
+                  00091028    00000002     csu_test_status_trans.obj (.econst:_$P$T1$2)
+                  0009102a    00000002     csu_test_status_trans.obj (.econst:_$P$T4$5)
+
+.ebss.1    1    0000a800    00000800     UNINITIALIZED
+                  0000a800    000003fb     libcstm_357E2FE0.obj (.ebss:_cv_data)
+                  0000abfb    00000004     lib_mhsUart.obj (.ebss:_cstmCoverageData_2776491CAB7DB37DF48DE415BE984ADA)
+                  0000abff    00000001     csu_tempMeasurement.obj (.ebss:_cstmCoverageData_52B5D08D97D1FBC04F4505E0A256A0CD)
+                  0000ac00    000000a4     csu_calibrationData.obj (.ebss)
+                  0000aca4    0000001c     lib_mhsI2c.obj (.ebss)
+                  0000acc0    00000080     csu_factory_mode.obj (.ebss:_cstmCoverageData_BBAFD5DEFF81CF2D122B974C8526D40E)
+                  0000ad40    00000064     lib_mhsUart.obj (.ebss:_rDataPointA)
+                  0000ada4    0000001a     csu_Cbit.obj (.ebss:_cstmCoverageData_703DA1B233D357912E4AEB106C6B1FF1)
+                  0000adbe    00000002     HI_3587_arinc.obj (.ebss)
+                  0000adc0    00000040     lib_mhsI2c.obj (.ebss:_RX_MsgBuffer)
+                  0000ae00    00000040     lib_mhsI2c.obj (.ebss:_TX_MsgBuffer)
+                  0000ae40    00000040     csu_mhs_Status_trans.obj (.ebss:_TxBusWord)
+                  0000ae80    00000029     csu_calibration_mode.obj (.ebss:_cstmCoverageData_7981556161BEB81F8E3D7967D1833727)
+                  0000aea9    00000014     lib_mhsAdc.obj (.ebss:_cstmCoverageData_AB725A56AFCB1BE7EC2F679342555F49)
+                  0000aebd    00000003     csu_calibration_mode.obj (.ebss:_maxB$8)
+                  0000aec0    00000024     csu_fluxMeasurement.obj (.ebss:_gConstant_B)
+                  0000aee4    00000019     csu_fluxMeasurement.obj (.ebss)
+                  0000aefd    00000003     csu_calibration_mode.obj (.ebss:_minB$9)
+                  0000af00    00000018     csu_calibrationData.obj (.ebss:_cstmCoverageData_B3D6C16D9DB64B49F996632B4CFC7881)
+                  0000af18    00000013     lib_mhsStd.obj (.ebss:_cstmCoverageData_A4F71B7B5ACCE729659412C9CA715DAA)
+                  0000af2b    00000001     csu_voltageMeasurement.obj (.ebss:_cstmCoverageData_5CC98B042206066B80C2C459ED7468F9)
+                  0000af2c    00000012     csu_calibration_mode.obj (.ebss)
+                  0000af3e    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__lock)
+                  0000af40    00000010     board.obj (.ebss:_cstmCoverageData_B001B348403BA1C9CFC62469D01906F9)
+                  0000af50    00000010     csu_accelMeasurement.obj (.ebss:_gConstant_A)
+                  0000af60    00000010     cvgc_357E2FE0.obj (.ebss:_moduleId_0)
+                  0000af70    0000000f     csu_fluxMeasurement.obj (.ebss:_cstmCoverageData_E67CF5F0A746BC260692F6E49744B86C)
+                  0000af7f    00000001     c2000ware_libraries.obj (.ebss:_cstmCoverageData_6D9F6A71EB213365E1594D890AF5929D)
+                  0000af80    0000000e     lib_mhsI2c.obj (.ebss:_cstmCoverageData_42B66B76300BC27B6B2F9051DD913913)
+                  0000af8e    0000000e     csu_angle_calculation.obj (.ebss:_cstmCoverageData_AC47AEDC19E2E57CFA9AA8EF3D3539BB)
+                  0000af9c    0000000e     csu_test_status_trans.obj (.ebss:_cstmCoverageData_C6284055858BEC9E137247B046DBA43B)
+                  0000afaa    0000000b     lib_mhsAdc.obj (.ebss:_ema)
+                  0000afb5    0000000a     main.obj (.ebss:_cstmCoverageData_0DC65A3D22428040AFC52CB5761B19A7)
+                  0000afbf    00000001     lib_mhsEpwm.obj (.ebss:_cstmCoverageData_C6957451A54EAC135DC106993B2776D7)
+                  0000afc0    0000000b     csu_mhs_Status_trans.obj (.ebss)
+                  0000afcb    00000001     cvgc_357E2FE0.obj (.ebss)
+                  0000afcc    0000000a     csu_accelMeasurement.obj (.ebss)
+                  0000afd6    00000009     csu_status_mode.obj (.ebss:_cstmCoverageData_6B515824061214E72B4D470154AB6A25)
+                  0000afdf    00000009     csu_mhs_Status_trans.obj (.ebss:_cstmCoverageData_E89648F4DFB3158321B1A197E56A0B90)
+                  0000afe8    00000008     HI_3587_arinc.obj (.ebss:_cstmCoverageData_3C4FCE89F61E224C8CD4B1FFB3EE3071)
+                  0000aff0    00000007     csu_operation_mode.obj (.ebss:_cstmCoverageData_C58349DC45A2EB4D483F37EF64F4C33F)
+                  0000aff7    00000006     csu_calibration_mode.obj (.ebss:_maxB_1$10)
+                  0000affd    00000001     libcstm_357E2FE0.obj (.ebss)
+                  0000affe    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__unlock)
+
+.ebss.2    1    0000c000    0000004b     UNINITIALIZED
+                  0000c000    00000006     csu_calibration_mode.obj (.ebss:_maxB_2$11)
+                  0000c006    00000006     csu_angle_calculation.obj (.ebss)
+                  0000c00c    00000006     device.obj (.ebss)
+                  0000c012    00000006     main.obj (.ebss)
+                  0000c018    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
+                  0000c01e    00000004     csu_accelMeasurement.obj (.ebss:_cstmCoverageData_827FDBC9095FD5130ED2D67109AE4B32)
+                  0000c022    00000004     csu_init.obj (.ebss:_cstmCoverageData_E16054ED388F153209D2D04E084BEBF5)
+                  0000c026    00000004     csu_factory_mode.obj (.ebss)
+                  0000c02a    00000004     csu_status_mode.obj (.ebss)
+                  0000c02e    00000004     lib_mhsUart.obj (.ebss)
+                  0000c032    00000002     board.obj (.ebss)
+                  0000c034    00000002     c2000ware_libraries.obj (.ebss)
+                  0000c036    00000002     csu_Cbit.obj (.ebss)
+                  0000c038    00000002     csu_init.obj (.ebss)
+                  0000c03a    00000002     csu_operation_mode.obj (.ebss)
+                  0000c03c    00000002     csu_tempMeasurement.obj (.ebss)
+                  0000c03e    00000002     csu_test_status_trans.obj (.ebss)
+                  0000c040    00000002     csu_voltageMeasurement.obj (.ebss)
+                  0000c042    00000002     lib_mhsAdc.obj (.ebss)
+                  0000c044    00000002     lib_mhsEpwm.obj (.ebss)
+                  0000c046    00000002     lib_mhsStd.obj (.ebss)
+                  0000c048    00000002     rts2800_fpu32.lib : strtok.c.obj (.ebss)
+                  0000c04a    00000001                       : errno.c.obj (.ebss)
+
+MODULE SUMMARY
+
+       Module                             code    initialized data   uninitialized data
+       ------                             ----    ----------------   ------------------
+    .\
+       csu_factory_mode.obj               3895    607                132               
+       lib_mhsAdc.obj                     1393    114                33                
+       csu_calibrationData.obj            1158    38                 188               
+       i2cLib_FIFO_master_interrupt.obj   1219    102                0                 
+       csu_calibration_mode.obj           878     129                77                
+       csu_angle_calculation.obj          665     57                 20                
+       csu_init.obj                       418     242                6                 
+       i2c_ex6_eeprom_interrupt.obj       584     67                 0                 
+       csu_fluxMeasurement.obj            475     90                 76                
+       HI_3587_arinc.obj                  424     162                10                
+       lib_mhsI2c.obj                     270     94                 170               
+       csu_test_status_trans.obj          472     45                 16                
+       csu_mhs_Status_trans.obj           410     30                 84                
+       lib_mhsEpwm.obj                    425     94                 3                 
+       csu_Cbit.obj                       390     66                 28                
+       lib_mhsUart.obj                    231     106                108               
+       main.obj                           313     106                16                
+       lib_mhsStd.obj                     290     26                 21                
+       csu_status_mode.obj                172     102                13                
+       csu_accelMeasurement.obj           177     59                 30                
+       csu_voltageMeasurement.obj         171     50                 3                 
+       csu_operation_mode.obj             166     26                 9                 
+       csu_tempMeasurement.obj            93      26                 3                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             14689   2438               1046              
+                                                                                       
+    .\device\
+       device.obj                         1017    34                 6                 
+       F2837xD_CodeStartBranch.obj        10      0                  0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             1027    34                 6                 
+                                                                                       
+    .\syscfg\
+       board.obj                          1190    302                18                
+       c2000ware_libraries.obj            20      26                 3                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             1210    328                21                
+                                                                                       
+    C:\myProject\SensorPia_Project\HMS\KF21_HMS_Arinc429_ver1p5\KF21_HMS_Arinc429_ver1p5\COVER\
+       libcstm_357E2FE0.obj               247     13                 1020              
+       cvgc_357E2FE0.obj                  60      21                 17                
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             307     34                 1037              
+                                                                                       
+    C:\ti\c2000\C2000Ware_5_01_00_00\driverlib\f2837xd\driverlib\ccs\Debug\driverlib_coff.lib
+       sysctl.obj                         1175    194                0                 
+       flash.obj                          654     191                0                 
+       sci.obj                            541     187                0                 
+       gpio.obj                           310     188                0                 
+       interrupt.obj                      395     99                 0                 
+       adc.obj                            281     93                 0                 
+       i2c.obj                            272     93                 0                 
+       spi.obj                            115     187                0                 
+       cputimer.obj                       42      98                 0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             3785    1330               0                 
+                                                                                       
+    C:\ti\ccs1120\ccs\tools\compiler\ti-cgt-c2000_22.6.1.LTS\lib\rts2800_fpu32.lib
+       e_powf.c.obj                       908     62                 0                 
+       e_asinf.c.obj                      245     20                 0                 
+       ctype.c.obj                        0       257                0                 
+       s_atanf.c.obj                      202     30                 0                 
+       e_sqrt.c.obj                       146     12                 0                 
+       fd_add28.asm.obj                   156     0                  0                 
+       fd_div28.asm.obj                   139     0                  0                 
+       fs_div28.asm.obj                   136     0                  0                 
+       fd_mpy28.asm.obj                   131     0                  0                 
+       s_cosf.c.obj                       99      0                  0                 
+       s_scalbnf.c.obj                    88      6                  0                 
+       boot28.asm.obj                     86      0                  0                 
+       exit.c.obj                         41      14                 6                 
+       atoi.c.obj                         49      0                  0                 
+       strtok.c.obj                       38      5                  2                 
+       fd_cmp28.asm.obj                   42      0                  0                 
+       l_div28.asm.obj                    42      0                  0                 
+       e_sqrtf.c.obj                      39      0                  0                 
+       cpy_tbl.c.obj                      36      0                  0                 
+       fd_tofsfpu32.asm.obj               35      0                  0                 
+       fd_toi28.asm.obj                   33      0                  0                 
+       fd_tol28.asm.obj                   31      0                  0                 
+       i_tofd28.asm.obj                   29      0                  0                 
+       memcpy.c.obj                       29      0                  0                 
+       fs_tofdfpu32.asm.obj               28      0                  0                 
+       fd_toul28.asm.obj                  27      0                  0                 
+       fd_tou28.asm.obj                   26      0                  0                 
+       ll_aox28.asm.obj                   24      0                  0                 
+       _lock.c.obj                        9       10                 4                 
+       s_fabs.c.obj                       23      0                  0                 
+       u_tofd28.asm.obj                   23      0                  0                 
+       strncmp.c.obj                      22      0                  0                 
+       args_main.c.obj                    18      0                  0                 
+       s_copysignf.c.obj                  17      0                  0                 
+       fd_sub28.asm.obj                   14      0                  0                 
+       strcspn.c.obj                      14      0                  0                 
+       strspn.c.obj                       14      0                  0                 
+       u_div28.asm.obj                    11      0                  0                 
+       strcat.c.obj                       9       0                  0                 
+       strlen.c.obj                       8       0                  0                 
+       errno.c.obj                        0       4                  1                 
+       strcpy.c.obj                       5       0                  0                 
+       pre_init.c.obj                     2       0                  0                 
+       startup.c.obj                      1       0                  0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             3075    420                13                
+                                                                                       
+       Stack:                             0       0                  1016              
+    +--+----------------------------------+-------+------------------+--------------------+
+       Grand Total:                       24093   4584               3139              
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+0000a800     2a0 (0000a800)     _cv_data
+
+0000abfb     2af (0000abc0)     _cstmCoverageData_2776491CAB7DB37DF48DE415BE984ADA
+0000abff     2af (0000abc0)     _cstmCoverageData_52B5D08D97D1FBC04F4505E0A256A0CD
+
+0000ac00     2b0 (0000ac00)     _bParameterError
+0000ac01     2b0 (0000ac00)     _gCheckSum_code
+0000ac02     2b0 (0000ac00)     _gversion_code
+0000ac03     2b0 (0000ac00)     _eepromcrc
+0000ac04     2b0 (0000ac00)     _cstmTempPtr1_B3D6C16D9DB64B49F996632B4CFC7881
+0000ac06     2b0 (0000ac00)     _mhsensor_accelrightAngle_Data
+0000ac16     2b0 (0000ac00)     _mhsensor_sensor_Data
+
+0000ac40     2b1 (0000ac40)     _mhsensor_calibration_Data
+
+0000ac80     2b2 (0000ac80)     _mhsensor_fluxrightAngle_Data
+0000aca4     2b2 (0000ac80)     _status
+0000aca6     2b2 (0000ac80)     _cstmTempPtr1_42B66B76300BC27B6B2F9051DD913913
+0000aca8     2b2 (0000ac80)     _currentResponderPtr
+0000acaa     2b2 (0000ac80)     _ControlAddr
+0000acac     2b2 (0000ac80)     _EEPROM
+
+0000acc0     2b3 (0000acc0)     _cstmCoverageData_BBAFD5DEFF81CF2D122B974C8526D40E
+
+0000ad40     2b5 (0000ad40)     _rDataPointA
+
+0000ada4     2b6 (0000ad80)     _cstmCoverageData_703DA1B233D357912E4AEB106C6B1FF1
+0000adbe     2b6 (0000ad80)     _cstmTempPtr1_3C4FCE89F61E224C8CD4B1FFB3EE3071
+
+0000adc0     2b7 (0000adc0)     _RX_MsgBuffer
+
+0000ae00     2b8 (0000ae00)     _TX_MsgBuffer
+
+0000ae40     2b9 (0000ae40)     _TxBusWord
+
+0000ae80     2ba (0000ae80)     _cstmCoverageData_7981556161BEB81F8E3D7967D1833727
+0000aea9     2ba (0000ae80)     _cstmCoverageData_AB725A56AFCB1BE7EC2F679342555F49
+
+0000aee4     2bb (0000aec0)     _cstmTempPtr1_E67CF5F0A746BC260692F6E49744B86C
+0000aee6     2bb (0000aec0)     _Box
+0000aeea     2bb (0000aec0)     _Boy
+0000aeee     2bb (0000aec0)     _Boz
+0000aef2     2bb (0000aec0)     _mhsensor_data
+
+0000af00     2bc (0000af00)     _cstmCoverageData_B3D6C16D9DB64B49F996632B4CFC7881
+0000af18     2bc (0000af00)     _cstmCoverageData_A4F71B7B5ACCE729659412C9CA715DAA
+0000af2b     2bc (0000af00)     _cstmCoverageData_5CC98B042206066B80C2C459ED7468F9
+0000af38     2bc (0000af00)     _cstmTempPtr1_7981556161BEB81F8E3D7967D1833727
+0000af3e     2bc (0000af00)     __lock
+
+0000af40     2bd (0000af40)     _cstmCoverageData_B001B348403BA1C9CFC62469D01906F9
+0000af70     2bd (0000af40)     _cstmCoverageData_E67CF5F0A746BC260692F6E49744B86C
+0000af7f     2bd (0000af40)     _cstmCoverageData_6D9F6A71EB213365E1594D890AF5929D
+
+0000af80     2be (0000af80)     _cstmCoverageData_42B66B76300BC27B6B2F9051DD913913
+0000af8e     2be (0000af80)     _cstmCoverageData_AC47AEDC19E2E57CFA9AA8EF3D3539BB
+0000af9c     2be (0000af80)     _cstmCoverageData_C6284055858BEC9E137247B046DBA43B
+0000afaa     2be (0000af80)     _ema
+0000afb5     2be (0000af80)     _cstmCoverageData_0DC65A3D22428040AFC52CB5761B19A7
+0000afbf     2be (0000af80)     _cstmCoverageData_C6957451A54EAC135DC106993B2776D7
+
+0000afc0     2bf (0000afc0)     _cstmTempPtr1_E89648F4DFB3158321B1A197E56A0B90
+0000afc2     2bf (0000afc0)     _arinc429_error
+0000afcc     2bf (0000afc0)     _cstmTempPtr1_827FDBC9095FD5130ED2D67109AE4B32
+0000afce     2bf (0000afc0)     _g0x
+0000afd2     2bf (0000afc0)     _g0y
+0000afd6     2bf (0000afc0)     _cstmCoverageData_6B515824061214E72B4D470154AB6A25
+0000afdf     2bf (0000afc0)     _cstmCoverageData_E89648F4DFB3158321B1A197E56A0B90
+0000afe8     2bf (0000afc0)     _cstmCoverageData_3C4FCE89F61E224C8CD4B1FFB3EE3071
+0000aff0     2bf (0000afc0)     _cstmCoverageData_C58349DC45A2EB4D483F37EF64F4C33F
+0000affe     2bf (0000afc0)     __unlock
+
+0000c006     300 (0000c000)     _cstmTempPtr1_AC47AEDC19E2E57CFA9AA8EF3D3539BB
+0000c00c     300 (0000c000)     _Example_Result
+0000c00e     300 (0000c000)     _Example_PassCount
+0000c010     300 (0000c000)     _Example_Fail
+0000c014     300 (0000c000)     _cstmTempPtr1_0DC65A3D22428040AFC52CB5761B19A7
+0000c018     300 (0000c000)     ___TI_enable_exit_profile_output
+0000c01a     300 (0000c000)     ___TI_cleanup_ptr
+0000c01c     300 (0000c000)     ___TI_dtors_ptr
+0000c01e     300 (0000c000)     _cstmCoverageData_827FDBC9095FD5130ED2D67109AE4B32
+0000c022     300 (0000c000)     _cstmCoverageData_E16054ED388F153209D2D04E084BEBF5
+0000c026     300 (0000c000)     _gfirstOpen_factory
+0000c028     300 (0000c000)     _cstmTempPtr1_BBAFD5DEFF81CF2D122B974C8526D40E
+0000c02a     300 (0000c000)     _cstmTempPtr1_6B515824061214E72B4D470154AB6A25
+0000c02c     300 (0000c000)     _Can_State_Ptr
+0000c02e     300 (0000c000)     _gRx_done
+0000c02f     300 (0000c000)     _gRx_cnt
+0000c030     300 (0000c000)     _cstmTempPtr1_2776491CAB7DB37DF48DE415BE984ADA
+0000c032     300 (0000c000)     _cstmTempPtr1_B001B348403BA1C9CFC62469D01906F9
+0000c034     300 (0000c000)     _cstmTempPtr1_6D9F6A71EB213365E1594D890AF5929D
+0000c036     300 (0000c000)     _cstmTempPtr1_703DA1B233D357912E4AEB106C6B1FF1
+0000c038     300 (0000c000)     _cstmTempPtr1_E16054ED388F153209D2D04E084BEBF5
+0000c03a     300 (0000c000)     _cstmTempPtr1_C58349DC45A2EB4D483F37EF64F4C33F
+0000c03c     300 (0000c000)     _cstmTempPtr1_52B5D08D97D1FBC04F4505E0A256A0CD
+0000c03e     300 (0000c000)     _cstmTempPtr1_C6284055858BEC9E137247B046DBA43B
+
+0000c040     301 (0000c040)     _cstmTempPtr1_5CC98B042206066B80C2C459ED7468F9
+0000c042     301 (0000c040)     _cstmTempPtr1_AB725A56AFCB1BE7EC2F679342555F49
+0000c044     301 (0000c040)     _cstmTempPtr1_C6957451A54EAC135DC106993B2776D7
+0000c046     301 (0000c040)     _cstmTempPtr1_A4F71B7B5ACCE729659412C9CA715DAA
+0000c04a     301 (0000c040)     _errno
+
+00090125    2404 (00090100)     __ctypes_
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                                              
+----  -------   ----                                              
+abs   ffffffff  .text                                             
+0     00087765  C$$EXIT                                           
+0     00086a62  FD$$ADD                                           
+0     00087711  FD$$CMP                                           
+0     00086b90  FD$$DIV                                           
+0     00086d2d  FD$$MPY                                           
+0     00087c6e  FD$$SUB                                           
+0     00087825  FD$$TOFS                                          
+0     000878ab  FD$$TOI                                           
+0     0008790b  FD$$TOL                                           
+0     00087a57  FD$$TOU                                           
+0     000879d4  FD$$TOUL                                          
+0     00086ca5  FS$$DIV                                           
+0     00087982  FS$$TOFD                                          
+0     00087948  I$$TOFD                                           
+0     0008773b  L$$DIV                                            
+0     0008774a  L$$MOD                                            
+0     00087aa1  LL$$AND                                           
+0     00087aa9  LL$$OR                                            
+0     00087ab1  LL$$XOR                                           
+0     00087cbd  U$$DIV                                            
+0     00087cc2  U$$MOD                                            
+0     00087b15  U$$TOFD                                           
+0     00087758  UL$$DIV                                           
+0     0008775f  UL$$MOD                                           
+0     00086eb1  _ADC_setINLTrim                                   
+0     0008768b  _ADC_setMode                                      
+0     0008704f  _ADC_setOffsetTrim                                
+0     00083675  _Board_init                                       
+1     0000aee6  _Box                                              
+1     0000aeea  _Boy                                              
+1     0000aeee  _Boz                                              
+0     00087b8c  _C2000Ware_libraries_init                         
+0     000837af  _CLR_WDT_init                                     
+0     00083700  _CPUTIMER_init                                    
+0     00087b92  _CPUTimer_setEmulationMode                        
+1     0000c02c  _Can_State_Ptr                                    
+1     0000acaa  _ControlAddr                                      
+0     00083794  _DISCRETE_1_init                                  
+0     000837cf  _DISCRETE_2_init                                  
+0     0008426d  _Device_bootCPU2                                  
+0     0008423c  _Device_configureTMXAnalogTrim                    
+0     000840ea  _Device_enableAllPeripherals                      
+0     00084226  _Device_enableUnbondedGPIOPullups                 
+0     00084209  _Device_enableUnbondedGPIOPullupsFor100Pin        
+0     000841f6  _Device_enableUnbondedGPIOPullupsFor176Pin        
+0     00084097  _Device_init                                      
+0     000841d5  _Device_initGPIO                                  
+1     0000acac  _EEPROM                                           
+1     0000c010  _Example_Fail                                     
+1     0000c00e  _Example_PassCount                                
+1     0000c00c  _Example_Result                                   
+0     000843f8  _Example_done                                     
+0     000843f3  _Example_setResultFail                            
+0     000843ee  _Example_setResultPass                            
+0     00008000  _Flash_initModule                                 
+0     00083732  _GPIO_init                                        
+0     0008754d  _GPIO_setControllerCore                           
+0     00087629  _GPIO_setDirectionMode                            
+0     00087216  _GPIO_setPadConfig                                
+0     00087584  _GPIO_setPinConfig                                
+0     000875bb  _GPIO_setQualificationMode                        
+0     000830d5  _I2CBusScan                                       
+0     0008575d  _I2C_GPIO_init                                    
+0     000831de  _I2C_MasterReceiver                               
+0     0008318f  _I2C_MasterTransmitter                            
+0     0008313c  _I2C_TransmitSlaveAddress_ControlBytes            
+0     00087869  _I2C_clearInterruptStatus                         
+0     000876ba  _I2C_disableInterrupt                             
+0     000876e6  _I2C_enableInterrupt                              
+0     0008788a  _I2C_getInterruptStatus                           
+0     00086f88  _I2C_initController                               
+0     0008578b  _I2Cinit                                          
+0     000837ea  _INTERRUPT_init                                   
+0     000869bd  _INT_mySCI0_RX_ISR                                
+0     00086a25  _INT_mySCI0_TX_ISR                                
+0     000872b9  _Interrupt_disable                                
+0     000875f2  _Interrupt_enable                                 
+0     00087499  _Interrupt_initModule                             
+0     0008792a  _Interrupt_initVectorTable                        
+0     0008619f  _LToStr                                           
+0     00083744  _MR_init                                          
+0     00086743  _MeasureAccelation                                
+0     000870fc  _MeasureBoardTemperature                          
+0     000852be  _MeasureFlux                                      
+0     0008687a  _MeasureVoltage                                   
+0     00083689  _PinMux_init                                      
+1     0000adc0  _RX_MsgBuffer                                     
+0     00086128  _RamfuncsLoadEnd                                  
+abs   00000128  _RamfuncsLoadSize                                 
+0     00086000  _RamfuncsLoadStart                                
+0     00008128  _RamfuncsRunEnd                                   
+abs   00000128  _RamfuncsRunSize                                  
+0     00008000  _RamfuncsRunStart                                 
+0     0008734f  _SCI_clearInterruptStatus                         
+0     00087394  _SCI_enableInterrupt                              
+0     00083816  _SCI_init                                         
+0     00087512  _SCI_readCharArray                                
+0     0008745b  _SCI_setConfig                                    
+0     0008741a  _SCI_writeCharArray                               
+0     00083776  _SPI_CS_init                                      
+0     0008386a  _SPI_init                                         
+0     0008710c  _SPI_setConfig                                    
+0     00086156  _StrZeroFill                                      
+0     00008124  _SysCtl_delay                                     
+0     00087268  _SysCtl_getClock                                  
+0     00086f20  _SysCtl_getDeviceParametric                       
+0     00087a3d  _SysCtl_getLowSpeedClock                          
+0     00087307  _SysCtl_selectOscSource                           
+0     00086c1b  _SysCtl_selectXTAL                                
+0     00085064  _SysCtl_setClock                                  
+0     0008375d  _TFLAG_init                                       
+1     0000ae00  _TX_MsgBuffer                                     
+1     0000ae40  _TxBusWord                                        
+0     000832fd  _Write_Read_TX_RX_FIFO                            
+1     000007f8  __STACK_END                                       
+abs   000003f8  __STACK_SIZE                                      
+1     0000c01a  ___TI_cleanup_ptr                                 
+1     0000c01c  ___TI_dtors_ptr                                   
+1     0000c018  ___TI_enable_exit_profile_output                  
+abs   ffffffff  ___TI_pprof_out_hndl                              
+abs   ffffffff  ___TI_prof_data_size                              
+abs   ffffffff  ___TI_prof_data_start                             
+abs   ffffffff  ___binit__                                        
+abs   ffffffff  ___c_args__                                       
+0     00080008  ___cinit__                                        
+0     000843e7  ___error__                                        
+abs   ffffffff  ___etext__                                        
+0     00082000  ___pinit__                                        
+0     0008750c  ___sti___17_cvgc_357E2FE0_cpp_57bf3e11            
+abs   ffffffff  ___text__                                         
+0     00087bef  __args_main                                       
+0     00090125  __ctypes_                                         
+1     0000af3e  __lock                                            
+0     00087cd0  __nop                                             
+0     00087ccc  __register_lock                                   
+0     00087cc8  __register_unlock                                 
+1     00000400  __stack                                           
+0     00083fff  __system_post_cinit                               
+0     00087cfa  __system_pre_init                                 
+1     0000affe  __unlock                                          
+0     00087765  _abort                                            
+0     0008671d  _accel_matrix_init                                
+0     00084e33  _adcA1ISR                                         
+0     00083d57  _angle_calculation                                
+1     0000afc2  _arinc429_error                                   
+0     00086550  _asin                                             
+0     00086550  _asinf                                            
+0     00086645  _atan                                             
+0     00086645  _atanf                                            
+0     0008765a  _atoi                                             
+1     0000ac00  _bParameterError                                  
+0     000871c0  _c_int00                                          
+0     00084793  _calibrationMode                                  
+0     00083213  _checkBusStatus                                   
+0     00085e7e  _checkCbit                                        
+0     00084cf8  _configureADC                                     
+0     00087801  _copy_in                                          
+0     00087c12  _copysign                                         
+0     00087c12  _copysignf                                        
+0     00086fec  _cos                                              
+0     00086fec  _cosf                                             
+0     00083fc7  _cpuTimer0ISR                                     
+1     0000afb5  _cstmCoverageData_0DC65A3D22428040AFC52CB5761B19A7
+1     0000abfb  _cstmCoverageData_2776491CAB7DB37DF48DE415BE984ADA
+1     0000afe8  _cstmCoverageData_3C4FCE89F61E224C8CD4B1FFB3EE3071
+1     0000af80  _cstmCoverageData_42B66B76300BC27B6B2F9051DD913913
+1     0000abff  _cstmCoverageData_52B5D08D97D1FBC04F4505E0A256A0CD
+1     0000af2b  _cstmCoverageData_5CC98B042206066B80C2C459ED7468F9
+1     0000afd6  _cstmCoverageData_6B515824061214E72B4D470154AB6A25
+1     0000af7f  _cstmCoverageData_6D9F6A71EB213365E1594D890AF5929D
+1     0000ada4  _cstmCoverageData_703DA1B233D357912E4AEB106C6B1FF1
+1     0000ae80  _cstmCoverageData_7981556161BEB81F8E3D7967D1833727
+1     0000c01e  _cstmCoverageData_827FDBC9095FD5130ED2D67109AE4B32
+1     0000af18  _cstmCoverageData_A4F71B7B5ACCE729659412C9CA715DAA
+1     0000aea9  _cstmCoverageData_AB725A56AFCB1BE7EC2F679342555F49
+1     0000af8e  _cstmCoverageData_AC47AEDC19E2E57CFA9AA8EF3D3539BB
+1     0000af40  _cstmCoverageData_B001B348403BA1C9CFC62469D01906F9
+1     0000af00  _cstmCoverageData_B3D6C16D9DB64B49F996632B4CFC7881
+1     0000acc0  _cstmCoverageData_BBAFD5DEFF81CF2D122B974C8526D40E
+1     0000aff0  _cstmCoverageData_C58349DC45A2EB4D483F37EF64F4C33F
+1     0000af9c  _cstmCoverageData_C6284055858BEC9E137247B046DBA43B
+1     0000afbf  _cstmCoverageData_C6957451A54EAC135DC106993B2776D7
+1     0000c022  _cstmCoverageData_E16054ED388F153209D2D04E084BEBF5
+1     0000af70  _cstmCoverageData_E67CF5F0A746BC260692F6E49744B86C
+1     0000afdf  _cstmCoverageData_E89648F4DFB3158321B1A197E56A0B90
+0     000864f8  _cstmInitializeModuleBucket                       
+0     000864a8  _cstmInitializeProcessBucket                      
+0     00086522  _cstmInitializeTu                                 
+1     0000c014  _cstmTempPtr1_0DC65A3D22428040AFC52CB5761B19A7    
+1     0000c030  _cstmTempPtr1_2776491CAB7DB37DF48DE415BE984ADA    
+1     0000adbe  _cstmTempPtr1_3C4FCE89F61E224C8CD4B1FFB3EE3071    
+1     0000aca6  _cstmTempPtr1_42B66B76300BC27B6B2F9051DD913913    
+1     0000c03c  _cstmTempPtr1_52B5D08D97D1FBC04F4505E0A256A0CD    
+1     0000c040  _cstmTempPtr1_5CC98B042206066B80C2C459ED7468F9    
+1     0000c02a  _cstmTempPtr1_6B515824061214E72B4D470154AB6A25    
+1     0000c034  _cstmTempPtr1_6D9F6A71EB213365E1594D890AF5929D    
+1     0000c036  _cstmTempPtr1_703DA1B233D357912E4AEB106C6B1FF1    
+1     0000af38  _cstmTempPtr1_7981556161BEB81F8E3D7967D1833727    
+1     0000afcc  _cstmTempPtr1_827FDBC9095FD5130ED2D67109AE4B32    
+1     0000c046  _cstmTempPtr1_A4F71B7B5ACCE729659412C9CA715DAA    
+1     0000c042  _cstmTempPtr1_AB725A56AFCB1BE7EC2F679342555F49    
+1     0000c006  _cstmTempPtr1_AC47AEDC19E2E57CFA9AA8EF3D3539BB    
+1     0000c032  _cstmTempPtr1_B001B348403BA1C9CFC62469D01906F9    
+1     0000ac04  _cstmTempPtr1_B3D6C16D9DB64B49F996632B4CFC7881    
+1     0000c028  _cstmTempPtr1_BBAFD5DEFF81CF2D122B974C8526D40E    
+1     0000c03a  _cstmTempPtr1_C58349DC45A2EB4D483F37EF64F4C33F    
+1     0000c03e  _cstmTempPtr1_C6284055858BEC9E137247B046DBA43B    
+1     0000c044  _cstmTempPtr1_C6957451A54EAC135DC106993B2776D7    
+1     0000c038  _cstmTempPtr1_E16054ED388F153209D2D04E084BEBF5    
+1     0000aee4  _cstmTempPtr1_E67CF5F0A746BC260692F6E49744B86C    
+1     0000afc0  _cstmTempPtr1_E89648F4DFB3158321B1A197E56A0B90    
+0     00086393  _cstm_Init_0DC65A3D22428040AFC52CB5761B19A7       
+0     0008740c  _cstm_Init_2776491CAB7DB37DF48DE415BE984ADA       
+0     000859fe  _cstm_Init_3C4FCE89F61E224C8CD4B1FFB3EE3071       
+0     0008626d  _cstm_Init_42B66B76300BC27B6B2F9051DD913913       
+0     000870ee  _cstm_Init_52B5D08D97D1FBC04F4505E0A256A0CD       
+0     000874d6  _cstm_Init_585A13598F38B0A59621B23994933D02       
+0     0008686c  _cstm_Init_5CC98B042206066B80C2C459ED7468F9       
+0     000867f1  _cstm_Init_6B515824061214E72B4D470154AB6A25       
+0     00087b7e  _cstm_Init_6D9F6A71EB213365E1594D890AF5929D       
+0     00085e70  _cstm_Init_703DA1B233D357912E4AEB106C6B1FF1       
+0     00084785  _cstm_Init_7981556161BEB81F8E3D7967D1833727       
+0     0008670f  _cstm_Init_827FDBC9095FD5130ED2D67109AE4B32       
+0     00086128  _cstm_Init_A4F71B7B5ACCE729659412C9CA715DAA       
+0     00084ca3  _cstm_Init_AB725A56AFCB1BE7EC2F679342555F49       
+0     00083d49  _cstm_Init_AC47AEDC19E2E57CFA9AA8EF3D3539BB       
+0     00083667  _cstm_Init_B001B348403BA1C9CFC62469D01906F9       
+0     000838a8  _cstm_Init_B3D6C16D9DB64B49F996632B4CFC7881       
+0     00082008  _cstm_Init_BBAFD5DEFF81CF2D122B974C8526D40E       
+0     00086932  _cstm_Init_C58349DC45A2EB4D483F37EF64F4C33F       
+0     00085445  _cstm_Init_C6284055858BEC9E137247B046DBA43B       
+0     0008594f  _cstm_Init_C6957451A54EAC135DC106993B2776D7       
+0     00085c1c  _cstm_Init_E16054ED388F153209D2D04E084BEBF5       
+0     0008526a  _cstm_Init_E67CF5F0A746BC260692F6E49744B86C       
+0     00085cd6  _cstm_Init_E89648F4DFB3158321B1A197E56A0B90       
+1     0000aca8  _currentResponderPtr                              
+1     0000a800  _cv_data                                          
+0     000862a4  _data_Read                                        
+0     00083ba7  _data_write_to_eeprom                             
+0     00083c10  _data_write_to_eeprom_calibraion                  
+0     000863ee  _delay_uS                                         
+0     00085c2a  _dspinit                                          
+0     0008627b  _eepromInit                                       
+1     0000ac03  _eepromcrc                                        
+1     0000afaa  _ema                                              
+1     0000c04a  _errno                                            
+0     00087767  _exit                                             
+0     00087afe  _fabsl                                            
+0     00082016  _factory_mode                                     
+0     00085278  _flux_matrix_init                                 
+1     0000afce  _g0x                                              
+1     0000afd2  _g0y                                              
+1     0000ac01  _gCheckSum_code                                   
+1     0000c02f  _gRx_cnt                                          
+1     0000c02e  _gRx_done                                         
+1     0000c026  _gfirstOpen_factory                               
+1     0000ac02  _gversion_code                                    
+0     00083240  _handleI2C_ErrorCondition                         
+0     00083227  _handleNACK                                       
+0     00086dff  _i2cFIFO_isr                                      
+0     00086db0  _i2c_isr                                          
+0     00084d2c  _initADCSOC                                       
+0     0008595d  _initEPWM                                         
+0     00087168  _ldexp                                            
+0     00087168  _ldexpf                                           
+0     000863a1  _main                                             
+0     00087965  _memcpy                                           
+0     00085ce4  _mhs_status_trans                                 
+1     0000ac06  _mhsensor_accelrightAngle_Data                    
+1     0000ac40  _mhsensor_calibration_Data                        
+1     0000aef2  _mhsensor_data                                    
+1     0000ac80  _mhsensor_fluxrightAngle_Data                     
+1     0000ac16  _mhsensor_sensor_Data                             
+0     00083708  _myCPUTIMER0_init                                 
+0     00083820  _mySCI0_init                                      
+0     00083874  _mySPI0_init                                      
+0     00086940  _operation_mode                                   
+0     000843f9  _pow                                              
+0     000843f9  _powf                                             
+1     0000ad40  _rDataPointA                                      
+0     00085a73  _readControlReg                                   
+0     00085ab9  _readStatusReg                                    
+0     000838b6  _read_parameter                                   
+0     00087168  _scalbn                                           
+0     00087168  _scalbnf                                          
+0     0008650f  _setZero                                          
+0     00084df7  _setupPPBOffset                                   
+0     0008778e  _sqrt                                             
+0     0008778e  _sqrtf                                            
+0     00086afe  _sqrtl                                            
+1     0000aca4  _status                                           
+0     000867ff  _status_mode                                      
+0     00085453  _status_transfer_to_terminal                      
+0     00087cd1  _strcat                                           
+0     00087cf1  _strcpy                                           
+0     00087c7c  _strcspn                                          
+0     00087ce2  _strlen                                           
+0     00087b2c  _strncmp                                          
+0     00087c8a  _strspn                                           
+0     000877db  _strtok                                           
+0     00085a0c  _txOpCode                                         
+0     000862fe  _verifyEEPROMRead                                 
+0     00085a51  _writeControlReg                                  
+0     00082f2d  _writeEepromCRC16                                 
+0     00085ad5  _writeTxFIFO                                      
+abs   ffffffff  binit                                             
+0     00080008  cinit                                             
+0     00080000  code_start                                        
+abs   ffffffff  etext                                             
+0     00082000  pinit                                             
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                                              
+----  -------   ----                                              
+0     00008000  _Flash_initModule                                 
+0     00008000  _RamfuncsRunStart                                 
+0     00008124  _SysCtl_delay                                     
+0     00008128  _RamfuncsRunEnd                                   
+0     00080000  code_start                                        
+0     00080008  ___cinit__                                        
+0     00080008  cinit                                             
+0     00082000  ___pinit__                                        
+0     00082000  pinit                                             
+0     00082008  _cstm_Init_BBAFD5DEFF81CF2D122B974C8526D40E       
+0     00082016  _factory_mode                                     
+0     00082f2d  _writeEepromCRC16                                 
+0     000830d5  _I2CBusScan                                       
+0     0008313c  _I2C_TransmitSlaveAddress_ControlBytes            
+0     0008318f  _I2C_MasterTransmitter                            
+0     000831de  _I2C_MasterReceiver                               
+0     00083213  _checkBusStatus                                   
+0     00083227  _handleNACK                                       
+0     00083240  _handleI2C_ErrorCondition                         
+0     000832fd  _Write_Read_TX_RX_FIFO                            
+0     00083667  _cstm_Init_B001B348403BA1C9CFC62469D01906F9       
+0     00083675  _Board_init                                       
+0     00083689  _PinMux_init                                      
+0     00083700  _CPUTIMER_init                                    
+0     00083708  _myCPUTIMER0_init                                 
+0     00083732  _GPIO_init                                        
+0     00083744  _MR_init                                          
+0     0008375d  _TFLAG_init                                       
+0     00083776  _SPI_CS_init                                      
+0     00083794  _DISCRETE_1_init                                  
+0     000837af  _CLR_WDT_init                                     
+0     000837cf  _DISCRETE_2_init                                  
+0     000837ea  _INTERRUPT_init                                   
+0     00083816  _SCI_init                                         
+0     00083820  _mySCI0_init                                      
+0     0008386a  _SPI_init                                         
+0     00083874  _mySPI0_init                                      
+0     000838a8  _cstm_Init_B3D6C16D9DB64B49F996632B4CFC7881       
+0     000838b6  _read_parameter                                   
+0     00083ba7  _data_write_to_eeprom                             
+0     00083c10  _data_write_to_eeprom_calibraion                  
+0     00083d49  _cstm_Init_AC47AEDC19E2E57CFA9AA8EF3D3539BB       
+0     00083d57  _angle_calculation                                
+0     00083fc7  _cpuTimer0ISR                                     
+0     00083fff  __system_post_cinit                               
+0     00084097  _Device_init                                      
+0     000840ea  _Device_enableAllPeripherals                      
+0     000841d5  _Device_initGPIO                                  
+0     000841f6  _Device_enableUnbondedGPIOPullupsFor176Pin        
+0     00084209  _Device_enableUnbondedGPIOPullupsFor100Pin        
+0     00084226  _Device_enableUnbondedGPIOPullups                 
+0     0008423c  _Device_configureTMXAnalogTrim                    
+0     0008426d  _Device_bootCPU2                                  
+0     000843e7  ___error__                                        
+0     000843ee  _Example_setResultPass                            
+0     000843f3  _Example_setResultFail                            
+0     000843f8  _Example_done                                     
+0     000843f9  _pow                                              
+0     000843f9  _powf                                             
+0     00084785  _cstm_Init_7981556161BEB81F8E3D7967D1833727       
+0     00084793  _calibrationMode                                  
+0     00084ca3  _cstm_Init_AB725A56AFCB1BE7EC2F679342555F49       
+0     00084cf8  _configureADC                                     
+0     00084d2c  _initADCSOC                                       
+0     00084df7  _setupPPBOffset                                   
+0     00084e33  _adcA1ISR                                         
+0     00085064  _SysCtl_setClock                                  
+0     0008526a  _cstm_Init_E67CF5F0A746BC260692F6E49744B86C       
+0     00085278  _flux_matrix_init                                 
+0     000852be  _MeasureFlux                                      
+0     00085445  _cstm_Init_C6284055858BEC9E137247B046DBA43B       
+0     00085453  _status_transfer_to_terminal                      
+0     0008575d  _I2C_GPIO_init                                    
+0     0008578b  _I2Cinit                                          
+0     0008594f  _cstm_Init_C6957451A54EAC135DC106993B2776D7       
+0     0008595d  _initEPWM                                         
+0     000859fe  _cstm_Init_3C4FCE89F61E224C8CD4B1FFB3EE3071       
+0     00085a0c  _txOpCode                                         
+0     00085a51  _writeControlReg                                  
+0     00085a73  _readControlReg                                   
+0     00085ab9  _readStatusReg                                    
+0     00085ad5  _writeTxFIFO                                      
+0     00085c1c  _cstm_Init_E16054ED388F153209D2D04E084BEBF5       
+0     00085c2a  _dspinit                                          
+0     00085cd6  _cstm_Init_E89648F4DFB3158321B1A197E56A0B90       
+0     00085ce4  _mhs_status_trans                                 
+0     00085e70  _cstm_Init_703DA1B233D357912E4AEB106C6B1FF1       
+0     00085e7e  _checkCbit                                        
+0     00086000  _RamfuncsLoadStart                                
+0     00086128  _RamfuncsLoadEnd                                  
+0     00086128  _cstm_Init_A4F71B7B5ACCE729659412C9CA715DAA       
+0     00086156  _StrZeroFill                                      
+0     0008619f  _LToStr                                           
+0     0008626d  _cstm_Init_42B66B76300BC27B6B2F9051DD913913       
+0     0008627b  _eepromInit                                       
+0     000862a4  _data_Read                                        
+0     000862fe  _verifyEEPROMRead                                 
+0     00086393  _cstm_Init_0DC65A3D22428040AFC52CB5761B19A7       
+0     000863a1  _main                                             
+0     000863ee  _delay_uS                                         
+0     000864a8  _cstmInitializeProcessBucket                      
+0     000864f8  _cstmInitializeModuleBucket                       
+0     0008650f  _setZero                                          
+0     00086522  _cstmInitializeTu                                 
+0     00086550  _asin                                             
+0     00086550  _asinf                                            
+0     00086645  _atan                                             
+0     00086645  _atanf                                            
+0     0008670f  _cstm_Init_827FDBC9095FD5130ED2D67109AE4B32       
+0     0008671d  _accel_matrix_init                                
+0     00086743  _MeasureAccelation                                
+0     000867f1  _cstm_Init_6B515824061214E72B4D470154AB6A25       
+0     000867ff  _status_mode                                      
+0     0008686c  _cstm_Init_5CC98B042206066B80C2C459ED7468F9       
+0     0008687a  _MeasureVoltage                                   
+0     00086932  _cstm_Init_C58349DC45A2EB4D483F37EF64F4C33F       
+0     00086940  _operation_mode                                   
+0     000869bd  _INT_mySCI0_RX_ISR                                
+0     00086a25  _INT_mySCI0_TX_ISR                                
+0     00086a62  FD$$ADD                                           
+0     00086afe  _sqrtl                                            
+0     00086b90  FD$$DIV                                           
+0     00086c1b  _SysCtl_selectXTAL                                
+0     00086ca5  FS$$DIV                                           
+0     00086d2d  FD$$MPY                                           
+0     00086db0  _i2c_isr                                          
+0     00086dff  _i2cFIFO_isr                                      
+0     00086eb1  _ADC_setINLTrim                                   
+0     00086f20  _SysCtl_getDeviceParametric                       
+0     00086f88  _I2C_initController                               
+0     00086fec  _cos                                              
+0     00086fec  _cosf                                             
+0     0008704f  _ADC_setOffsetTrim                                
+0     000870ee  _cstm_Init_52B5D08D97D1FBC04F4505E0A256A0CD       
+0     000870fc  _MeasureBoardTemperature                          
+0     0008710c  _SPI_setConfig                                    
+0     00087168  _ldexp                                            
+0     00087168  _ldexpf                                           
+0     00087168  _scalbn                                           
+0     00087168  _scalbnf                                          
+0     000871c0  _c_int00                                          
+0     00087216  _GPIO_setPadConfig                                
+0     00087268  _SysCtl_getClock                                  
+0     000872b9  _Interrupt_disable                                
+0     00087307  _SysCtl_selectOscSource                           
+0     0008734f  _SCI_clearInterruptStatus                         
+0     00087394  _SCI_enableInterrupt                              
+0     0008740c  _cstm_Init_2776491CAB7DB37DF48DE415BE984ADA       
+0     0008741a  _SCI_writeCharArray                               
+0     0008745b  _SCI_setConfig                                    
+0     00087499  _Interrupt_initModule                             
+0     000874d6  _cstm_Init_585A13598F38B0A59621B23994933D02       
+0     0008750c  ___sti___17_cvgc_357E2FE0_cpp_57bf3e11            
+0     00087512  _SCI_readCharArray                                
+0     0008754d  _GPIO_setControllerCore                           
+0     00087584  _GPIO_setPinConfig                                
+0     000875bb  _GPIO_setQualificationMode                        
+0     000875f2  _Interrupt_enable                                 
+0     00087629  _GPIO_setDirectionMode                            
+0     0008765a  _atoi                                             
+0     0008768b  _ADC_setMode                                      
+0     000876ba  _I2C_disableInterrupt                             
+0     000876e6  _I2C_enableInterrupt                              
+0     00087711  FD$$CMP                                           
+0     0008773b  L$$DIV                                            
+0     0008774a  L$$MOD                                            
+0     00087758  UL$$DIV                                           
+0     0008775f  UL$$MOD                                           
+0     00087765  C$$EXIT                                           
+0     00087765  _abort                                            
+0     00087767  _exit                                             
+0     0008778e  _sqrt                                             
+0     0008778e  _sqrtf                                            
+0     000877db  _strtok                                           
+0     00087801  _copy_in                                          
+0     00087825  FD$$TOFS                                          
+0     00087869  _I2C_clearInterruptStatus                         
+0     0008788a  _I2C_getInterruptStatus                           
+0     000878ab  FD$$TOI                                           
+0     0008790b  FD$$TOL                                           
+0     0008792a  _Interrupt_initVectorTable                        
+0     00087948  I$$TOFD                                           
+0     00087965  _memcpy                                           
+0     00087982  FS$$TOFD                                          
+0     000879d4  FD$$TOUL                                          
+0     00087a3d  _SysCtl_getLowSpeedClock                          
+0     00087a57  FD$$TOU                                           
+0     00087aa1  LL$$AND                                           
+0     00087aa9  LL$$OR                                            
+0     00087ab1  LL$$XOR                                           
+0     00087afe  _fabsl                                            
+0     00087b15  U$$TOFD                                           
+0     00087b2c  _strncmp                                          
+0     00087b7e  _cstm_Init_6D9F6A71EB213365E1594D890AF5929D       
+0     00087b8c  _C2000Ware_libraries_init                         
+0     00087b92  _CPUTimer_setEmulationMode                        
+0     00087bef  __args_main                                       
+0     00087c12  _copysign                                         
+0     00087c12  _copysignf                                        
+0     00087c6e  FD$$SUB                                           
+0     00087c7c  _strcspn                                          
+0     00087c8a  _strspn                                           
+0     00087cbd  U$$DIV                                            
+0     00087cc2  U$$MOD                                            
+0     00087cc8  __register_unlock                                 
+0     00087ccc  __register_lock                                   
+0     00087cd0  __nop                                             
+0     00087cd1  _strcat                                           
+0     00087ce2  _strlen                                           
+0     00087cf1  _strcpy                                           
+0     00087cfa  __system_pre_init                                 
+0     00090125  __ctypes_                                         
+1     00000400  __stack                                           
+1     000007f8  __STACK_END                                       
+1     0000a800  _cv_data                                          
+1     0000abfb  _cstmCoverageData_2776491CAB7DB37DF48DE415BE984ADA
+1     0000abff  _cstmCoverageData_52B5D08D97D1FBC04F4505E0A256A0CD
+1     0000ac00  _bParameterError                                  
+1     0000ac01  _gCheckSum_code                                   
+1     0000ac02  _gversion_code                                    
+1     0000ac03  _eepromcrc                                        
+1     0000ac04  _cstmTempPtr1_B3D6C16D9DB64B49F996632B4CFC7881    
+1     0000ac06  _mhsensor_accelrightAngle_Data                    
+1     0000ac16  _mhsensor_sensor_Data                             
+1     0000ac40  _mhsensor_calibration_Data                        
+1     0000ac80  _mhsensor_fluxrightAngle_Data                     
+1     0000aca4  _status                                           
+1     0000aca6  _cstmTempPtr1_42B66B76300BC27B6B2F9051DD913913    
+1     0000aca8  _currentResponderPtr                              
+1     0000acaa  _ControlAddr                                      
+1     0000acac  _EEPROM                                           
+1     0000acc0  _cstmCoverageData_BBAFD5DEFF81CF2D122B974C8526D40E
+1     0000ad40  _rDataPointA                                      
+1     0000ada4  _cstmCoverageData_703DA1B233D357912E4AEB106C6B1FF1
+1     0000adbe  _cstmTempPtr1_3C4FCE89F61E224C8CD4B1FFB3EE3071    
+1     0000adc0  _RX_MsgBuffer                                     
+1     0000ae00  _TX_MsgBuffer                                     
+1     0000ae40  _TxBusWord                                        
+1     0000ae80  _cstmCoverageData_7981556161BEB81F8E3D7967D1833727
+1     0000aea9  _cstmCoverageData_AB725A56AFCB1BE7EC2F679342555F49
+1     0000aee4  _cstmTempPtr1_E67CF5F0A746BC260692F6E49744B86C    
+1     0000aee6  _Box                                              
+1     0000aeea  _Boy                                              
+1     0000aeee  _Boz                                              
+1     0000aef2  _mhsensor_data                                    
+1     0000af00  _cstmCoverageData_B3D6C16D9DB64B49F996632B4CFC7881
+1     0000af18  _cstmCoverageData_A4F71B7B5ACCE729659412C9CA715DAA
+1     0000af2b  _cstmCoverageData_5CC98B042206066B80C2C459ED7468F9
+1     0000af38  _cstmTempPtr1_7981556161BEB81F8E3D7967D1833727    
+1     0000af3e  __lock                                            
+1     0000af40  _cstmCoverageData_B001B348403BA1C9CFC62469D01906F9
+1     0000af70  _cstmCoverageData_E67CF5F0A746BC260692F6E49744B86C
+1     0000af7f  _cstmCoverageData_6D9F6A71EB213365E1594D890AF5929D
+1     0000af80  _cstmCoverageData_42B66B76300BC27B6B2F9051DD913913
+1     0000af8e  _cstmCoverageData_AC47AEDC19E2E57CFA9AA8EF3D3539BB
+1     0000af9c  _cstmCoverageData_C6284055858BEC9E137247B046DBA43B
+1     0000afaa  _ema                                              
+1     0000afb5  _cstmCoverageData_0DC65A3D22428040AFC52CB5761B19A7
+1     0000afbf  _cstmCoverageData_C6957451A54EAC135DC106993B2776D7
+1     0000afc0  _cstmTempPtr1_E89648F4DFB3158321B1A197E56A0B90    
+1     0000afc2  _arinc429_error                                   
+1     0000afcc  _cstmTempPtr1_827FDBC9095FD5130ED2D67109AE4B32    
+1     0000afce  _g0x                                              
+1     0000afd2  _g0y                                              
+1     0000afd6  _cstmCoverageData_6B515824061214E72B4D470154AB6A25
+1     0000afdf  _cstmCoverageData_E89648F4DFB3158321B1A197E56A0B90
+1     0000afe8  _cstmCoverageData_3C4FCE89F61E224C8CD4B1FFB3EE3071
+1     0000aff0  _cstmCoverageData_C58349DC45A2EB4D483F37EF64F4C33F
+1     0000affe  __unlock                                          
+1     0000c006  _cstmTempPtr1_AC47AEDC19E2E57CFA9AA8EF3D3539BB    
+1     0000c00c  _Example_Result                                   
+1     0000c00e  _Example_PassCount                                
+1     0000c010  _Example_Fail                                     
+1     0000c014  _cstmTempPtr1_0DC65A3D22428040AFC52CB5761B19A7    
+1     0000c018  ___TI_enable_exit_profile_output                  
+1     0000c01a  ___TI_cleanup_ptr                                 
+1     0000c01c  ___TI_dtors_ptr                                   
+1     0000c01e  _cstmCoverageData_827FDBC9095FD5130ED2D67109AE4B32
+1     0000c022  _cstmCoverageData_E16054ED388F153209D2D04E084BEBF5
+1     0000c026  _gfirstOpen_factory                               
+1     0000c028  _cstmTempPtr1_BBAFD5DEFF81CF2D122B974C8526D40E    
+1     0000c02a  _cstmTempPtr1_6B515824061214E72B4D470154AB6A25    
+1     0000c02c  _Can_State_Ptr                                    
+1     0000c02e  _gRx_done                                         
+1     0000c02f  _gRx_cnt                                          
+1     0000c030  _cstmTempPtr1_2776491CAB7DB37DF48DE415BE984ADA    
+1     0000c032  _cstmTempPtr1_B001B348403BA1C9CFC62469D01906F9    
+1     0000c034  _cstmTempPtr1_6D9F6A71EB213365E1594D890AF5929D    
+1     0000c036  _cstmTempPtr1_703DA1B233D357912E4AEB106C6B1FF1    
+1     0000c038  _cstmTempPtr1_E16054ED388F153209D2D04E084BEBF5    
+1     0000c03a  _cstmTempPtr1_C58349DC45A2EB4D483F37EF64F4C33F    
+1     0000c03c  _cstmTempPtr1_52B5D08D97D1FBC04F4505E0A256A0CD    
+1     0000c03e  _cstmTempPtr1_C6284055858BEC9E137247B046DBA43B    
+1     0000c040  _cstmTempPtr1_5CC98B042206066B80C2C459ED7468F9    
+1     0000c042  _cstmTempPtr1_AB725A56AFCB1BE7EC2F679342555F49    
+1     0000c044  _cstmTempPtr1_C6957451A54EAC135DC106993B2776D7    
+1     0000c046  _cstmTempPtr1_A4F71B7B5ACCE729659412C9CA715DAA    
+1     0000c04a  _errno                                            
+abs   00000128  _RamfuncsLoadSize                                 
+abs   00000128  _RamfuncsRunSize                                  
+abs   000003f8  __STACK_SIZE                                      
+abs   ffffffff  .text                                             
+abs   ffffffff  ___TI_pprof_out_hndl                              
+abs   ffffffff  ___TI_prof_data_size                              
+abs   ffffffff  ___TI_prof_data_start                             
+abs   ffffffff  ___binit__                                        
+abs   ffffffff  ___c_args__                                       
+abs   ffffffff  ___etext__                                        
+abs   ffffffff  ___text__                                         
+abs   ffffffff  binit                                             
+abs   ffffffff  etext                                             
+
+[311 symbols]

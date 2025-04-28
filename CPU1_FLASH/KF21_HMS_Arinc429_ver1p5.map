@@ -1,0 +1,1040 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.1                     
+******************************************************************************
+>> Linked Fri Apr 11 11:07:54 2025
+
+OUTPUT FILE NAME:   <KF21_HMS_Arinc429_ver1p5.out>
+ENTRY POINT SYMBOL: "code_start"  address: 00080000
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  RAMM0                 00000123   000002dd  00000000  000002dd  RWIX
+  RAMLS0                00008000   00000800  00000128  000006d8  RWIX
+  RAMLS1                00008800   00000800  00000000  00000800  RWIX
+  RAMLS2                00009000   00000800  00000000  00000800  RWIX
+  RAMLS3                00009800   00000800  00000000  00000800  RWIX
+  RAMLS4                0000a000   00000800  00000000  00000800  RWIX
+  RAMD0                 0000b000   00000800  00000000  00000800  RWIX
+  RAMGS14               0001a000   00001000  00000000  00001000  RWIX
+  RAMGS15               0001b000   00000ff8  00000000  00000ff8  RWIX
+  BEGIN                 00080000   00000002  00000002  00000000  RWIX
+  FLASHA                00080002   00001ffe  000000f9  00001f05  RWIX
+  FLASHB                00082000   00002000  00002000  00000000  RWIX
+  FLASHC                00084000   00002000  00002000  00000000  RWIX
+  FLASHD                00086000   00002000  00000f12  000010ee  RWIX
+  FLASHE                00088000   00008000  00000000  00008000  RWIX
+  FLASHF                00090000   00008000  00000d8a  00007276  RWIX
+  FLASHG                00098000   00008000  00000000  00008000  RWIX
+  FLASHH                000a0000   00008000  00000000  00008000  RWIX
+  FLASHI                000a8000   00008000  00000000  00008000  RWIX
+  FLASHJ                000b0000   00008000  00000000  00008000  RWIX
+  FLASHK                000b8000   00002000  00000000  00002000  RWIX
+  FLASHL                000ba000   00002000  00000000  00002000  RWIX
+  FLASHM                000bc000   00002000  00000000  00002000  RWIX
+  FLASHN                000be000   00001ff0  00000000  00001ff0  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+PAGE 1:
+  BOOT_RSVD             00000002   00000121  00000000  00000121  RWIX
+  RAMM1                 00000400   000003f8  000003f8  00000000  RWIX
+  RAMLS5                0000a800   00000800  00000280  00000580  RWIX
+  RAMD1                 0000b800   00000800  00000000  00000800  RWIX
+  RAMGS0                0000c000   00001000  00000000  00001000  RWIX
+  RAMGS1                0000d000   00001000  00000000  00001000  RWIX
+  RAMGS2                0000e000   00001000  00000000  00001000  RWIX
+  RAMGS3                0000f000   00001000  00000000  00001000  RWIX
+  RAMGS4                00010000   00001000  00000000  00001000  RWIX
+  RAMGS5                00011000   00001000  00000000  00001000  RWIX
+  RAMGS6                00012000   00001000  00000000  00001000  RWIX
+  RAMGS7                00013000   00001000  00000000  00001000  RWIX
+  RAMGS8                00014000   00001000  00000000  00001000  RWIX
+  RAMGS9                00015000   00001000  00000000  00001000  RWIX
+  RAMGS10               00016000   00001000  00000000  00001000  RWIX
+  RAMGS11               00017000   00001000  00000000  00001000  RWIX
+  RAMGS12               00018000   00001000  00000000  00001000  RWIX
+  RAMGS13               00019000   00001000  00000000  00001000  RWIX
+  CPU2TOCPU1RAM         0003f800   00000400  00000000  00000400  RWIX
+  CPU1TOCPU2RAM         0003fc00   00000400  00000000  00000400  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.cinit     0    00080008    000000f9     
+                  00080008    00000040     csu_calibration_mode.obj (.cinit)
+                  00080048    00000027     csu_fluxMeasurement.obj (.cinit:_gConstant_B)
+                  0008006f    00000015     csu_fluxMeasurement.obj (.cinit)
+                  00080084    00000013     csu_accelMeasurement.obj (.cinit:_gConstant_A)
+                  00080097    00000010     csu_calibrationData.obj (.cinit)
+                  000800a7    0000000f     device.obj (.cinit)
+                  000800b6    0000000e     csu_accelMeasurement.obj (.cinit)
+                  000800c4    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  000800d2    00000008     lib_mhsUart.obj (.cinit)
+                  000800da    00000007     csu_angle_calculation.obj (.cinit)
+                  000800e1    00000005     rts2800_fpu32.lib : _lock.c.obj (.cinit:__lock)
+                  000800e6    00000005                       : _lock.c.obj (.cinit:__unlock)
+                  000800eb    00000004     lib_mhsAdc.obj (.cinit:_ema)
+                  000800ef    00000004     lib_mhsUart.obj (.cinit:_rDataPointA)
+                  000800f3    00000004     csu_factory_mode.obj (.cinit)
+                  000800f7    00000004     lib_mhsI2c.obj (.cinit)
+                  000800fb    00000004     rts2800_fpu32.lib : errno.c.obj (.cinit)
+                  000800ff    00000002     --HOLE-- [fill = 0]
+
+.pinit     0    00082000    00000000     UNINITIALIZED
+
+codestart 
+*          0    00080000    00000002     
+                  00080000    00000002     F2837xD_CodeStartBranch.obj (codestart)
+
+.stack     1    00000400    000003f8     UNINITIALIZED
+                  00000400    000003f8     --HOLE--
+
+.reset     0    003fffc0    00000002     DSECT
+                  003fffc0    00000002     rts2800_fpu32.lib : boot28.asm.obj (.reset)
+
+.pinit     0    00082000    00000000     UNINITIALIZED
+
+.TI.ramfunc 
+*          0    00086000    00000128     RUN ADDR = 00008000
+                  00086000    00000043     driverlib_coff.lib : flash.obj (.TI.ramfunc:_Flash_initModule)
+                  00086043    0000002c                        : flash.obj (.TI.ramfunc:_Flash_setBankPowerMode)
+                  0008606f    00000024                        : flash.obj (.TI.ramfunc:_Flash_setWaitstates)
+                  00086093    0000001d                        : flash.obj (.TI.ramfunc:_Flash_setPumpPowerMode)
+                  000860b0    00000018                        : flash.obj (.TI.ramfunc:_Flash_disableCache)
+                  000860c8    00000018                        : flash.obj (.TI.ramfunc:_Flash_disablePrefetch)
+                  000860e0    00000017                        : flash.obj (.TI.ramfunc:_Flash_enableCache)
+                  000860f7    00000017                        : flash.obj (.TI.ramfunc:_Flash_enablePrefetch)
+                  0008610e    00000016                        : flash.obj (.TI.ramfunc:_Flash_enableECC)
+                  00086124    00000004                        : sysctl.obj (.TI.ramfunc)
+
+GETBUFFER 
+*          0    0003f800    00000000     DSECT
+
+GETWRITEIDX 
+*          0    0003f800    00000000     DSECT
+
+PUTREADIDX 
+*          0    0003f800    00000000     DSECT
+
+.text.1    0    00082000    00002000     
+                  00082000    00000acb     csu_factory_mode.obj (.text)
+                  00082acb    000004c3     i2cLib_FIFO_master_interrupt.obj (.text)
+                  00082f8e    00000438     board.obj (.text)
+                  000833c6    000003f9     device.obj (.text)
+                  000837bf    0000038c     rts2800_fpu32.lib : e_powf.c.obj (.text)
+                  00083b4b    00000345     csu_calibrationData.obj (.text)
+                  00083e90    0000016b     HI_3587_arinc.obj (.text)
+                  00083ffb    00000002     driverlib_coff.lib : interrupt.obj (.text:_Interrupt_illegalOperationHandler)
+                  00083ffd    00000002                        : interrupt.obj (.text:_Interrupt_nmiHandler)
+                  00083fff    00000001     rts2800_fpu32.lib : startup.c.obj (.text)
+
+.text.2    0    00084000    00002000     
+                  00084000    00000309     lib_mhsAdc.obj (.text)
+                  00084309    00000236     csu_angle_calculation.obj (.text)
+                  0008453f    00000206     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_setClock)
+                  00084745    000001f7     lib_mhsAdc.obj (.text:retain)
+                  0008493c    000001cc     csu_calibration_mode.obj (.text)
+                  00084b08    000001c6     i2c_ex6_eeprom_interrupt.obj (.text)
+                  00084cce    000001af     lib_mhsEpwm.obj (.text)
+                  00084e7d    00000180     csu_init.obj (.text)
+                  00084ffd    0000017a     csu_test_status_trans.obj (.text)
+                  00085177    00000176     lib_mhsStd.obj (.text)
+                  000852ed    0000012f     csu_mhs_Status_trans.obj (.text)
+                  0008541c    0000012d     csu_fluxMeasurement.obj (.text)
+                  00085549    000000f5     rts2800_fpu32.lib : e_asinf.c.obj (.text)
+                  0008563e    000000cf     main.obj (.text)
+                  0008570d    000000ca     rts2800_fpu32.lib : s_atanf.c.obj (.text)
+                  000857d7    000000c6     csu_Cbit.obj (.text)
+                  0008589d    0000009c     rts2800_fpu32.lib : fd_add28.asm.obj (.text)
+                  00085939    00000097     csu_voltageMeasurement.obj (.text)
+                  000859d0    00000094     lib_mhsUart.obj (.text:retain)
+                  00085a64    00000093     lib_mhsI2c.obj (.text)
+                  00085af7    00000001     --HOLE-- [fill = 0]
+                  00085af8    00000092     rts2800_fpu32.lib : e_sqrt.c.obj (.text)
+                  00085b8a    00000090     csu_accelMeasurement.obj (.text)
+                  00085c1a    0000008b     rts2800_fpu32.lib : fd_div28.asm.obj (.text)
+                  00085ca5    0000008a     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_selectXTAL)
+                  00085d2f    00000088     csu_status_mode.obj (.text)
+                  00085db7    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
+                  00085e3f    00000083                       : fd_mpy28.asm.obj (.text)
+                  00085ec2    00000082     i2c_ex6_eeprom_interrupt.obj (.text:retain)
+                  00085f44    0000007f     driverlib_coff.lib : interrupt.obj (.text:_Interrupt_clearIFR)
+                  00085fc3    0000003d                        : interrupt.obj (.text:_Interrupt_initModule)
+
+.text.3    0    00086128    00000dea     
+                  00086128    0000006f     driverlib_coff.lib : adc.obj (.text:_ADC_setINLTrim)
+                  00086197    0000006e     csu_operation_mode.obj (.text)
+                  00086205    00000068     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_getDeviceParametric)
+                  0008626d    00000064                        : i2c.obj (.text:_I2C_initController)
+                  000862d1    00000063     rts2800_fpu32.lib : s_cosf.c.obj (.text)
+                  00086334    00000060     driverlib_coff.lib : adc.obj (.text:_ADC_setOffsetTrim)
+                  00086394    0000005c                        : spi.obj (.text:_SPI_setConfig)
+                  000863f0    00000058     rts2800_fpu32.lib : s_scalbnf.c.obj (.text)
+                  00086448    00000056                       : boot28.asm.obj (.text)
+                  0008649e    00000052     driverlib_coff.lib : gpio.obj (.text:_GPIO_setPadConfig)
+                  000864f0    00000051                        : sysctl.obj (.text:_SysCtl_getClock)
+                  00086541    0000004e                        : interrupt.obj (.text:_Interrupt_disable)
+                  0008658f    0000004a     csu_tempMeasurement.obj (.text)
+                  000865d9    00000048     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_selectOscSource)
+                  00086621    00000045                        : sci.obj (.text:_SCI_clearInterruptStatus)
+                  00086666    00000044                        : sci.obj (.text:_SCI_enableInterrupt)
+                  000866aa    00000041                        : sci.obj (.text:_SCI_writeCharArray)
+                  000866eb    0000003e                        : sci.obj (.text:_SCI_setConfig)
+                  00086729    0000003b                        : sci.obj (.text:_SCI_readCharArray)
+                  00086764    00000037                        : gpio.obj (.text:_GPIO_setControllerCore)
+                  0008679b    00000037                        : gpio.obj (.text:_GPIO_setPinConfig)
+                  000867d2    00000037                        : gpio.obj (.text:_GPIO_setQualificationMode)
+                  00086809    00000037                        : interrupt.obj (.text:_Interrupt_enable)
+                  00086840    00000035     main.obj (.text:retain)
+                  00086875    00000034     lib_mhsUart.obj (.text)
+                  000868a9    00000032     lib_mhsEpwm.obj (.text:retain)
+                  000868db    00000031     driverlib_coff.lib : gpio.obj (.text:_GPIO_setDirectionMode)
+                  0008690c    0000002f                        : adc.obj (.text:_ADC_setMode)
+                  0008693b    0000002c                        : i2c.obj (.text:_I2C_disableInterrupt)
+                  00086967    0000002b                        : i2c.obj (.text:_I2C_enableInterrupt)
+                  00086992    0000002a     rts2800_fpu32.lib : fd_cmp28.asm.obj (.text)
+                  000869bc    0000002a                       : l_div28.asm.obj (.text)
+                  000869e6    00000029                       : exit.c.obj (.text)
+                  00086a0f    00000001     --HOLE-- [fill = 0]
+                  00086a10    00000027                       : e_sqrtf.c.obj (.text)
+                  00086a37    00000026     driverlib_coff.lib : flash.obj (.text:_Flash_setBankPowerUpDelay)
+                  00086a5d    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
+                  00086a81    00000023                       : fd_tofsfpu32.asm.obj (.text)
+                  00086aa4    00000021     driverlib_coff.lib : sysctl.obj (.text:_CPUTimer_selectClockSource)
+                  00086ac5    00000021                        : i2c.obj (.text:_I2C_clearInterruptStatus)
+                  00086ae6    00000021                        : i2c.obj (.text:_I2C_getInterruptStatus)
+                  00086b07    00000021     rts2800_fpu32.lib : fd_toi28.asm.obj (.text)
+                  00086b28    00000020     driverlib_coff.lib : sci.obj (.text:_SCI_isFIFOEnabled)
+                  00086b48    0000001f                        : sysctl.obj (.text:_CPUTimer_getTimerOverflowStatus)
+                  00086b67    0000001f     rts2800_fpu32.lib : fd_tol28.asm.obj (.text)
+                  00086b86    0000001e     driverlib_coff.lib : interrupt.obj (.text:_Interrupt_initVectorTable)
+                  00086ba4    0000001d     rts2800_fpu32.lib : i_tofd28.asm.obj (.text)
+                  00086bc1    0000001d                       : memcpy.c.obj (.text)
+                  00086bde    0000001c                       : fs_tofdfpu32.asm.obj (.text)
+                  00086bfa    0000001b     driverlib_coff.lib : adc.obj (.text:_ADC_isBaseValid)
+                  00086c15    0000001b                        : sci.obj (.text:_SCI_isBaseValid)
+                  00086c30    0000001b     rts2800_fpu32.lib : fd_toul28.asm.obj (.text)
+                  00086c4b    0000001a     driverlib_coff.lib : sysctl.obj (.text:_CPUTimer_startTimer)
+                  00086c65    0000001a                        : sci.obj (.text:_SCI_isDataAvailableNonFIFO)
+                  00086c7f    0000001a                        : sci.obj (.text:_SCI_isSpaceAvailableNonFIFO)
+                  00086c99    0000001a                        : sysctl.obj (.text:_SysCtl_getLowSpeedClock)
+                  00086cb3    0000001a     rts2800_fpu32.lib : fd_tou28.asm.obj (.text)
+                  00086ccd    00000018     driverlib_coff.lib : sci.obj (.text:_SCI_disableModule)
+                  00086ce5    00000018                        : sci.obj (.text:_SCI_performSoftwareReset)
+                  00086cfd    00000018     rts2800_fpu32.lib : ll_aox28.asm.obj (.text)
+                  00086d15    00000017     driverlib_coff.lib : cputimer.obj (.text:_CPUTimer_isBaseValid)
+                  00086d2c    00000017                        : sysctl.obj (.text:_CPUTimer_isBaseValid)
+                  00086d43    00000017                        : spi.obj (.text:_SPI_isBaseValid)
+                  00086d5a    00000017     rts2800_fpu32.lib : s_fabs.c.obj (.text)
+                  00086d71    00000017                       : u_tofd28.asm.obj (.text)
+                  00086d88    00000014     driverlib_coff.lib : sysctl.obj (.text:_CPUTimer_stopTimer)
+                  00086d9c    00000014                        : sci.obj (.text:_SCI_getRxFIFOStatus)
+                  00086db0    00000014                        : sci.obj (.text:_SCI_getTxFIFOStatus)
+                  00086dc4    00000013                        : cputimer.obj (.text:_CPUTimer_setEmulationMode)
+                  00086dd7    00000013                        : i2c.obj (.text:_I2C_isBaseValid)
+                  00086dea    00000013                        : sci.obj (.text:_SCI_enableModule)
+                  00086dfd    00000012                        : sysctl.obj (.text:_CPUTimer_clearOverflowFlag)
+                  00086e0f    00000012                        : sysctl.obj (.text:_CPUTimer_disableInterrupt)
+                  00086e21    00000012     rts2800_fpu32.lib : args_main.c.obj (.text)
+                  00086e33    00000011     driverlib_coff.lib : sysctl.obj (.text:_CPUTimer_setPeriod)
+                  00086e44    00000011     rts2800_fpu32.lib : s_copysignf.c.obj (.text)
+                  00086e55    00000010     driverlib_coff.lib : flash.obj (.text:_Flash_isCtrlBaseValid)
+                  00086e65    00000010                        : flash.obj (.text:_Flash_isECCBaseValid)
+                  00086e75    0000000f                        : sysctl.obj (.text:_SysCtl_pollCpuTimer)
+                  00086e84    0000000e                        : gpio.obj (.text:_GPIO_isPinValid)
+                  00086e92    0000000e                        : interrupt.obj (.text:_Interrupt_defaultHandler)
+                  00086ea0    0000000e     rts2800_fpu32.lib : fd_sub28.asm.obj (.text)
+                  00086eae    0000000d     driverlib_coff.lib : interrupt.obj (.text:_Interrupt_disableGlobal)
+                  00086ebb    0000000d                        : interrupt.obj (.text:_Interrupt_enableGlobal)
+                  00086ec8    0000000b                        : sysctl.obj (.text:_SysCtl_isMCDClockFailureDetected)
+                  00086ed3    0000000b     rts2800_fpu32.lib : u_div28.asm.obj (.text)
+                  00086ede    00000009     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_serviceWatchdog)
+                  00086ee7    00000009     rts2800_fpu32.lib : _lock.c.obj (.text)
+                  00086ef0    00000009                       : strcat.c.obj (.text)
+                  00086ef9    00000008     F2837xD_CodeStartBranch.obj (.text)
+                  00086f01    00000008     rts2800_fpu32.lib : strlen.c.obj (.text)
+                  00086f09    00000007     driverlib_coff.lib : sysctl.obj (.text:_SysCtl_resetMCD)
+                  00086f10    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+
+.econst    0    00090000    00000d8a     
+                  00090000    00000113     board.obj (.econst:.string)
+                  00090113    00000001     csu_test_status_trans.obj (.econst:.string:_$P$T0$1)
+                  00090114    000000d0     csu_init.obj (.econst:.string)
+                  000901e4    000000c2     driverlib_coff.lib : sysctl.obj (.econst:.string)
+                  000902a6    000000bf                        : flash.obj (.econst:.string)
+                  00090365    00000001     csu_factory_mode.obj (.econst:.string:_$P$T14$16)
+                  00090366    000000bc     driverlib_coff.lib : gpio.obj (.econst:.string)
+                  00090422    000000bb                        : sci.obj (.econst:.string)
+                  000904dd    00000001     csu_factory_mode.obj (.econst:.string:_$P$T15$17)
+                  000904de    000000bb     driverlib_coff.lib : spi.obj (.econst:.string)
+                  00090599    00000001     csu_test_status_trans.obj (.econst:.string:_$P$T2$3)
+                  0009059a    00000087     HI_3587_arinc.obj (.econst:.string)
+                  00090621    00000001     csu_test_status_trans.obj (.econst:.string:_$P$T3$4)
+                  00090622    00000066     i2cLib_FIFO_master_interrupt.obj (.econst:.string)
+                  00090688    00000063     driverlib_coff.lib : interrupt.obj (.econst:.string)
+                  000906eb    00000001     csu_factory_mode.obj (.econst:.string:_$P$T33$35)
+                  000906ec    00000062     driverlib_coff.lib : cputimer.obj (.econst:.string)
+                  0009074e    0000005d                        : adc.obj (.econst:.string)
+                  000907ab    00000001     csu_factory_mode.obj (.econst:.string:_$P$T34$36)
+                  000907ac    0000005d     driverlib_coff.lib : i2c.obj (.econst:.string)
+                  00090809    00000001     --HOLE-- [fill = 0]
+                  0009080a    00000044     csu_status_mode.obj (.econst:.string)
+                  0009084e    00000044     lib_mhsEpwm.obj (.econst:.string)
+                  00090892    00000044     main.obj (.econst:.string)
+                  000908d6    00000043     i2c_ex6_eeprom_interrupt.obj (.econst:.string)
+                  00090919    00000001     --HOLE-- [fill = 0]
+                  0009091a    00000043     lib_mhsAdc.obj (.econst:.string)
+                  0009095d    00000001     --HOLE-- [fill = 0]
+                  0009095e    00000043     lib_mhsI2c.obj (.econst:.string)
+                  000909a1    00000001     --HOLE-- [fill = 0]
+                  000909a2    00000043     lib_mhsUart.obj (.econst:.string)
+                  000909e5    00000001     --HOLE-- [fill = 0]
+                  000909e6    00000032     rts2800_fpu32.lib : e_powf.c.obj (.econst)
+                  00090a18    00000028     csu_Cbit.obj (.econst)
+                  00090a40    00000018     csu_angle_calculation.obj (.econst)
+                  00090a58    00000018     csu_voltageMeasurement.obj (.econst)
+                  00090a70    00000014     rts2800_fpu32.lib : e_asinf.c.obj (.econst)
+                  00090a84    00000013     csu_factory_mode.obj (.econst:.string:_$P$T13$15)
+                  00090a97    00000001     --HOLE-- [fill = 0]
+                  00090a98    00000013     device.obj (.econst:.string)
+                  00090aab    00000011     csu_factory_mode.obj (.econst:.string:_$P$T18$20)
+                  00090abc    00000011     csu_factory_mode.obj (.econst:.string:_$P$T19$21)
+                  00090acd    00000011     csu_factory_mode.obj (.econst:.string:_$P$T20$22)
+                  00090ade    00000011     csu_factory_mode.obj (.econst:.string:_$P$T21$23)
+                  00090aef    00000011     csu_factory_mode.obj (.econst:.string:_$P$T22$24)
+                  00090b00    00000011     csu_factory_mode.obj (.econst:.string:_$P$T23$25)
+                  00090b11    00000011     csu_factory_mode.obj (.econst:.string:_$P$T24$26)
+                  00090b22    00000011     csu_factory_mode.obj (.econst:.string:_$P$T25$27)
+                  00090b33    00000011     csu_factory_mode.obj (.econst:.string:_$P$T26$28)
+                  00090b44    00000011     csu_factory_mode.obj (.econst:.string:_$P$T27$29)
+                  00090b55    00000011     csu_factory_mode.obj (.econst:.string:_$P$T28$30)
+                  00090b66    00000011     csu_factory_mode.obj (.econst:.string:_$P$T29$31)
+                  00090b77    00000011     csu_factory_mode.obj (.econst:.string:_$P$T30$32)
+                  00090b88    00000011     csu_factory_mode.obj (.econst:.string:_$P$T31$33)
+                  00090b99    00000011     csu_factory_mode.obj (.econst:.string:_$P$T32$34)
+                  00090baa    00000010     csu_factory_mode.obj (.econst:.string:_$P$T12$14)
+                  00090bba    00000010     csu_calibration_mode.obj (.econst)
+                  00090bca    00000010     csu_test_status_trans.obj (.econst)
+                  00090bda    00000010     lib_mhsAdc.obj (.econst)
+                  00090bea    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T37$39)
+                  00090bf6    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T38$40)
+                  00090c02    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T39$41)
+                  00090c0e    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T40$42)
+                  00090c1a    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T41$43)
+                  00090c26    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T42$44)
+                  00090c32    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T43$45)
+                  00090c3e    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T44$46)
+                  00090c4a    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T45$47)
+                  00090c56    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T46$48)
+                  00090c62    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T47$49)
+                  00090c6e    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T48$50)
+                  00090c7a    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T49$51)
+                  00090c86    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T50$52)
+                  00090c92    0000000c     csu_factory_mode.obj (.econst:.string:_$P$T51$53)
+                  00090c9e    0000000c     csu_calibrationData.obj (.econst)
+                  00090caa    0000000c     csu_factory_mode.obj (.econst)
+                  00090cb6    0000000c     csu_status_mode.obj (.econst)
+                  00090cc2    0000000c     main.obj (.econst)
+                  00090cce    0000000c     rts2800_fpu32.lib : e_sqrt.c.obj (.econst)
+                  00090cda    0000000a                       : s_atanf.c.obj (.econst:_aT)
+                  00090ce4    00000008     csu_factory_mode.obj (.econst:.string:_$P$T17$19)
+                  00090cec    00000008     csu_factory_mode.obj (.econst:.string:_$P$T36$38)
+                  00090cf4    00000008     rts2800_fpu32.lib : s_atanf.c.obj (.econst:_atanhi)
+                  00090cfc    00000008                       : s_atanf.c.obj (.econst:_atanlo)
+                  00090d04    00000008     csu_init.obj (.econst)
+                  00090d0c    00000007     csu_factory_mode.obj (.econst:.string:_$P$T0$2)
+                  00090d13    00000007     csu_factory_mode.obj (.econst:.string:_$P$T4$6)
+                  00090d1a    00000006     csu_factory_mode.obj (.econst:.string:_$P$T1$3)
+                  00090d20    00000006     csu_factory_mode.obj (.econst:.string:_$P$T2$4)
+                  00090d26    00000006     csu_factory_mode.obj (.econst:.string:_$P$T3$5)
+                  00090d2c    00000006     csu_factory_mode.obj (.econst:.string:_$P$T5$7)
+                  00090d32    00000006     rts2800_fpu32.lib : s_scalbnf.c.obj (.econst)
+                  00090d38    00000005     csu_factory_mode.obj (.econst:.string:_$P$T10$12)
+                  00090d3d    00000005     csu_factory_mode.obj (.econst:.string:_$P$T11$13)
+                  00090d42    00000005     csu_factory_mode.obj (.econst:.string:_$P$T6$8)
+                  00090d47    00000005     csu_factory_mode.obj (.econst:.string:_$P$T7$9)
+                  00090d4c    00000005     csu_factory_mode.obj (.econst:.string:_$P$T8$10)
+                  00090d51    00000005     csu_factory_mode.obj (.econst:.string:_$P$T9$11)
+                  00090d56    00000004     csu_factory_mode.obj (.econst:.string:_$P$T16$18)
+                  00090d5a    00000004     csu_factory_mode.obj (.econst:.string:_$P$T35$37)
+                  00090d5e    00000004     rts2800_fpu32.lib : e_powf.c.obj (.econst:_bp)
+                  00090d62    00000004                       : e_powf.c.obj (.econst:_dp_h)
+                  00090d66    00000004                       : e_powf.c.obj (.econst:_dp_l)
+                  00090d6a    00000004     csu_fluxMeasurement.obj (.econst)
+                  00090d6e    00000004     csu_mhs_Status_trans.obj (.econst)
+                  00090d72    00000004     rts2800_fpu32.lib : s_atanf.c.obj (.econst)
+                  00090d76    00000002     csu_test_status_trans.obj (.econst:.string:_$P$T1$2)
+                  00090d78    00000002     csu_test_status_trans.obj (.econst:.string:_$P$T4$5)
+                  00090d7a    00000002     csu_factory_mode.obj (.econst:.string:_$P$T52$54)
+                  00090d7c    00000002     csu_factory_mode.obj (.econst:.string:_$P$T53$55)
+                  00090d7e    00000002     csu_factory_mode.obj (.econst:.string:_$P$T54$56)
+                  00090d80    00000002     csu_factory_mode.obj (.econst:.string:_$P$T55$57)
+                  00090d82    00000002     csu_factory_mode.obj (.econst:.string:_$P$T56$58)
+                  00090d84    00000002     csu_factory_mode.obj (.econst:.string:_$P$T57$59)
+                  00090d86    00000002     csu_factory_mode.obj (.econst:.string:_$P$T58$60)
+                  00090d88    00000002     csu_factory_mode.obj (.econst:.string)
+
+.ebss      1    0000a800    00000280     UNINITIALIZED
+                  0000a800    000000a4     csu_calibrationData.obj (.ebss)
+                  0000a8a4    0000001a     lib_mhsI2c.obj (.ebss)
+                  0000a8be    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__lock)
+                  0000a8c0    00000064     lib_mhsUart.obj (.ebss:_rDataPointA)
+                  0000a924    00000017     csu_fluxMeasurement.obj (.ebss)
+                  0000a93b    00000001     rts2800_fpu32.lib : errno.c.obj (.ebss)
+                  0000a93c    00000004     csu_angle_calculation.obj (.ebss)
+                  0000a940    00000040     lib_mhsI2c.obj (.ebss:_RX_MsgBuffer)
+                  0000a980    00000040     lib_mhsI2c.obj (.ebss:_TX_MsgBuffer)
+                  0000a9c0    00000040     csu_mhs_Status_trans.obj (.ebss:_TxBusWord)
+                  0000aa00    00000024     csu_fluxMeasurement.obj (.ebss:_gConstant_B)
+                  0000aa24    00000015     csu_calibration_mode.obj (.ebss)
+                  0000aa39    00000001     --HOLE--
+                  0000aa3a    00000006     device.obj (.ebss)
+                  0000aa40    00000010     csu_accelMeasurement.obj (.ebss:_gConstant_A)
+                  0000aa50    0000000b     lib_mhsAdc.obj (.ebss:_ema)
+                  0000aa5b    00000009     csu_mhs_Status_trans.obj (.ebss)
+                  0000aa64    00000008     csu_accelMeasurement.obj (.ebss)
+                  0000aa6c    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
+                  0000aa72    00000004     main.obj (.ebss)
+                  0000aa76    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__unlock)
+                  0000aa78    00000002     csu_factory_mode.obj (.ebss)
+                  0000aa7a    00000002     csu_status_mode.obj (.ebss)
+                  0000aa7c    00000002     lib_mhsStd.obj (.ebss)
+                  0000aa7e    00000002     lib_mhsUart.obj (.ebss)
+
+MODULE SUMMARY
+
+       Module                             code    initialized data   uninitialized data
+       ------                             ----    ----------------   ------------------
+    .\
+       csu_factory_mode.obj               2763    598                2                 
+       lib_mhsAdc.obj                     1280    87                 11                
+       i2cLib_FIFO_master_interrupt.obj   1219    102                0                 
+       csu_calibrationData.obj            837     28                 164               
+       i2c_ex6_eeprom_interrupt.obj       584     67                 0                 
+       csu_angle_calculation.obj          566     31                 4                 
+       csu_init.obj                       384     216                0                 
+       csu_calibration_mode.obj           460     80                 21                
+       lib_mhsEpwm.obj                    481     68                 0                 
+       HI_3587_arinc.obj                  363     135                0                 
+       csu_fluxMeasurement.obj            301     64                 59                
+       csu_test_status_trans.obj          378     23                 0                 
+       lib_mhsUart.obj                    200     79                 102               
+       csu_mhs_Status_trans.obj           303     4                  73                
+       lib_mhsStd.obj                     374     0                  2                 
+       lib_mhsI2c.obj                     147     71                 154               
+       main.obj                           260     80                 4                 
+       csu_Cbit.obj                       198     40                 0                 
+       csu_status_mode.obj                136     80                 2                 
+       csu_accelMeasurement.obj           144     33                 24                
+       csu_voltageMeasurement.obj         151     24                 0                 
+       csu_operation_mode.obj             110     0                  0                 
+       csu_tempMeasurement.obj            74      0                  0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             11713   1910               622               
+                                                                                       
+    .\device\
+       device.obj                         1017    34                 6                 
+       F2837xD_CodeStartBranch.obj        10      0                  0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             1027    34                 6                 
+                                                                                       
+    .\syscfg\
+       board.obj                          1080    275                0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             1080    275                0                 
+                                                                                       
+    C:\ti\c2000\C2000Ware_5_01_00_00\driverlib\f2837xd\driverlib\ccs\Debug\driverlib_coff.lib
+       sysctl.obj                         1175    194                0                 
+       flash.obj                          654     191                0                 
+       sci.obj                            541     187                0                 
+       gpio.obj                           310     188                0                 
+       interrupt.obj                      395     99                 0                 
+       adc.obj                            281     93                 0                 
+       i2c.obj                            272     93                 0                 
+       spi.obj                            115     187                0                 
+       cputimer.obj                       42      98                 0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             3785    1330               0                 
+                                                                                       
+    C:\ti\ccs1120\ccs\tools\compiler\ti-cgt-c2000_22.6.1.LTS\lib\rts2800_fpu32.lib
+       e_powf.c.obj                       908     62                 0                 
+       e_asinf.c.obj                      245     20                 0                 
+       s_atanf.c.obj                      202     30                 0                 
+       e_sqrt.c.obj                       146     12                 0                 
+       fd_add28.asm.obj                   156     0                  0                 
+       fd_div28.asm.obj                   139     0                  0                 
+       fs_div28.asm.obj                   136     0                  0                 
+       fd_mpy28.asm.obj                   131     0                  0                 
+       s_cosf.c.obj                       99      0                  0                 
+       s_scalbnf.c.obj                    88      6                  0                 
+       boot28.asm.obj                     86      0                  0                 
+       exit.c.obj                         41      14                 6                 
+       fd_cmp28.asm.obj                   42      0                  0                 
+       l_div28.asm.obj                    42      0                  0                 
+       e_sqrtf.c.obj                      39      0                  0                 
+       cpy_tbl.c.obj                      36      0                  0                 
+       fd_tofsfpu32.asm.obj               35      0                  0                 
+       fd_toi28.asm.obj                   33      0                  0                 
+       fd_tol28.asm.obj                   31      0                  0                 
+       i_tofd28.asm.obj                   29      0                  0                 
+       memcpy.c.obj                       29      0                  0                 
+       fs_tofdfpu32.asm.obj               28      0                  0                 
+       fd_toul28.asm.obj                  27      0                  0                 
+       fd_tou28.asm.obj                   26      0                  0                 
+       ll_aox28.asm.obj                   24      0                  0                 
+       _lock.c.obj                        9       10                 4                 
+       s_fabs.c.obj                       23      0                  0                 
+       u_tofd28.asm.obj                   23      0                  0                 
+       args_main.c.obj                    18      0                  0                 
+       s_copysignf.c.obj                  17      0                  0                 
+       fd_sub28.asm.obj                   14      0                  0                 
+       u_div28.asm.obj                    11      0                  0                 
+       strcat.c.obj                       9       0                  0                 
+       strlen.c.obj                       8       0                  0                 
+       errno.c.obj                        0       4                  1                 
+       pre_init.c.obj                     2       0                  0                 
+       startup.c.obj                      1       0                  0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             2933    158                11                
+                                                                                       
+       Stack:                             0       0                  1016              
+    +--+----------------------------------+-------+------------------+--------------------+
+       Grand Total:                       20538   3707               1655              
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+0000a800     2a0 (0000a800)     _bParameterError
+0000a801     2a0 (0000a800)     _gCheckSum_code
+0000a802     2a0 (0000a800)     _gversion_code
+0000a803     2a0 (0000a800)     _eepromcrc
+0000a804     2a0 (0000a800)     _mhsensor_accelrightAngle_Data
+0000a814     2a0 (0000a800)     _mhsensor_sensor_Data
+
+0000a840     2a1 (0000a840)     _mhsensor_calibration_Data
+
+0000a880     2a2 (0000a880)     _mhsensor_fluxrightAngle_Data
+0000a8a4     2a2 (0000a880)     _status
+0000a8a6     2a2 (0000a880)     _currentResponderPtr
+0000a8a8     2a2 (0000a880)     _ControlAddr
+0000a8aa     2a2 (0000a880)     _EEPROM
+0000a8be     2a2 (0000a880)     __lock
+
+0000a8c0     2a3 (0000a8c0)     _rDataPointA
+
+0000a924     2a4 (0000a900)     _Box
+0000a928     2a4 (0000a900)     _Boy
+0000a92c     2a4 (0000a900)     _Boz
+0000a930     2a4 (0000a900)     _mhsensor_data
+0000a93b     2a4 (0000a900)     _errno
+
+0000a940     2a5 (0000a940)     _RX_MsgBuffer
+
+0000a980     2a6 (0000a980)     _TX_MsgBuffer
+
+0000a9c0     2a7 (0000a9c0)     _TxBusWord
+
+0000aa3a     2a8 (0000aa00)     _Example_Result
+0000aa3c     2a8 (0000aa00)     _Example_PassCount
+0000aa3e     2a8 (0000aa00)     _Example_Fail
+
+0000aa50     2a9 (0000aa40)     _ema
+0000aa5b     2a9 (0000aa40)     _arinc429_error
+0000aa64     2a9 (0000aa40)     _g0x
+0000aa68     2a9 (0000aa40)     _g0y
+0000aa6c     2a9 (0000aa40)     ___TI_enable_exit_profile_output
+0000aa6e     2a9 (0000aa40)     ___TI_cleanup_ptr
+0000aa70     2a9 (0000aa40)     ___TI_dtors_ptr
+0000aa76     2a9 (0000aa40)     __unlock
+0000aa78     2a9 (0000aa40)     _gfirstOpen_factory
+0000aa7a     2a9 (0000aa40)     _Can_State_Ptr
+0000aa7e     2a9 (0000aa40)     _gRx_done
+0000aa7f     2a9 (0000aa40)     _gRx_cnt
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                                      
+----  -------   ----                                      
+abs   ffffffff  .text                                     
+0     000869e6  C$$EXIT                                   
+0     0008589d  FD$$ADD                                   
+0     00086992  FD$$CMP                                   
+0     00085c1a  FD$$DIV                                   
+0     00085e3f  FD$$MPY                                   
+0     00086ea0  FD$$SUB                                   
+0     00086a81  FD$$TOFS                                  
+0     00086b07  FD$$TOI                                   
+0     00086b67  FD$$TOL                                   
+0     00086cb3  FD$$TOU                                   
+0     00086c30  FD$$TOUL                                  
+0     00085db7  FS$$DIV                                   
+0     00086bde  FS$$TOFD                                  
+0     00086ba4  I$$TOFD                                   
+0     000869bc  L$$DIV                                    
+0     000869cb  L$$MOD                                    
+0     00086cfd  LL$$AND                                   
+0     00086d05  LL$$OR                                    
+0     00086d0d  LL$$XOR                                   
+0     00086ed3  U$$DIV                                    
+0     00086ed8  U$$MOD                                    
+0     00086d71  U$$TOFD                                   
+0     000869d9  UL$$DIV                                   
+0     000869e0  UL$$MOD                                   
+0     00086128  _ADC_setINLTrim                           
+0     0008690c  _ADC_setMode                              
+0     00086334  _ADC_setOffsetTrim                        
+0     000831f3  _Board_init                               
+1     0000a924  _Box                                      
+1     0000a928  _Boy                                      
+1     0000a92c  _Boz                                      
+0     000832fe  _CLR_WDT_init                             
+0     00083274  _CPUTIMER_init                            
+0     00086dc4  _CPUTimer_setEmulationMode                
+1     0000aa7a  _Can_State_Ptr                            
+1     0000a8a8  _ControlAddr                              
+0     000832ea  _DISCRETE_1_init                          
+0     00083317  _DISCRETE_2_init                          
+0     00083633  _Device_bootCPU2                          
+0     00083602  _Device_configureTMXAnalogTrim            
+0     000834b0  _Device_enableAllPeripherals              
+0     000835ec  _Device_enableUnbondedGPIOPullups         
+0     000835cf  _Device_enableUnbondedGPIOPullupsFor100Pin
+0     000835bc  _Device_enableUnbondedGPIOPullupsFor176Pin
+0     0008345d  _Device_init                              
+0     0008359b  _Device_initGPIO                          
+1     0000a8aa  _EEPROM                                   
+1     0000aa3e  _Example_Fail                             
+1     0000aa3c  _Example_PassCount                        
+1     0000aa3a  _Example_Result                           
+0     000837be  _Example_done                             
+0     000837b9  _Example_setResultFail                    
+0     000837b4  _Example_setResultPass                    
+0     00008000  _Flash_initModule                         
+0     0008329c  _GPIO_init                                
+0     00086764  _GPIO_setControllerCore                   
+0     000868db  _GPIO_setDirectionMode                    
+0     0008649e  _GPIO_setPadConfig                        
+0     0008679b  _GPIO_setPinConfig                        
+0     000867d2  _GPIO_setQualificationMode                
+0     00082c61  _I2CBusScan                               
+0     00084c48  _I2C_GPIO_init                            
+0     00082d6a  _I2C_MasterReceiver                       
+0     00082d1b  _I2C_MasterTransmitter                    
+0     00082cc8  _I2C_TransmitSlaveAddress_ControlBytes    
+0     00086ac5  _I2C_clearInterruptStatus                 
+0     0008693b  _I2C_disableInterrupt                     
+0     00086967  _I2C_enableInterrupt                      
+0     00086ae6  _I2C_getInterruptStatus                   
+0     0008626d  _I2C_initController                       
+0     00084c76  _I2Cinit                                  
+0     0008332b  _INTERRUPT_init                           
+0     000868a9  _INT_myEPWM0_ISR                          
+0     000859d0  _INT_mySCI0_RX_ISR                        
+0     00085a2c  _INT_mySCI0_TX_ISR                        
+0     000856a9  _IdleMode                                 
+0     00086541  _Interrupt_disable                        
+0     00086809  _Interrupt_enable                         
+0     00085fc3  _Interrupt_initModule                     
+0     00086b86  _Interrupt_initVectorTable                
+0     0008528b  _LToStr                                   
+0     000832a9  _MR_init                                  
+0     00085bab  _MeasureAccelation                        
+0     000865ce  _MeasureBoardTemperature                  
+0     0008545d  _MeasureFlux                              
+0     00085939  _MeasureVoltage                           
+0     00083202  _PinMux_init                              
+1     0000a940  _RX_MsgBuffer                             
+0     00086128  _RamfuncsLoadEnd                          
+abs   00000128  _RamfuncsLoadSize                         
+0     00086000  _RamfuncsLoadStart                        
+0     00008128  _RamfuncsRunEnd                           
+abs   00000128  _RamfuncsRunSize                          
+0     00008000  _RamfuncsRunStart                         
+0     00086621  _SCI_clearInterruptStatus                 
+0     00086666  _SCI_enableInterrupt                      
+0     00083350  _SCI_init                                 
+0     00086729  _SCI_readCharArray                        
+0     000866eb  _SCI_setConfig                            
+0     000866aa  _SCI_writeCharArray                       
+0     000832d1  _SPI_CS_init                              
+0     00083396  _SPI_init                                 
+0     00086394  _SPI_setConfig                            
+0     00085259  _StrZeroFill                              
+0     00008124  _SysCtl_delay                             
+0     000864f0  _SysCtl_getClock                          
+0     00086205  _SysCtl_getDeviceParametric               
+0     00086c99  _SysCtl_getLowSpeedClock                  
+0     000865d9  _SysCtl_selectOscSource                   
+0     00085ca5  _SysCtl_selectXTAL                        
+0     0008453f  _SysCtl_setClock                          
+0     000832bd  _TFLAG_init                               
+1     0000a980  _TX_MsgBuffer                             
+1     0000a9c0  _TxBusWord                                
+0     00082e89  _Write_Read_TX_RX_FIFO                    
+1     000007f8  __STACK_END                               
+abs   000003f8  __STACK_SIZE                              
+1     0000aa6e  ___TI_cleanup_ptr                         
+1     0000aa70  ___TI_dtors_ptr                           
+1     0000aa6c  ___TI_enable_exit_profile_output          
+abs   ffffffff  ___TI_pprof_out_hndl                      
+abs   ffffffff  ___TI_prof_data_size                      
+abs   ffffffff  ___TI_prof_data_start                     
+abs   ffffffff  ___binit__                                
+abs   ffffffff  ___c_args__                               
+0     00080008  ___cinit__                                
+0     000837ad  ___error__                                
+abs   ffffffff  ___etext__                                
+abs   ffffffff  ___pinit__                                
+abs   ffffffff  ___text__                                 
+0     00086e21  __args_main                               
+1     0000a8be  __lock                                    
+0     00086eef  __nop                                     
+0     00086eeb  __register_lock                           
+0     00086ee7  __register_unlock                         
+1     00000400  __stack                                   
+0     00083fff  __system_post_cinit                       
+0     00086f10  __system_pre_init                         
+1     0000aa76  __unlock                                  
+0     000869e6  _abort                                    
+0     00085b8a  _accel_matrix_init                        
+0     00084745  _adcA1ISR                                 
+0     00084324  _angle_calculation                        
+1     0000aa5b  _arinc429_error                           
+0     00085549  _asin                                     
+0     00085549  _asinf                                    
+0     0008570d  _atan                                     
+0     0008570d  _atanf                                    
+1     0000a800  _bParameterError                          
+0     00086448  _c_int00                                  
+0     0008493c  _calibrationMode                          
+0     00082d9f  _checkBusStatus                           
+0     000857d7  _checkCbit                                
+0     000841f2  _configureADC                             
+0     00086a5d  _copy_in                                  
+0     00086e44  _copysign                                 
+0     00086e44  _copysignf                                
+0     000862d1  _cos                                      
+0     000862d1  _cosf                                     
+0     00086840  _cpuTimer0ISR                             
+1     0000a8a6  _currentResponderPtr                      
+0     00085aaa  _data_Read                                
+0     00083dde  _data_write_to_eeprom                     
+0     000856b2  _delay_uS                                 
+0     00084a09  _detect_rotation                          
+0     00084f65  _dspinit                                  
+0     00085a87  _eepromInit                               
+1     0000a803  _eepromcrc                                
+1     0000aa50  _ema                                      
+1     0000a93b  _errno                                    
+0     000869e8  _exit                                     
+0     00086d5a  _fabsl                                    
+0     00082000  _factory_mode                             
+0     0008541c  _flux_matrix_init                         
+1     0000aa64  _g0x                                      
+1     0000aa68  _g0y                                      
+1     0000a801  _gCheckSum_code                           
+1     0000aa7f  _gRx_cnt                                  
+1     0000aa7e  _gRx_done                                 
+1     0000aa78  _gfirstOpen_factory                       
+1     0000a802  _gversion_code                            
+0     00082dcc  _handleI2C_ErrorCondition                 
+0     00082db3  _handleNACK                               
+0     00085f11  _i2cFIFO_isr                              
+0     00085ec2  _i2c_isr                                  
+0     00084216  _initADCSOC                               
+0     00084e53  _initEPWM                                 
+0     000863f0  _ldexp                                    
+0     000863f0  _ldexpf                                   
+0     00085679  _main                                     
+0     00086bc1  _memcpy                                   
+0     000852ed  _mhs_status_trans                         
+1     0000a804  _mhsensor_accelrightAngle_Data            
+1     0000a840  _mhsensor_calibration_Data                
+1     0000a930  _mhsensor_data                            
+1     0000a880  _mhsensor_fluxrightAngle_Data             
+1     0000a814  _mhsensor_sensor_Data                     
+0     00083277  _myCPUTIMER0_init                         
+0     00083353  _mySCI0_init                              
+0     00083399  _mySPI0_init                              
+0     00085177  _my_atoi                                  
+0     000851fb  _my_strlen                                
+0     00085206  _my_strncmp                               
+0     000851ba  _my_strtok                                
+0     000861b2  _operation_mode                           
+0     000837bf  _pow                                      
+0     000837bf  _powf                                     
+1     0000a8c0  _rDataPointA                              
+0     00083f57  _readControlReg                           
+0     00083f97  _readStatusReg                            
+0     00083b4b  _read_parameter                           
+0     000863f0  _scalbn                                   
+0     000863f0  _scalbnf                                  
+0     000842d4  _setupPPBOffset                           
+0     00086a10  _sqrt                                     
+0     00086a10  _sqrtf                                    
+0     00085af8  _sqrtl                                    
+1     0000a8a4  _status                                   
+0     00085d60  _status_mode                              
+0     00084ffd  _status_transfer_to_terminal              
+0     00086ef0  _strcat                                   
+0     00086f01  _strlen                                   
+0     00083f02  _txOpCode                                 
+0     00085ad4  _verifyEEPROMRead                         
+0     00083f3b  _writeControlReg                          
+0     00083fad  _writeTxFIFO                              
+abs   ffffffff  binit                                     
+0     00080008  cinit                                     
+0     00080000  code_start                                
+abs   ffffffff  etext                                     
+abs   ffffffff  pinit                                     
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                                      
+----  -------   ----                                      
+0     00008000  _Flash_initModule                         
+0     00008000  _RamfuncsRunStart                         
+0     00008124  _SysCtl_delay                             
+0     00008128  _RamfuncsRunEnd                           
+0     00080000  code_start                                
+0     00080008  ___cinit__                                
+0     00080008  cinit                                     
+0     00082000  _factory_mode                             
+0     00082c61  _I2CBusScan                               
+0     00082cc8  _I2C_TransmitSlaveAddress_ControlBytes    
+0     00082d1b  _I2C_MasterTransmitter                    
+0     00082d6a  _I2C_MasterReceiver                       
+0     00082d9f  _checkBusStatus                           
+0     00082db3  _handleNACK                               
+0     00082dcc  _handleI2C_ErrorCondition                 
+0     00082e89  _Write_Read_TX_RX_FIFO                    
+0     000831f3  _Board_init                               
+0     00083202  _PinMux_init                              
+0     00083274  _CPUTIMER_init                            
+0     00083277  _myCPUTIMER0_init                         
+0     0008329c  _GPIO_init                                
+0     000832a9  _MR_init                                  
+0     000832bd  _TFLAG_init                               
+0     000832d1  _SPI_CS_init                              
+0     000832ea  _DISCRETE_1_init                          
+0     000832fe  _CLR_WDT_init                             
+0     00083317  _DISCRETE_2_init                          
+0     0008332b  _INTERRUPT_init                           
+0     00083350  _SCI_init                                 
+0     00083353  _mySCI0_init                              
+0     00083396  _SPI_init                                 
+0     00083399  _mySPI0_init                              
+0     0008345d  _Device_init                              
+0     000834b0  _Device_enableAllPeripherals              
+0     0008359b  _Device_initGPIO                          
+0     000835bc  _Device_enableUnbondedGPIOPullupsFor176Pin
+0     000835cf  _Device_enableUnbondedGPIOPullupsFor100Pin
+0     000835ec  _Device_enableUnbondedGPIOPullups         
+0     00083602  _Device_configureTMXAnalogTrim            
+0     00083633  _Device_bootCPU2                          
+0     000837ad  ___error__                                
+0     000837b4  _Example_setResultPass                    
+0     000837b9  _Example_setResultFail                    
+0     000837be  _Example_done                             
+0     000837bf  _pow                                      
+0     000837bf  _powf                                     
+0     00083b4b  _read_parameter                           
+0     00083dde  _data_write_to_eeprom                     
+0     00083f02  _txOpCode                                 
+0     00083f3b  _writeControlReg                          
+0     00083f57  _readControlReg                           
+0     00083f97  _readStatusReg                            
+0     00083fad  _writeTxFIFO                              
+0     00083fff  __system_post_cinit                       
+0     000841f2  _configureADC                             
+0     00084216  _initADCSOC                               
+0     000842d4  _setupPPBOffset                           
+0     00084324  _angle_calculation                        
+0     0008453f  _SysCtl_setClock                          
+0     00084745  _adcA1ISR                                 
+0     0008493c  _calibrationMode                          
+0     00084a09  _detect_rotation                          
+0     00084c48  _I2C_GPIO_init                            
+0     00084c76  _I2Cinit                                  
+0     00084e53  _initEPWM                                 
+0     00084f65  _dspinit                                  
+0     00084ffd  _status_transfer_to_terminal              
+0     00085177  _my_atoi                                  
+0     000851ba  _my_strtok                                
+0     000851fb  _my_strlen                                
+0     00085206  _my_strncmp                               
+0     00085259  _StrZeroFill                              
+0     0008528b  _LToStr                                   
+0     000852ed  _mhs_status_trans                         
+0     0008541c  _flux_matrix_init                         
+0     0008545d  _MeasureFlux                              
+0     00085549  _asin                                     
+0     00085549  _asinf                                    
+0     00085679  _main                                     
+0     000856a9  _IdleMode                                 
+0     000856b2  _delay_uS                                 
+0     0008570d  _atan                                     
+0     0008570d  _atanf                                    
+0     000857d7  _checkCbit                                
+0     0008589d  FD$$ADD                                   
+0     00085939  _MeasureVoltage                           
+0     000859d0  _INT_mySCI0_RX_ISR                        
+0     00085a2c  _INT_mySCI0_TX_ISR                        
+0     00085a87  _eepromInit                               
+0     00085aaa  _data_Read                                
+0     00085ad4  _verifyEEPROMRead                         
+0     00085af8  _sqrtl                                    
+0     00085b8a  _accel_matrix_init                        
+0     00085bab  _MeasureAccelation                        
+0     00085c1a  FD$$DIV                                   
+0     00085ca5  _SysCtl_selectXTAL                        
+0     00085d60  _status_mode                              
+0     00085db7  FS$$DIV                                   
+0     00085e3f  FD$$MPY                                   
+0     00085ec2  _i2c_isr                                  
+0     00085f11  _i2cFIFO_isr                              
+0     00085fc3  _Interrupt_initModule                     
+0     00086000  _RamfuncsLoadStart                        
+0     00086128  _ADC_setINLTrim                           
+0     00086128  _RamfuncsLoadEnd                          
+0     000861b2  _operation_mode                           
+0     00086205  _SysCtl_getDeviceParametric               
+0     0008626d  _I2C_initController                       
+0     000862d1  _cos                                      
+0     000862d1  _cosf                                     
+0     00086334  _ADC_setOffsetTrim                        
+0     00086394  _SPI_setConfig                            
+0     000863f0  _ldexp                                    
+0     000863f0  _ldexpf                                   
+0     000863f0  _scalbn                                   
+0     000863f0  _scalbnf                                  
+0     00086448  _c_int00                                  
+0     0008649e  _GPIO_setPadConfig                        
+0     000864f0  _SysCtl_getClock                          
+0     00086541  _Interrupt_disable                        
+0     000865ce  _MeasureBoardTemperature                  
+0     000865d9  _SysCtl_selectOscSource                   
+0     00086621  _SCI_clearInterruptStatus                 
+0     00086666  _SCI_enableInterrupt                      
+0     000866aa  _SCI_writeCharArray                       
+0     000866eb  _SCI_setConfig                            
+0     00086729  _SCI_readCharArray                        
+0     00086764  _GPIO_setControllerCore                   
+0     0008679b  _GPIO_setPinConfig                        
+0     000867d2  _GPIO_setQualificationMode                
+0     00086809  _Interrupt_enable                         
+0     00086840  _cpuTimer0ISR                             
+0     000868a9  _INT_myEPWM0_ISR                          
+0     000868db  _GPIO_setDirectionMode                    
+0     0008690c  _ADC_setMode                              
+0     0008693b  _I2C_disableInterrupt                     
+0     00086967  _I2C_enableInterrupt                      
+0     00086992  FD$$CMP                                   
+0     000869bc  L$$DIV                                    
+0     000869cb  L$$MOD                                    
+0     000869d9  UL$$DIV                                   
+0     000869e0  UL$$MOD                                   
+0     000869e6  C$$EXIT                                   
+0     000869e6  _abort                                    
+0     000869e8  _exit                                     
+0     00086a10  _sqrt                                     
+0     00086a10  _sqrtf                                    
+0     00086a5d  _copy_in                                  
+0     00086a81  FD$$TOFS                                  
+0     00086ac5  _I2C_clearInterruptStatus                 
+0     00086ae6  _I2C_getInterruptStatus                   
+0     00086b07  FD$$TOI                                   
+0     00086b67  FD$$TOL                                   
+0     00086b86  _Interrupt_initVectorTable                
+0     00086ba4  I$$TOFD                                   
+0     00086bc1  _memcpy                                   
+0     00086bde  FS$$TOFD                                  
+0     00086c30  FD$$TOUL                                  
+0     00086c99  _SysCtl_getLowSpeedClock                  
+0     00086cb3  FD$$TOU                                   
+0     00086cfd  LL$$AND                                   
+0     00086d05  LL$$OR                                    
+0     00086d0d  LL$$XOR                                   
+0     00086d5a  _fabsl                                    
+0     00086d71  U$$TOFD                                   
+0     00086dc4  _CPUTimer_setEmulationMode                
+0     00086e21  __args_main                               
+0     00086e44  _copysign                                 
+0     00086e44  _copysignf                                
+0     00086ea0  FD$$SUB                                   
+0     00086ed3  U$$DIV                                    
+0     00086ed8  U$$MOD                                    
+0     00086ee7  __register_unlock                         
+0     00086eeb  __register_lock                           
+0     00086eef  __nop                                     
+0     00086ef0  _strcat                                   
+0     00086f01  _strlen                                   
+0     00086f10  __system_pre_init                         
+1     00000400  __stack                                   
+1     000007f8  __STACK_END                               
+1     0000a800  _bParameterError                          
+1     0000a801  _gCheckSum_code                           
+1     0000a802  _gversion_code                            
+1     0000a803  _eepromcrc                                
+1     0000a804  _mhsensor_accelrightAngle_Data            
+1     0000a814  _mhsensor_sensor_Data                     
+1     0000a840  _mhsensor_calibration_Data                
+1     0000a880  _mhsensor_fluxrightAngle_Data             
+1     0000a8a4  _status                                   
+1     0000a8a6  _currentResponderPtr                      
+1     0000a8a8  _ControlAddr                              
+1     0000a8aa  _EEPROM                                   
+1     0000a8be  __lock                                    
+1     0000a8c0  _rDataPointA                              
+1     0000a924  _Box                                      
+1     0000a928  _Boy                                      
+1     0000a92c  _Boz                                      
+1     0000a930  _mhsensor_data                            
+1     0000a93b  _errno                                    
+1     0000a940  _RX_MsgBuffer                             
+1     0000a980  _TX_MsgBuffer                             
+1     0000a9c0  _TxBusWord                                
+1     0000aa3a  _Example_Result                           
+1     0000aa3c  _Example_PassCount                        
+1     0000aa3e  _Example_Fail                             
+1     0000aa50  _ema                                      
+1     0000aa5b  _arinc429_error                           
+1     0000aa64  _g0x                                      
+1     0000aa68  _g0y                                      
+1     0000aa6c  ___TI_enable_exit_profile_output          
+1     0000aa6e  ___TI_cleanup_ptr                         
+1     0000aa70  ___TI_dtors_ptr                           
+1     0000aa76  __unlock                                  
+1     0000aa78  _gfirstOpen_factory                       
+1     0000aa7a  _Can_State_Ptr                            
+1     0000aa7e  _gRx_done                                 
+1     0000aa7f  _gRx_cnt                                  
+abs   00000128  _RamfuncsLoadSize                         
+abs   00000128  _RamfuncsRunSize                          
+abs   000003f8  __STACK_SIZE                              
+abs   ffffffff  .text                                     
+abs   ffffffff  ___TI_pprof_out_hndl                      
+abs   ffffffff  ___TI_prof_data_size                      
+abs   ffffffff  ___TI_prof_data_start                     
+abs   ffffffff  ___binit__                                
+abs   ffffffff  ___c_args__                               
+abs   ffffffff  ___etext__                                
+abs   ffffffff  ___pinit__                                
+abs   ffffffff  ___text__                                 
+abs   ffffffff  binit                                     
+abs   ffffffff  etext                                     
+abs   ffffffff  pinit                                     
+
+[232 symbols]
