@@ -60,13 +60,12 @@ __interrupt void INT_mySCI0_RX_ISR(void)
 __interrupt void INT_mySCI0_TX_ISR(void)
 {
 
+    Interrupt_disable(INT_mySCI0_TX);
 	// 1.  SCI 송신 FIFO 버퍼(TXFF)의 인터럽트 상태 플래그를 초기화
     SCI_clearInterruptStatus(SCIA_BASE, SCI_INT_TXFF);
-	
+
 	// 2. 인터럽트 그룹 9의 ACK 플래그를 초기화
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP9);
 }
-
-
 
 

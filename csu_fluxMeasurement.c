@@ -15,8 +15,6 @@
 
 #define MAG_RESOLUTION      (10000.0/32768.0L)  // range / 2^15
 
-#define use_new_lib_funtion
-
 float64_t Box = 0.0L;  //자기장 x축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000 
 float64_t Boy = 0.0L;  //자기장 y축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000 
 float64_t Boz = 0.0L;  //자기장 z축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000 
@@ -65,6 +63,10 @@ void MeasureFlux(void)
     float64_t Consty;
     float64_t Constz;
 
+    int16_t realBx;
+    int16_t realBy;
+    int16_t realBz;
+
     // 1.x,y,z 축별로 자기장값 계산 = (필터링 된 adc 값 - 옵셋) * 게인 
     int16_t fluxX0 = ema[ADC_CH_INDEX_FLUX_X] - mhsensor_calibration_Data.Offset_Bx;
     gAverageADC_B[0] = ((float64_t)(fluxX0)) * mhsensor_calibration_Data.Gain_Bx;
@@ -83,9 +85,20 @@ void MeasureFlux(void)
         Result_calibration[i] = Constx + Consty + Constz;
     }
 
-    int16_t realBx = (int16_t)Result_calibration[0] - mhsensor_calibration_Data.calOffsetBx;
-    int16_t realBy = (int16_t)Result_calibration[1] - mhsensor_calibration_Data.calOffsetBy;
-    int16_t realBz = (int16_t)Result_calibration[2] - mhsensor_calibration_Data.calOffsetBz;
+
+    if(calibration_mode == 1U)
+    {
+        realBx = (int16_t)Result_calibration[0];
+        realBy = (int16_t)Result_calibration[1];
+        realBz = (int16_t)Result_calibration[2];
+    }
+    else
+    {
+        realBx = (int16_t)Result_calibration[0] - mhsensor_calibration_Data.calOffsetBx;
+        realBy = (int16_t)Result_calibration[1] - mhsensor_calibration_Data.calOffsetBy;
+        realBz = (int16_t)Result_calibration[2] - mhsensor_calibration_Data.calOffsetBz;
+    }
+
 
     if(realBx > 10000)
     {
@@ -139,127 +152,9 @@ void MeasureFlux(void)
 // 출력 전역변수 : mhsensor_data
 static void converterToArinc429(void)
 {
-#ifndef  use_new_lib_funtion
-
-    int16_t rmx, rmy, rmz;
-    // 1. 직각도 보정을 한 x,y,z 자기장 값을 libConverterToArinc429() 함수를 사용하여 arinc 429 프로토콜 방식으로 데이터로 변환 후 mhsensor_data 구조체 전역변수에 저장한다.
-
-    if(Box < 0.0f)
-    {
-        int16_t mx = -1*(int16_t)Box;
-        if(magResolution == 0.0f)
-        {
-            rmx = 0;
-        }
-        else
-        {
-            float64_t magx = (float64_t)mx / MAG_RESOLUTION;
-            rmx = ~((int16_t)(magx)) + 1;
-        }
-
-        mhsensor_data.Mag_x = (uint16_t)rmx & 0x3FFFU;     //14bit
-        mhsensor_data.sign_mag_x = 1U;
-    }
-    else
-    {
-        int16_t mx = (int16_t)Box;
-        if(magResolution == 0.0f)
-        {
-            rmx = 0;
-        }
-        else
-        {
-            float64_t magx = (float64_t)mx / MAG_RESOLUTION;
-            rmx = ~((int16_t)(magx)) + 1;
-        }
-
-        mhsensor_data.Mag_x = (uint16_t)rmx & 0x3FFFU;     //14bit
-        mhsensor_data.sign_mag_x = 0U;
-    }
-#else
     libConverterToArinc429(&mhsensor_data.Mag_x, Box);
-#endif
-
-#ifndef  use_new_lib_funtion
-    if(Boy < 0.0f)
-    {
-
-        int16_t my = -1*(int16_t)Boy;
-        if(magResolution == 0.0f)
-        {
-            rmy = 0;
-        }
-        else
-        {
-            float64_t magy = (float64_t)my / MAG_RESOLUTION;
-            rmy = ~((int16_t)(magy)) + 1;
-        }
-
-        mhsensor_data.Mag_y = (uint16_t)rmy & 0x3FFFU;
-        mhsensor_data.sign_mag_y = 1U;
-    }
-    else
-    {
-        int16_t my = (int16_t)Boy;
-        if(magResolution == 0.0f)
-        {
-            rmy = 0;
-        }
-        else
-        {
-            float64_t magy = (float64_t)my / MAG_RESOLUTION;
-            rmy = ~((int16_t)(magy)) + 1;
-        }
-
-        mhsensor_data.Mag_y = (uint16_t)rmy & 0x3FFFU;
-        mhsensor_data.sign_mag_y = 0U;
-    }
-#else
-
     libConverterToArinc429(&mhsensor_data.Mag_y, Boy);
-
-#endif
-
-#ifndef  use_new_lib_funtion
-    if(Boz < 0.0f)
-    {
-
-        int16_t mz = -1*(int16_t)Boz;
-        if(magResolution == 0.0f)
-        {
-            rmz = 0;
-        }
-        else
-        {
-            float64_t magz = (float64_t)mz / MAG_RESOLUTION;
-            rmz = ~((int16_t)(magz)) + 1;
-        }
-
-        mhsensor_data.Mag_z = (uint16_t)rmz & 0x3FFFU;
-        mhsensor_data.sign_mag_z = 1U;
-    }
-    else
-    {
-        int16_t mz = (int16_t)Boz;
-        if(magResolution == 0.0f)
-        {
-            rmz = 0;
-        }
-        else
-        {
-            float64_t magz = (float64_t)mz / MAG_RESOLUTION;
-            rmz = ~((int16_t)(magz)) + 1;
-        }
-
-        mhsensor_data.Mag_z = (uint16_t)rmz & 0x3FFFU;
-        mhsensor_data.sign_mag_z = 0U;
-    }
-#else
     libConverterToArinc429(&mhsensor_data.Mag_z, Boz);
-
-#endif
-
-
 }
 
 

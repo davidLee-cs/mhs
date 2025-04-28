@@ -24,6 +24,9 @@ void delay_uS(float64_t x);
 __interrupt void i2cFIFO_isr(void);
 __interrupt void i2c_isr(void);
 
+
+
+extern uint16_t calibration_mode;
 extern uint16_t gRx_done;
 extern uint16_t rDataPointA[100];
 extern int16_t gRx_cnt;

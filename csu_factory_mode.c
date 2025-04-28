@@ -1038,46 +1038,8 @@ void writeEepromCRC16(void)
 
 }
 
-#if 0
-static void crc16Set(void)
-{
-    const char_t* comma = ",";
-    const char_t end[] = {'\r', '\n'};
 
-    char_t buffer[100] = {0,};
-
-    int16_t i;
-    for(i=0; i<100; i++)
-    {
-        buffer[i] = (char_t)rDataPointA[i];
-    }
-
-    // 1. 수신된 문자열로 부터 comma 단위 분자열로 분리
-    const char_t *crc = strtok(&rDataPointA[5],comma);
-    if( crc != NULL)
-    {
-        // 2. 첫번째 단위 문자열은 x축 가속도 이득 문자열을 gain_Ax 정수로 변환 한다.
-        int16_t crc16 = atoi(crc);
-        crc = strtok(NULL, comma);
-
-        // 5. 다섯전째 다섯전째 단위 문자열은 y축 가속도 옵셋 eeprom 저장 유무를 위한 정수 변환.
-        int16_t testSave = atoi(crc);
-
-        if(testSave == 1)
-        {
-            (void)data_write_to_eeprom(EEPROM_CHK_CRC_ADDRESS, (uint16_t)(crc16));
-
-        }
-
-        // 7. 데이터 저장 후 완료 ack 를 터미널에 전송 한다.
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)buffer, (uint16_t)strlen(buffer));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 2U);
-    }
-}
-
-#endif
-
-#if 0
+#if 1
 void sendUart(float64_t bx, float64_t by, float64_t bz, float64_t ax, float64_t ay, uint16_t angle)
 {
     char_t *msg2 = NULL;
@@ -1093,6 +1055,7 @@ void sendUart(float64_t bx, float64_t by, float64_t bz, float64_t ax, float64_t 
     SCI_writeCharArray(SCIA_BASE, (uint16_t*)msg2, strlen(msg2));
 
 }
+
 
 void calsendUart(uint16_t cnt, uint16_t angle)
 {

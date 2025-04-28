@@ -53,17 +53,6 @@ void calibrationMode(void)
 	static int16_t minB[3] = {0,};	// calibration mode에서 측정된 자기장 x축 최소값
     int16_t getB[3] = {0,};
 
-    #if 0
-
-    int16_t getBx,getBy, getBz;
-    static int16_t maxBx = 0;   // calibration mode에서 측정된 자기장 x축 최대값
-    static int16_t maxBy = 0;   // calibration mode에서 측정된 자기장 y축 최대값
-    static int16_t maxBz = 0;   // calibration mode에서 측정된 자기장 z축 최대값
-    static int16_t minBx = 0;   // calibration mode에서 측정된 자기장 x축 최소값
-    static int16_t minBy = 0;   // calibration mode에서 측정된 자기장 y축 최소값
-    static int16_t minBz = 0;   // calibration mode에서 측정된 자기장 z축 최소값
-#endif
-
     static int16_t maxB_1[6] = {0,};   // calibration mode에서 측정된 자기장 x축 최대값
     static int16_t maxB_2[6] = {0,};   // calibration mode에서 측정된 자기장 x축 최대값
     float64_t error_B[6] = {0,};
@@ -110,51 +99,6 @@ void calibrationMode(void)
            minB[i] = getB[i];
         }
     }
-
-#if 0
-
-    if(firstCalRun == 0)
-    {
-        firstCalRun = 1;
-
-        maxBx = getBx;
-        minBx = getBx;
-
-        maxBy = getBy;
-        minBy = getBy;
-
-        maxBz = getBz;
-        minBz = getBz;
-
-    }
-
-    if(getBx >= maxBx)
-    {
-        maxBx = getBx;
-    }
-    if(minBx > getBx)
-    {
-        minBx = getBx;
-    }
-
-    if(getBy >= maxBy)
-    {
-        maxBy = getBy;
-    }
-    if(minBy > getBy)
-    {
-        minBy = getBy;
-    }
-
-    if(getBz >= maxBz)
-    {
-        maxBz = getBz;
-    }
-    if(minBz > getBz)
-    {
-        minBz = getBz;
-    }
-#endif
 
     if(cw_rotations == 1)
     {
@@ -271,7 +215,7 @@ void calibrationMode(void)
     }
 
 
-#if 0
+#if 1
         calsendUart(cw_rotations, emaBx);
 #endif
 

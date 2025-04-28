@@ -29,6 +29,7 @@ void dspinit(void)
 	// 2. GPIO 핀, 통신 인터페이스, 전원 장치 등을 설정
     Board_init();
 
+    Interrupt_disable(INT_mySCI0_TX);
 	// 4. 인터럽트 핸들러와 벡터 테이블을 초기화
     init_interrupt();
 

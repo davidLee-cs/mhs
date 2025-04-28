@@ -9,7 +9,8 @@
 
 #include "mhs_project.h"
 
-#define DELAY_1000MS     (1000000.0L)
+
+
 #define DELAY_100MS      (100000.0L)
 #define DELAY_10MS       (10000.0L)
 #define LOOP_COUNT_LIMIT (100U)		// Chattering 감지 상황이 100 msec  을 초과하지 않도록 제한하는 선언값
@@ -17,6 +18,9 @@
 void (*Can_State_Ptr)(void);        // 다음 수행될 모드를 가르키는 함수 포인터
 									// calibrationMode() / status_mode() / factory_mode() / IdleMode() / operation_mode() 와 같이 각 모드의 실행 함수명을가르킴.
 									// 다음 cycle  수행시 Can_State_Ptr 가 가르키는 모드 함수가 실행됨.
+
+uint16_t calibration_mode;
+
 
 // 기능 : Discrete SW 1,2 를 통해 모드 선택하는 함수
 //       SW1,2 (H/H) : Operation
@@ -70,13 +74,16 @@ void status_mode(void)
     else if(Discrete_1_val == 1U)
 #endif
     {
+        calibration_mode = 1U;
         Can_State_Ptr = &calibrationMode;
     } 
 #ifdef NEW_BOARD
     else if ((Discrete_1_val == 0U) && (Discrete_2_val == 1U))
     {
-        Can_State_Ptr = &factory_mode;
+        calibration_mode = 0U;
         gfirstOpen_factory = 1U;
+        Interrupt_enable(INT_mySCI0_TX);
+        Can_State_Ptr = &factory_mode;
     }
 #else
     else if (Discrete_2_val == 1U)
@@ -88,6 +95,7 @@ void status_mode(void)
 #endif
     else 
     {
+        calibration_mode = 0U;
 		Can_State_Ptr = &operation_mode;
     };
 

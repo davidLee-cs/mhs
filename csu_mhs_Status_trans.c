@@ -45,14 +45,7 @@ void mhs_status_trans(uint16_t paddingbit, uint16_t StatusMatrix)
 			rxbyte = 0;
 		}
 		
-		delay_uS(100.0L);
     }
-
-	// 2. mhsensor_data.MagHeading 값이 3599 값이 넘지 않도록 제한 (방어적 코드)
-	if(mhsensor_data.MagHeading >3599U)
-	{
-		mhsensor_data.MagHeading = 3599U;
-	}
 
 	// 3. arinc429에 전송을 위한 방위각 값을 arinc429 프로토콜 형태로 변경 
 	// 	  parity(1bit): 프로토콜의 parity 에서 0(deflult : Odd Parity)

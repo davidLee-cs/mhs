@@ -66,12 +66,10 @@ gpio6.gpioPin.$assign = "GPIO53";
 sci1.$name                    = "mySCI0";
 sci1.registerInterrupts       = true;
 sci1.rxFifo                   = "SCI_FIFO_RX1";
-sci1.enabledFIFOInterrupts    = ["SCI_INT_RXFF"];
 sci1.baudRates                = 9600;
-sci1.sci.$assign              = "SCIA";
-sci1.sci.scirxdPin.$assign    = "GPIO28";
-sci1.sci.scitxdPin.$assign    = "GPIO29";
+sci1.enabledFIFOInterrupts    = ["SCI_INT_RXFF","SCI_INT_TXFF"];
 sci1.sciRXInt.enableInterrupt = true;
+sci1.sciTXInt.enableInterrupt = true;
 
 spi1.$name                   = "mySPI0";
 spi1.mode                    = "SPI_MODE_CONTROLLER";
@@ -85,3 +83,12 @@ spi1.spi.spi_picoPin.$assign = "GPIO16";
 spi1.spi.spi_pociPin.$assign = "GPIO17";
 spi1.spi.spi_clkPin.$assign  = "GPIO18";
 spi1.spi.spi_ptePin.$assign  = "GPIO19";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+sci1.sci.$suggestSolution           = "SCIA";
+sci1.sci.scirxdPin.$suggestSolution = "GPIO28";
+sci1.sci.scitxdPin.$suggestSolution = "GPIO29";

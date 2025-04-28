@@ -12,5 +12,4 @@
 void status_mode(void);
 
 
-
 #endif /* CSU_STATUS_MODE_H_ */
