@@ -621,16 +621,12 @@ static void sub_matrixDataTransfortToTerminal(void)
         }
     }
 
-    for(index=0; index < 3U; index++)
+    for(index=0; index < 2U; index++)
     {
         //2.1 각 주소를 비교하여 문자열 출력
         uint16_t eepromAddr = readCalAddr[index];
         switch(eepromAddr)
         {
-            case EEPROM_CHK_SUM_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)checksum, (uint16_t)strlen(checksum));
-                break;
-
             case EEPROM_VERSION_ADDRESS:
                 SCI_writeCharArray(SCIA_BASE, (const char_t*)version, (uint16_t)strlen(version));
                 break;

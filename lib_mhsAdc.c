@@ -225,12 +225,12 @@ __interrupt void adcA1ISR(void)
     if(read0 > 0x7FFFU)
     {
         result_0 = read0 - 0x7FFFU;
-        fluxread[0] = (int16_t)result_0;
+        fluxread[0] = (int16_t)result_0 * -1;
     }
     else
     {
         result_0 = 0x7FFFU - read0;
-        fluxread[0] = (int16_t)result_0 * -1;
+        fluxread[0] = (int16_t)result_0;
     }
 
     // 3. ADCA 모듈의 SOC 번호 1의 결과를 읽어 자기장 y 축 데이터(fluxread)로 변환
@@ -238,12 +238,12 @@ __interrupt void adcA1ISR(void)
     if(read1 > 0x7FFFU)
     {
         result_1 = read1 - 0x7FFFU;
-        fluxread[1] = (int16_t)result_1;
+        fluxread[1] = (int16_t)result_1 * -1;
     }
     else
     {
         result_1 = 0x7FFFU - read1;
-        fluxread[1] = (int16_t)result_1 * -1;
+        fluxread[1] = (int16_t)result_1;
     }
 
     // 4. ADCA 모듈의 SOC 번호 2의 결과를 읽어 자기장 z 축 데이터(fluxread)로 변환
@@ -251,12 +251,12 @@ __interrupt void adcA1ISR(void)
     if(read2 > 0x7FFFU)
     {
         result_2 = read2 - 0x7FFFU;
-        fluxread[2] = (int16_t)result_2;
+        fluxread[2] = (int16_t)result_2 * -1;
     }
     else
     {
         result_2 = 0x7FFFU - read2;
-        fluxread[2] = (int16_t)result_2 * -1;
+        fluxread[2] = (int16_t)result_2;
     }
 
 
@@ -269,12 +269,12 @@ __interrupt void adcA1ISR(void)
     if(adcax0 > 0x7FFFU)
     {
         result_a0 = adcax0 - 0x7FFFU;
-        accread[0] = (int16_t)result_a0;
+        accread[0] = (int16_t)result_a0 * -1;
     }
     else
     {
         result_a0 = 0x7FFFU - adcax0;
-        accread[0] = (int16_t)result_a0 * -1;
+        accread[0] = (int16_t)result_a0;
     }
 
     // 7. ADCB모듈의 SOC 번호 1의 결과를 읽어 가속도 y 축 데이터(accread)로 변환
@@ -282,12 +282,12 @@ __interrupt void adcA1ISR(void)
     if(adcax1 > 0x7FFFU)
     {
         result_a1 = adcax1 - 0x7FFFU;
-        accread[1] = (int16_t)result_a1;
+        accread[1] = (int16_t)result_a1 * -1;
     }
     else
     {
         result_a1 = 0x7FFFU - adcax1;
-        accread[1] = (int16_t)result_a1 * -1;
+        accread[1] = (int16_t)result_a1;
     }
 
     // 8. ADCB모듈의 SOC 번호 2의 결과를 읽어 가속도 z 축 데이터(accread)로 변환

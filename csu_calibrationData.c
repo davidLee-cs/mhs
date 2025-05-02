@@ -102,13 +102,14 @@ void read_parameter(void)
     error |= data_read_from_eeprom(EEPROM_AY10_RA_ADDRESS, &eepromBuffer[26]);
     error |= data_read_from_eeprom(EEPROM_AY11_RA_ADDRESS, &eepromBuffer[27]);
 
-    error |= data_read_from_eeprom(EEPROM_CHK_SUM_ADDRESS, &eepromBuffer[28]);  // software checksum
+    eepromBuffer[28] = 0;
     error |= data_read_from_eeprom(EEPROM_VERSION_ADDRESS, &eepromBuffer[29]);  // software version
 
     error |= data_read_from_eeprom(EEPROM_CHK_CRC_ADDRESS, &resultcrc);  // eeprom crc16
 
     size_t data_len = (size_t)(sizeof(eepromBuffer) / sizeof(eepromBuffer[0]));
     eepromcrc = crc16_modbus_little_endian(eepromBuffer, data_len);
+
 
     if((uint16_t)resultcrc != eepromcrc)
     {

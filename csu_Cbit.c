@@ -14,8 +14,8 @@ static uint16_t mag_acc_check(void);
 static uint16_t temp_check(void);
 static uint16_t volt_check(void);
 
-#define VOLT_28_MORE        (28.0L*1.05L)
-#define VOLT_28_LESS        (28.0L*0.95L)
+#define VOLT_28_MORE        (32.0L)
+#define VOLT_28_LESS        (12.0L)
 
 #define VOLT_5_MORE         (5.0L*1.05L)
 #define VOLT_5_LESS         (5.0L*0.95L)
