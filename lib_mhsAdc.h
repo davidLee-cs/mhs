@@ -34,7 +34,7 @@ enum {
 void configureADC(uint32_t adcBase, uint16_t bittype);
 void setupPPBOffset(void);
 
-extern int16_t ema[ADC_CH_INDEX_MAX];
+extern uint16_t ema[ADC_CH_INDEX_MAX];
 
 #if 0
 

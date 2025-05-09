@@ -16,24 +16,25 @@
 
 
 // 회전 감지 변수
-static int16_t cw_rotations;   // CW 방향 회전 횟수
+static int16_t cw_rotations;     // CW 방향 회전 횟수
 
-static uint16_t emaCnt;
-static uint16_t calRotationDone;
+static uint16_t emaCnt;          // 지연 시간을 주기 위한 카운터
+static uint16_t calRotationDone; // MHS 회전 완료 플래그
 
 static int16_t calibration_ema_filter(float64_t adc, float64_t alpha, int16_t previous_ema_filtered_value);
 static void detect_rotation(float64_t sensor_value);
 
 
-// 기능 : discrete_1 스위치가 LOW 이면 cal과 CBIT 을 수행하고, High 이면 eeprom 모드에 데이터 저장하고 Idle 로 동작한다.
-//       단, CBIT 수행 시 에러가 발생 이후에는 idle 모드로 동작한다.
+// 기능 : discrete_1 스위치가 LOW 이면 cal과 CBIT 을 수행하고, MHS가 2회 이상 회전 후에 eeprom 모드에 데이터 저장하고 ssm 상태를 cal 모드에서 noraml 모드로 변경한다.
+//       단, CBIT 수행 시 에러가 발생 이후에는 ssm 상태를  STATUS_BCD_FW 상태로 전송한다.
 // 입출력 전역변수
 // float64_t Box;  //자기장 x축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
-// float64_t BoyL;  //자기장 y축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
+// float64_t Boy;  //자기장 y축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
 // float64_t Boz;  //자기장 z축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
-// int16_t calOffsetBx;    // 자기장 x축 calibration 모드 옵셋
-// int16_t calOffsetBy;    // 자기장 y축 calibration 모드 옵셋
-// int16_t calOffsetBz;    // 자기장 z축 calibration 모드 옵셋
+// mhsensor_calibration_Data.calOffsetBx;    // 자기장 x축 calibration 모드 옵셋
+// mhsensor_calibration_Data.calOffsetBy;    // 자기장 y축 calibration 모드 옵셋
+// mhsensor_calibration_Data.calOffsetBz;    // 자기장 z축 calibration 모드 옵셋
+
 // 이력 :
 //      2024.05.23 : 이충순 : 초기 작성
 void calibrationMode(void)
@@ -58,18 +59,20 @@ void calibrationMode(void)
     float64_t error_B[6] = {0,};
     int16_t i;
 
-    // 1.1.1 CBIT 오류가 없으면 자기장 측정
+    // 1. 자기장 측정, 전압, 온도를 측정
     MeasureFlux();
     MeasureVoltage();
     MeasureBoardTemperature();
 
+    // 2. 자기장 x축을 ema 필터를 적용
     emaBx = calibration_ema_filter(Box, 0.90, emaBx);
 
-    // 1.1.2 측정된 자기장의 min, max 확인
+    // 3. 각 자기장값을 버퍼에 저장
     getB[X_AXIS] = (int16_t)Box; // min/max 비교를 위하여 float을 int 형 변환
     getB[Y_AXIS] = (int16_t)Boy;
     getB[Z_AXIS] = (int16_t)Boz;
 
+    // 4. 처음 동작 시 각축 min, max 값을 현재 값으로 설정.
     if(firstCalRun == 0)
     {
         firstCalRun = 1;
@@ -86,6 +89,7 @@ void calibrationMode(void)
     }
 
 
+    // 5. 각 축별 현재값이 max[] 보다 크면 max[]로 저장, min[] 보다 작으면  min[]에 저장
     for(i=0; i<3; i++)
     {
 
@@ -100,6 +104,7 @@ void calibrationMode(void)
         }
     }
 
+    // 6. 1회전하면 maxB_1[] 버퍼에 저장
     if(cw_rotations == 1)
     {
         maxB_1[0] = maxB[X_AXIS];
@@ -110,6 +115,7 @@ void calibrationMode(void)
         maxB_1[5] = minB[Z_AXIS];
     }
 
+    // 7. 2회전이면 maxB_2[] 버퍼에 저장
     if(cw_rotations == 2)
     {
         maxB_2[0] = maxB[X_AXIS];
@@ -120,21 +126,23 @@ void calibrationMode(void)
         maxB_2[5] = minB[Z_AXIS];
     }
 
+    // 8. 2.5초 마다 detect_rotation() 함수 호출하여 회전 감시 진행
     if(calModeCnt++ > 50) /// 2.5초 대기
     {
         calModeCnt = 0;
+        // 8.1 calOffsetDone =0, 즉, cal 모드일때만 진행
         if(calOffsetDone == 0U) // cal 모드 일때만 적용,
         {
             detect_rotation((float64_t)emaBx);
         }
     }
 
-
-    // 1.1.3 checkCbit()을 호출하여 CBIT 진행,
+    // 9. checkCbit()을 호출하여 CBIT 진행 후 에러 확인
     if(checkCbit() == 1U)
     {
         errorCbit = 1U;
     }
+
 
     if(calOffsetDone == 1U)
     {

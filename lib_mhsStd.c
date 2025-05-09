@@ -19,10 +19,10 @@
   uart 송신 인터럽트 서비스 루틴 함수
 
 입출력 변수
-char_t *str : 문자열을 입력
+char8_t *str : 문자열을 입력
 return : 문자열을 정수로 변환된 값을 리턴
 */
-int16_t my_atoi(const char_t *str)
+int16_t my_atoi(const char8_t *str)
 {
     int16_t   sign;
     int16_t   value;
@@ -53,7 +53,7 @@ int16_t my_atoi(const char_t *str)
         while ((*str >= '0') && (*str <= '9'))
         {
         	// 1.3.1 ASCII 코드에서 '0'의 값을 빼서 실제 숫자 값을 입력
-            char_t v = *str - '0';
+            char8_t v = *str - '0';
 			//1.3.2 value에 10을 곱하고 현재 읽은 숫자를 더하여 정수를 형성
             value = (value * 10) + (int16_t)v;  
             str++;
@@ -66,13 +66,13 @@ int16_t my_atoi(const char_t *str)
 
 #if 0
 // 구분자(delimiter)를 기반으로 주어진 문자열을 잘라서 각각의 토큰을 반환하는 함수 
-char_t *my_strtok(char_t *str, const char_t *deli)
+char8_t *my_strtok(char8_t *str, const char8_t *deli)
 {
     uint16_t i;
     uint16_t deli_len = my_strlen(deli); //deli가 몇개있는지 알아야 for문 케이스 검사가능
-    static char_t* tmp = NULL; //
-    char_t* chk = NULL;
-    char_t* idx = tmp;
+    static char8_t* tmp = NULL; //
+    char8_t* chk = NULL;
+    char8_t* idx = tmp;
 
 	// 1. 문자열 입력에서  tmp에 값이 비어 있는 경우 tmp에 str 대입
     if((str != NULL) && !tmp){
@@ -138,13 +138,13 @@ char_t *my_strtok(char_t *str, const char_t *deli)
  deli에 주어진 구분자를 기준으로 문자열을 나누고, 다음 토큰을 요청할 때마다 NULL이 아닌 부분을 반환
 
 입출력 변수
-char_t *str : 문자열 포인터 입력
-const char_t *deli : 문자열 구분할 특정 구분자
+char8_t *str : 문자열 포인터 입력
+const char8_t *deli : 문자열 구분할 특정 구분자
 */
-char_t* my_strtok(char_t* str, const char_t* delimiters) {
-    static char_t* pCurrent;
-    const char_t* pDelimit; // const 유지
-    char_t* result = NULL; // 반환할 값을 저장할 변수
+char8_t* my_strtok(char8_t* str, const char8_t* delimiters) {
+    static char8_t* pCurrent;
+    const char8_t* pDelimit; // const 유지
+    char8_t* result = NULL; // 반환할 값을 저장할 변수
 
     // 1. pCurrent 초기화
     if (str != NULL) {
@@ -187,10 +187,10 @@ char_t* my_strtok(char_t* str, const char_t* delimiters) {
     return result; // return 문은 단 한 번만 사용
 }
 #if 0
-char_t* my_strtok(char_t* str, const char_t* delimiters) {
-    static char_t* pCurrent;
-    const char_t* pDelimit; // const 유지
-    const char_t* result = NULL; // 반환할 값을 저장할 변수
+char8_t* my_strtok(char8_t* str, const char8_t* delimiters) {
+    static char8_t* pCurrent;
+    const char8_t* pDelimit; // const 유지
+    const char8_t* result = NULL; // 반환할 값을 저장할 변수
 
     // 1. pCurrent 초기화
     if (str != NULL) {
@@ -236,9 +236,9 @@ char_t* my_strtok(char_t* str, const char_t* delimiters) {
  문자열의 길이를 계산하는 함수
 
 입출력 변수
-const char_t *str : 문자열 포인터 입력
+const char8_t *str : 문자열 포인터 입력
 */
-uint16_t my_strlen(const char_t *str)
+uint16_t my_strlen(const char8_t *str)
 {
     uint16_t cnt=0;
 	// 1. str[cnt]가 널 문자('\0')가 아닐 때까지 계속 반복합니다. 각 반복에서 카운터 cnt를 증가 시킴.
@@ -255,12 +255,12 @@ uint16_t my_strlen(const char_t *str)
  문자열의 길이를 계산하는 함수
 
 입출력 변수
-const char_t *str : 문자열 포인터 입력
+const char8_t *str : 문자열 포인터 입력
 */
-int16_t my_strncmp(const char_t *s1, const char_t *s2, uint16_t n)
+int16_t my_strncmp(const char8_t *s1, const char8_t *s2, uint16_t n)
 {
     uint16_t  i=0;
-    char_t   r=0;
+    char8_t   r=0;
 
 	// 1.  주어진 n만큼 문자열을 비교합니다. 두 문자열 모두 널 문자가 아닐 경우 계속 비교 
     while ((i < n) && ((s1[i] != '\0') && (s2[i] != '\0'))) {
@@ -277,10 +277,10 @@ int16_t my_strncmp(const char_t *s1, const char_t *s2, uint16_t n)
 }
 
 
-static char_t *my_strcpy(char_t *dest, const char_t *src)
+static char8_t *my_strcpy(char8_t *dest, const char8_t *src)
 {
     int16_t i=0;
-    char_t *done = NULL;
+    char8_t *done = NULL;
 
     if((src == NULL) || (dest == NULL))
     {
@@ -306,19 +306,19 @@ static char_t *my_strcpy(char_t *dest, const char_t *src)
  문자열의 길이를 계산하는 함수
 
 입출력 변수
-char_t c : 1바이트 정수 입력
+char8_t c : 1바이트 정수 입력
 */
-static char_t ToDigitNum(char_t c)
+static char8_t ToDigitNum(char8_t c)
 {
-    char_t r = c;
-    char_t z = (char_t)0;
-    char_t n = (char_t)9;
+    char8_t r = c;
+    char8_t z = (char8_t)0;
+    char8_t n = (char8_t)9;
 
 	// 1. c가 0~9 범위인지 체크
     if((r >= z)  && (r <= n))
     {
     	//1.1  c가 숫자라면, ASCII로 변환
-        r = (char_t)(c + 48);
+        r = (char8_t)(c + 48);
     }
 
 	// 2. 변환된 값을 반환
@@ -329,10 +329,10 @@ static char_t ToDigitNum(char_t c)
 기능설명
   버퍼를 아스키코드 ‘0’ 으로 저장
 입출력 변수
-char_t *str : 아스키코드‘0’ 으로 변환한 문자열을 str 버퍼에 저장
+char8_t *str : 아스키코드‘0’ 으로 변환한 문자열을 str 버퍼에 저장
 int16_t str_size : 변환할 문자열 자릿수
 */
-void StrZeroFill( char_t *str, uint16_t iLength )
+void StrZeroFill( char8_t *str, uint16_t iLength )
 {
     uint16_t i=0;
     uint16_t iLen = (uint16_t)strlen(str);
@@ -341,7 +341,7 @@ void StrZeroFill( char_t *str, uint16_t iLength )
     if(iLength >= iLen)
     {
         iMLen =  iLength - iLen;
-        char_t szBuf[20+1];
+        char8_t szBuf[20+1];
         (void)memset(szBuf, 0x00, sizeof(szBuf));
 
         for( i=0U; i<iMLen; i++ )
@@ -363,10 +363,10 @@ void StrZeroFill( char_t *str, uint16_t iLength )
 
 입출력 변수
 int32_t lval : 변환할 32 bit 정수를 입력
-char_t *str : 변환한 문자열을 str 버퍼에 저장
+char8_t *str : 변환한 문자열을 str 버퍼에 저장
 int16_t str_size : 변환할 문자열 자릿수
 */
-int16_t LToStr(int32_t lval, char_t *str, int16_t str_size)
+int16_t LToStr(int32_t lval, char8_t *str, int16_t str_size)
 {
     int16_t dval, index=0;
     int32_t maxcolumn = 100000000;
@@ -408,7 +408,7 @@ int16_t LToStr(int32_t lval, char_t *str, int16_t str_size)
 			// 1.2.2. ToDigitNum 함수를 사용하여 문자로 변환, 변환된 문자는 str 배열에 저장
             if ((index >= 0) && (index < (str_size - 1)))
             {
-                str[index++] = ToDigitNum((char_t)dval);
+                str[index++] = ToDigitNum((char8_t)dval);
             }
 
 			//1.2.3 현재 자릿수 제거하고 자릿수를 줄임.
@@ -437,7 +437,7 @@ int16_t LToStr(int32_t lval, char_t *str, int16_t str_size)
 
 #if 0
 //  문자열 버퍼의 내용을 초기화하는 함수 
-void bufclear(char_t *p, int16_t n)
+void bufclear(char8_t *p, int16_t n)
 {
     int16_t i;
 
@@ -447,13 +447,13 @@ void bufclear(char_t *p, int16_t n)
     }
 }
 
-void *my_memset(void *src, char_t value, uint16_t num)
+void *my_memset(void *src, char8_t value, uint16_t num)
 {
         uint16_t i;
-        char_t* p = (char_t*) src;
+        char8_t* p = (char8_t*) src;
 
         for (i = 0U; i < num; i++) {
-            p[i] = (char_t) value;
+            p[i] = (char8_t) value;
         }
 
         return src;  // 원래 포인터를 반환
@@ -462,8 +462,8 @@ void *my_memset(void *src, char_t value, uint16_t num)
 
 void *my_memcpy(void *dest,const void *src, uint16_t len)
 {
-    char_t *pdest = (char_t*)dest;
-    const char_t *psrc = (char_t*)src;
+    char8_t *pdest = (char8_t*)dest;
+    const char8_t *psrc = (char8_t*)src;
     while(len--)
     {
         *pdest++ = *psrc++;
@@ -471,10 +471,10 @@ void *my_memcpy(void *dest,const void *src, uint16_t len)
     return dest;
 }
 
-int16_t my_strcmp(const char_t *s1, const char_t *s2)
+int16_t my_strcmp(const char8_t *s1, const char8_t *s2)
 {
     int16_t i=0;
-    char_t r=0;
+    char8_t r=0;
 
     // 두 문자열을 하나씩 비교합니다.
     while ((s1[i] != '\0') && (s2[i] != '\0')) {

@@ -10,6 +10,10 @@
 #include <math.h>
 #include "mhs_project.h"
 
+float64_t gFluxrx;
+float64_t gFluxry;
+
+
 static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t by, float64_t bz);
 
 // 기능 : 정북 기준 방위각 계산
@@ -92,6 +96,7 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
 
 #if 1
 
+    // 1. 자기장 보정 벡터 계산
     float64_t Apm = (float64_t)(asin((float32_t)gx));
     if(Apm == 0.0L)
     {
@@ -108,9 +113,13 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
     float64_t testAp = (float64_t)(sqrt(1.0-pow((float32_t)gx, 2.0)));
     float64_t cosAp = gy / testAp;
 
+    // 2. sqrt(1 - pow(가속도, 2))와 같은 항은 기울기에 따라 축이 회전할 때 벡터 크기를 조정
     Brx = (float64_t)(sqrt(1.0-pow((float32_t)gx, 2.0))*bx) - (float64_t)(gx*cosAp*by) + (float64_t)(gx*sqrt(1.0-pow((float32_t)cosAp, 2.0))*bz);
     Bry = (float64_t)(sqrt(1.0-pow((float32_t)cosAp, 2.0))*by) + (cosAp*bz);
 
+
+    gFluxrx = Brx;
+    gFluxry = Bry;
     if((Brx == 0.0L ) || (Bry == 0.0L))
     {
         atanB = 0.0;

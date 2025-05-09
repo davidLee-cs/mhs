@@ -19,6 +19,13 @@ float64_t Box = 0.0L;  //자기장 x축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~
 float64_t Boy = 0.0L;  //자기장 y축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000 
 float64_t Boz = 0.0L;  //자기장 z축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000 
 
+int16_t filterBx = 0;
+int16_t filterBy = 0;
+int16_t filterBz = 0;
+int16_t filterAx = 0;
+int16_t filterAy = 0;
+
+
 struct _mhsensor_data mhsensor_data;
 
 static void converterToArinc429(void);
@@ -68,11 +75,11 @@ void MeasureFlux(void)
     int16_t realBz;
 
     // 1.x,y,z 축별로 자기장값 계산 = (필터링 된 adc 값 - 옵셋) * 게인 
-    int16_t fluxX0 = ema[ADC_CH_INDEX_FLUX_X] - mhsensor_calibration_Data.Offset_Bx;
+    int16_t fluxX0 = filterBx - mhsensor_calibration_Data.Offset_Bx;
     gAverageADC_B[0] = ((float64_t)(fluxX0)) * mhsensor_calibration_Data.Gain_Bx;
-    int16_t fluxY0 = ema[ADC_CH_INDEX_FLUX_Y] - mhsensor_calibration_Data.Offset_By;
+    int16_t fluxY0 = filterBy - mhsensor_calibration_Data.Offset_By;
     gAverageADC_B[1] = ((float64_t)(fluxY0)) * mhsensor_calibration_Data.Gain_By;
-    int16_t fluxZ0 = ema[ADC_CH_INDEX_FLUX_Z] - mhsensor_calibration_Data.Offset_Bz;
+    int16_t fluxZ0 = filterBz - mhsensor_calibration_Data.Offset_Bz;
     gAverageADC_B[2] = ((float64_t)(fluxZ0)) * mhsensor_calibration_Data.Gain_Bz;
 
 

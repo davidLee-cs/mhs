@@ -41,4 +41,14 @@
 #define MHS_VERSION     (0xA100U)
 
 
+extern int16_t filterBx;
+extern int16_t filterBy;
+extern int16_t filterBz;
+extern int16_t filterAx;
+extern int16_t filterAy;
+
+extern float64_t gFluxrx;
+extern float64_t gFluxry;
+
+
 #endif /* MHS_PROJECT_H_ */

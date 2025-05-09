@@ -20,26 +20,43 @@ float64_t g0x = 0.0L;  // 가속도 x축, 단위 g, 정밀도  , 범위    0 ~  +/- 1.6g
 float64_t g0y = 0.0L;  // 가속도 y축, 단위 g, 정밀도  , 범위    0 ~  +/- 1.6g
 
 static float64_t gConstant_A[2][2] =
-        { {1.0L, 0.0L},
-          {0.0L, 1.0L}
+        { {1.0L, 0.0L}, //행렬 (2x2) 가속도 x축 보정 상수값
+          {0.0L, 1.0L}  //행렬 (2x2) 가속도 y축 보정 상수값
         };
 
 
+
+
+
+// 기능 : 가속도 센서의 축 보정 상수값 입력
+// 입력 전역변수 :
+//  mhsensor_accelrightAngle_Data.matrix_x00; //
+//  mhsensor_accelrightAngle_Data.matrix_x01;
+//  mhsensor_accelrightAngle_Data.matrix_y10;
+//  mhsensor_accelrightAngle_Data.matrix_y11;
+// 출력 전역변수:
+//  gConstant_A[0][0]
+//  gConstant_A[0][1]
+//  gConstant_A[1][0]
+//  gConstant_A[1][1]
 void accel_matrix_init(void)
 {
+    // 1. 가속도 x축 행열 (2x2) 상수 입력
     gConstant_A[0][0] = mhsensor_accelrightAngle_Data.matrix_x00;
     gConstant_A[0][1] = mhsensor_accelrightAngle_Data.matrix_x01;
 
+    // 2. 가속도 y축 행열 (2x2) 상수 입력
     gConstant_A[1][0] = mhsensor_accelrightAngle_Data.matrix_y10;
     gConstant_A[1][1] = mhsensor_accelrightAngle_Data.matrix_y11;
 }
 
-// adc에서 필터링 데이터를 이용하여 가속도 값으려 변환
+
+// 기능 : adc에서 필터링 데이터를 이용하여 가속도 값으려 변환
 // 입력 전역변수 : 
-//		필터된 입력값 : ema[ADC_CH_INDEX_ACCEL_X], ema[ADC_CH_INDEX_ACCEL_Y], ema[ADC_CH_INDEX_ACCEL_Z] 
+//		필터된 입력값 : ema[ADC_CH_INDEX_ACCEL_X], ema[ADC_CH_INDEX_ACCEL_Y]
 //		옵셋값 :Offset_Ax, Offset_Ay, Offset_Az
-//		게인 : Gain_Ax, Gain_Ay, Gain_Az
-// 출력 : g0x, g0y, g0z
+//		게인 : Gain_Ax, Gain_Ay
+// 출력 : g0x, g0y
 // 출력 가속도 = (필터된 입력값 - 옵셋값) * 게인
 void MeasureAccelation(void)
 {
@@ -55,9 +72,9 @@ void MeasureAccelation(void)
 
 
     // 1.x,y,z 축별로 가속도값 계산 = (필터링 된 adc 값 - 옵셋) * 게인 
-    int16_t accX0 = ema[ADC_CH_INDEX_ACCEL_X] - mhsensor_calibration_Data.Offset_Ax;
+    int16_t accX0 = filterAx - mhsensor_calibration_Data.Offset_Ax;
     gAverageADC_A[0] = (float64_t)(accX0) * mhsensor_calibration_Data.Gain_Ax;
-    int16_t accY0 = ema[ADC_CH_INDEX_ACCEL_Y] - mhsensor_calibration_Data.Offset_Ay;
+    int16_t accY0 = filterAy - mhsensor_calibration_Data.Offset_Ay;
     gAverageADC_A[1] = ((float64_t)(accY0)) * mhsensor_calibration_Data.Gain_Ay;
 
 

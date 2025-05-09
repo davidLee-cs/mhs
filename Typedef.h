@@ -20,8 +20,8 @@
 typedef float         float32_t;
 typedef long double   float64_t;
 
-typedef char          char_t;
-typedef unsigned char uchar_t;
+typedef char          char8_t;
+typedef unsigned char uchar8_t;
 
 typedef          int   int16_t;
 typedef unsigned int   uint16_t;

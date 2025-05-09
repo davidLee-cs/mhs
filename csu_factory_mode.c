@@ -54,12 +54,12 @@ void factory_mode(void)
 {
 	static uint16_t bSendUartData = 0U;
 
-    const char_t startCmd[] = {'$','S','T','A','R','T','\0'};
-    const char_t stopCmd[] = {'$','S','T','O','P','\0'};
+    const char8_t startCmd[] = {'$','S','T','A','R','T','\0'};
+    const char8_t stopCmd[] = {'$','S','T','O','P','\0'};
 
-    const char_t end[] = {'\r', '\n','\r', '\n','\0'};
-    const char_t openFactory[] =   {'F','A','C','T','O','R','Y','_','M','O','D','E','!','!','!','\0' };
-    const char_t star[] =       {'*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','\0' };
+    const char8_t end[] = {'\r', '\n','\r', '\n','\0'};
+    const char8_t openFactory[] =   {'F','A','C','T','O','R','Y','_','M','O','D','E','!','!','!','\0' };
+    const char8_t star[] =       {'*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','\0' };
 
     int16_t cnt;
 
@@ -67,12 +67,12 @@ void factory_mode(void)
     {
         gfirstOpen_factory = 0U;
 
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)star, (uint16_t)strlen(star));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, (uint16_t)strlen(end));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)openFactory, (uint16_t)strlen(openFactory));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, (uint16_t)strlen(end));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)star, (uint16_t)strlen(star));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, (uint16_t)strlen(end));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)star, (uint16_t)strlen(star));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, (uint16_t)strlen(end));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)openFactory, (uint16_t)strlen(openFactory));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, (uint16_t)strlen(end));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)star, (uint16_t)strlen(star));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, (uint16_t)strlen(end));
     }
 
 
@@ -138,7 +138,7 @@ void factory_mode(void)
 
 static void eepromDataReadCmd(void){
 
-    const char_t eepromReadCmd[] = {'$','R','E','A','D','\0'};
+    const char8_t eepromReadCmd[] = {'$','R','E','A','D','\0'};
     // 1.3 ºˆΩ≈µ•¿Ã≈Õ∞° eeprom ø° ¿˙¿Âµ» calibarion  ¿¸º€ ∏Ì∑…¿Ã∏È, calibrationDataTransfortToTerminal() ∏¶ ºˆ«‡«œø© eeprom ø° ¿˙¿Âµ» µ•¿Ã≈Õ∏¶ ≈ÕπÃ≥ ∑Œ ¿¸º€«—¥Ÿ.
     if(strncmp(rDataPointA, eepromReadCmd, 5) == 0)
     {
@@ -152,14 +152,14 @@ static void eepromDataReadCmd(void){
 static void sub_function_mode(void)
 {
 
-    const char_t calFluxCmd[] = {'$','F','L','U','X','\0'};
-    const char_t calAccelCmd[] = {'$','A','C','C','E','L','\0'};
-    const char_t calModeOffsetCmd[] = {'$','C','A','L','B','\0'};
-    const char_t accelrightAnglesetCmd[] = {'$','A','R','A','\0'};
-    const char_t fluxrightAnglesetCmd[] = {'$','F','R','A','\0'};
-    const char_t versionCmd[] = {'$','V','E','R','\0'};
+    const char8_t calFluxCmd[] = {'$','F','L','U','X','\0'};
+    const char8_t calAccelCmd[] = {'$','A','C','C','E','L','\0'};
+    const char8_t calModeOffsetCmd[] = {'$','C','A','L','B','\0'};
+    const char8_t accelrightAnglesetCmd[] = {'$','A','R','A','\0'};
+    const char8_t fluxrightAnglesetCmd[] = {'$','F','R','A','\0'};
+    const char8_t versionCmd[] = {'$','V','E','R','\0'};
 #if 0
-    const char_t crc16Cmd[] = {'$','C','R','C','\0'};
+    const char8_t crc16Cmd[] = {'$','C','R','C','\0'};
 #endif
 
     // 1.4 ºˆΩ≈µ•¿Ã≈Õ∞° ∫∏¡§«— ∞°º”µµ ºæº≠ ∆ƒ∂ÛπÃ≈Õ ∞™ ¿˙¿Â ∏Ì∑…¿Ã∏È, ∫∏¡§«— ∞°º”µµ ºæº≠ ∆ƒ∂ÛπÃ≈Õ ∞™¿Œ  x,y,z√‡ gain, offset ∞™¿ª eepromø° ¿˙¿Â«—¥Ÿ.
@@ -218,24 +218,24 @@ RX_MsgBuffer[MAX_BUFFER_SIZE];  EEPROM ø°º≠ ¿–¿∫ µ•¿Ã≈Õ∏¶ ISR∞˙ ¥Ÿ∏• csuøÕ ∞¯¿Ø«
 */
 static void calibrationDataTransfortToTerminal(void)
 {
-    char_t msg[100];
+    char8_t msg[100];
 
-    const char_t plus[] = {'+'};
-    const char_t minus[] = {'-'};
-    const char_t end[] = {'\r', '\n','\r', '\n'};
-    const char_t error[] = {'e','r','r','o','r','\r','\n','\0'};
+    const char8_t plus[] = {'+'};
+    const char8_t minus[] = {'-'};
+    const char8_t end[] = {'\r', '\n','\r', '\n'};
+    const char8_t error[] = {'e','r','r','o','r','\r','\n','\0'};
 
-    const char_t accelXGain[] =   {'A','C','C','E','L','_','X','_','G','A','I','N',':',' ',' ',' ','\0' };
-    const char_t accelYGain[] =   {'A','C','C','E','L','_','Y','_','G','A','I','N',':',' ',' ',' ','\0' };
-    const char_t accelXOffset[] = {'A','C','C','E','L','_','X','_','O','F','F','S','E','T',':',' ','\0' };
-    const char_t accelYOffset[] = {'A','C','C','E','L','_','Y','_','O','F','F','S','E','T',':',' ','\0' };
+    const char8_t accelXGain[] =   {'A','C','C','E','L','_','X','_','G','A','I','N',':',' ',' ',' ','\0' };
+    const char8_t accelYGain[] =   {'A','C','C','E','L','_','Y','_','G','A','I','N',':',' ',' ',' ','\0' };
+    const char8_t accelXOffset[] = {'A','C','C','E','L','_','X','_','O','F','F','S','E','T',':',' ','\0' };
+    const char8_t accelYOffset[] = {'A','C','C','E','L','_','Y','_','O','F','F','S','E','T',':',' ','\0' };
 
-    const char_t fluxlXGain[] =   {'F','L','U','X','_','_','X','_','G','A','I','N',':',' ',' ',' ','\0' };
-    const char_t fluxlYGain[] =   {'F','L','U','X','_','_','Y','_','G','A','I','N',':',' ',' ',' ','\0' };
-    const char_t fluxlZGain[] =   {'F','L','U','X','_','_','Z','_','G','A','I','N',':',' ',' ',' ','\0' };
-    const char_t fluxXOffset[] =  {'F','L','U','X','_','_','X','_','O','F','F','S','E','T',':',' ','\0' };
-    const char_t fluxYOffset[] =  {'F','L','U','X','_','_','Y','_','O','F','F','S','E','T',':',' ','\0' };
-    const char_t fluxZOffset[] =  {'F','L','U','X','_','_','Z','_','O','F','F','S','E','T',':',' ','\0' };
+    const char8_t fluxlXGain[] =   {'F','L','U','X','_','_','X','_','G','A','I','N',':',' ',' ',' ','\0' };
+    const char8_t fluxlYGain[] =   {'F','L','U','X','_','_','Y','_','G','A','I','N',':',' ',' ',' ','\0' };
+    const char8_t fluxlZGain[] =   {'F','L','U','X','_','_','Z','_','G','A','I','N',':',' ',' ',' ','\0' };
+    const char8_t fluxXOffset[] =  {'F','L','U','X','_','_','X','_','O','F','F','S','E','T',':',' ','\0' };
+    const char8_t fluxYOffset[] =  {'F','L','U','X','_','_','Y','_','O','F','F','S','E','T',':',' ','\0' };
+    const char8_t fluxZOffset[] =  {'F','L','U','X','_','_','Z','_','O','F','F','S','E','T',':',' ','\0' };
 
     int16_t readCalData[20] = {0,};
     uint16_t readCalAddr[20] = {0,};
@@ -273,53 +273,53 @@ static void calibrationDataTransfortToTerminal(void)
         switch(eepromAddr)
         {
             case EEPROM_GAIN_AX_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)accelXGain, (uint16_t)strlen((accelXGain)));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)accelXGain, (uint16_t)strlen((accelXGain)));
                 break;
 
             case EEPROM_GAIN_AY_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)accelYGain, (uint16_t)strlen(accelYGain));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)accelYGain, (uint16_t)strlen(accelYGain));
                 break;
 
             case EEPROM_GAIN_AZ_ADDRESS:
                 break;
 
             case EEPROM_OFFSET_AX_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)accelXOffset, (uint16_t)strlen(accelXOffset));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)accelXOffset, (uint16_t)strlen(accelXOffset));
                 break;
 
             case EEPROM_OFFSET_AY_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)accelYOffset, (uint16_t)strlen(accelYOffset));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)accelYOffset, (uint16_t)strlen(accelYOffset));
                 break;
 
             case EEPROM_OFFSET_AZ_ADDRESS:
                 break;
 
             case EEPROM_GAIN_BX_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)fluxlXGain, (uint16_t)strlen(fluxlXGain));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)fluxlXGain, (uint16_t)strlen(fluxlXGain));
                 break;
 
             case EEPROM_GAIN_BY_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)fluxlYGain, (uint16_t)strlen(fluxlYGain));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)fluxlYGain, (uint16_t)strlen(fluxlYGain));
                 break;
 
             case EEPROM_GAIN_BZ_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)fluxlZGain, (uint16_t)strlen(fluxlZGain));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)fluxlZGain, (uint16_t)strlen(fluxlZGain));
                 break;
 
             case EEPROM_OFFSET_BX_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)fluxXOffset, (uint16_t)strlen(fluxXOffset));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)fluxXOffset, (uint16_t)strlen(fluxXOffset));
                 break;
 
             case EEPROM_OFFSET_BY_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)fluxYOffset, (uint16_t)strlen(fluxYOffset));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)fluxYOffset, (uint16_t)strlen(fluxYOffset));
                 break;
 
             case EEPROM_OFFSET_BZ_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)fluxZOffset, (uint16_t)strlen(fluxZOffset));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)fluxZOffset, (uint16_t)strlen(fluxZOffset));
                 break;
 
             default :
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)error, 7U);
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)error, 7U);
                 break;
 
         }
@@ -328,19 +328,19 @@ static void calibrationDataTransfortToTerminal(void)
         if(readCalData[index] < 0){
             myread = readCalData[index] * -1;
             // 2.2.1 ∫Œ»£∏¶ ≈ÕπÃ≥Œ∑Œ ¿¸º€
-            SCI_writeCharArray(SCIA_BASE, (const char_t*)minus, 1U);
+            SCI_writeCharArray(SCIA_BASE, (const char8_t*)minus, 1U);
         }else{
             myread = readCalData[index];
             // 2.2.2 ∫Œ»£∏¶ ≈ÕπÃ≥Œ∑Œ ¿¸º€
-            SCI_writeCharArray(SCIA_BASE, (const char_t*)plus, 1U);
+            SCI_writeCharArray(SCIA_BASE, (const char8_t*)plus, 1U);
         }
 
         // 2.3.  myRead ¿˝¥Î∞™¿ª ≈ÕπÃ≥Œ∑Œ ¿¸º€«—¥Ÿ.
         int32_t mystr = (int32_t)myread;
         (void)LToStr(mystr,msg,6);
         StrZeroFill(msg,6);
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)msg, 6U);
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 4U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)msg, 6U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 4U);
 
     }
 }
@@ -354,16 +354,16 @@ RX_MsgBuffer[MAX_BUFFER_SIZE];  EEPROM ø°º≠ ¿–¿∫ µ•¿Ã≈Õ∏¶ ISR∞˙ ¥Ÿ∏• csuøÕ ∞¯¿Ø«
 */
 static void sub_calibrationDataTransfortToTerminal(void)
 {
-    char_t msg[100];
+    char8_t msg[100];
 
-    const char_t plus[] = {'+'};
-    const char_t minus[] = {'-'};
-    const char_t end[] = {'\r', '\n','\r', '\n'};
-    const char_t error[] = {'e','r','r','o','r','\r','\n','\0'};
+    const char8_t plus[] = {'+'};
+    const char8_t minus[] = {'-'};
+    const char8_t end[] = {'\r', '\n','\r', '\n'};
+    const char8_t error[] = {'e','r','r','o','r','\r','\n','\0'};
 
-    const char_t calOffset_Bx[] = {'C','A','L','_','_','X','_','_','O','F','F','S','E','T',':',' ','\0' };
-    const char_t calOffset_By[] = {'C','A','L','_','_','Y','_','_','O','F','F','S','E','T',':',' ','\0' };
-    const char_t calOffset_Bz[] = {'C','A','L','_','_','Z','_','_','O','F','F','S','E','T',':',' ','\0' };
+    const char8_t calOffset_Bx[] = {'C','A','L','_','_','X','_','_','O','F','F','S','E','T',':',' ','\0' };
+    const char8_t calOffset_By[] = {'C','A','L','_','_','Y','_','_','O','F','F','S','E','T',':',' ','\0' };
+    const char8_t calOffset_Bz[] = {'C','A','L','_','_','Z','_','_','O','F','F','S','E','T',':',' ','\0' };
 
     int16_t readCalData[20] = {0,};
     uint16_t readCalAddr[20] = {0,};
@@ -401,18 +401,18 @@ static void sub_calibrationDataTransfortToTerminal(void)
         switch(eepromAddr)
         {
             case EEPROM_BX_CAL_OFFSET_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)calOffset_Bx, (uint16_t)strlen(calOffset_Bx));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)calOffset_Bx, (uint16_t)strlen(calOffset_Bx));
                 break;
 
             case EEPROM_BY_CAL_OFFSET_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)calOffset_By, (uint16_t)strlen(calOffset_By));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)calOffset_By, (uint16_t)strlen(calOffset_By));
                 break;
 
             case EEPROM_BZ_CAL_OFFSET_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)calOffset_Bz, (uint16_t)strlen(calOffset_Bz));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)calOffset_Bz, (uint16_t)strlen(calOffset_Bz));
                 break;
             default :
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)error, 7U);
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)error, 7U);
                 break;
 
         }
@@ -421,19 +421,19 @@ static void sub_calibrationDataTransfortToTerminal(void)
         if(readCalData[index] < 0){
             myread = readCalData[index] * -1;
             // 2.2.1 ∫Œ»£∏¶ ≈ÕπÃ≥Œ∑Œ ¿¸º€
-            SCI_writeCharArray(SCIA_BASE, (const char_t*)minus, 1U);
+            SCI_writeCharArray(SCIA_BASE, (const char8_t*)minus, 1U);
         }else{
             myread = readCalData[index];
             // 2.2.2 ∫Œ»£∏¶ ≈ÕπÃ≥Œ∑Œ ¿¸º€
-            SCI_writeCharArray(SCIA_BASE, (const char_t*)plus, 1U);
+            SCI_writeCharArray(SCIA_BASE, (const char8_t*)plus, 1U);
         }
 
         // 2.3.  myRead ¿˝¥Î∞™¿ª ≈ÕπÃ≥Œ∑Œ ¿¸º€«—¥Ÿ.
         int32_t mystr = (int32_t)myread;
         (void)LToStr(mystr,msg,6);
         StrZeroFill(msg,6);
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)msg, 6U);
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 4U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)msg, 6U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 4U);
 
         // 2.4 1 byte ¿¸º€ øœ∑·±Ó¡ˆ ¥Î±‚
 
@@ -442,30 +442,30 @@ static void sub_calibrationDataTransfortToTerminal(void)
 
 static void matrixDataTransfortToTerminal(void)
 {
-    char_t msg[100];
+    char8_t msg[100];
 
-    const char_t plus[] = {'+'};
-    const char_t minus[] = {'-'};
-    const char_t end[] = {'\r', '\n','\r', '\n'};
-    const char_t error[] = {'e','r','r','o','r','\r','\n','\0'};
+    const char8_t plus[] = {'+'};
+    const char8_t minus[] = {'-'};
+    const char8_t end[] = {'\r', '\n','\r', '\n'};
+    const char8_t error[] = {'e','r','r','o','r','\r','\n','\0'};
 
-    const char_t matrix_Bx_00[] = {'M','A','T','R','I','X','_','B','X','0','0','\0' };
-    const char_t matrix_Bx_01[] = {'M','A','T','R','I','X','_','B','X','0','1','\0' };
-    const char_t matrix_Bx_02[] = {'M','A','T','R','I','X','_','B','X','0','2','\0' };
+    const char8_t matrix_Bx_00[] = {'M','A','T','R','I','X','_','B','X','0','0','\0' };
+    const char8_t matrix_Bx_01[] = {'M','A','T','R','I','X','_','B','X','0','1','\0' };
+    const char8_t matrix_Bx_02[] = {'M','A','T','R','I','X','_','B','X','0','2','\0' };
 
-    const char_t matrix_By_10[] = {'M','A','T','R','I','X','_','B','X','1','0','\0' };
-    const char_t matrix_By_11[] = {'M','A','T','R','I','X','_','B','X','1','1','\0' };
-    const char_t matrix_By_12[] = {'M','A','T','R','I','X','_','B','X','1','2','\0' };
+    const char8_t matrix_By_10[] = {'M','A','T','R','I','X','_','B','X','1','0','\0' };
+    const char8_t matrix_By_11[] = {'M','A','T','R','I','X','_','B','X','1','1','\0' };
+    const char8_t matrix_By_12[] = {'M','A','T','R','I','X','_','B','X','1','2','\0' };
 
-    const char_t matrix_Bz_20[] = {'M','A','T','R','I','X','_','B','X','2','0','\0' };
-    const char_t matrix_Bz_21[] = {'M','A','T','R','I','X','_','B','X','2','1','\0' };
-    const char_t matrix_Bz_22[] = {'M','A','T','R','I','X','_','B','X','2','2','\0' };
+    const char8_t matrix_Bz_20[] = {'M','A','T','R','I','X','_','B','X','2','0','\0' };
+    const char8_t matrix_Bz_21[] = {'M','A','T','R','I','X','_','B','X','2','1','\0' };
+    const char8_t matrix_Bz_22[] = {'M','A','T','R','I','X','_','B','X','2','2','\0' };
 
-    const char_t matrix_Ax_00[] = {'M','A','T','R','I','X','_','A','X','0','0','\0' };
-    const char_t matrix_Ax_01[] = {'M','A','T','R','I','X','_','A','X','0','1','\0' };
+    const char8_t matrix_Ax_00[] = {'M','A','T','R','I','X','_','A','X','0','0','\0' };
+    const char8_t matrix_Ax_01[] = {'M','A','T','R','I','X','_','A','X','0','1','\0' };
 
-    const char_t matrix_Ay_10[] = {'M','A','T','R','I','X','_','A','Y','1','0','\0' };
-    const char_t matrix_Ay_11[] = {'M','A','T','R','I','X','_','A','Y','1','1','\0' };
+    const char8_t matrix_Ay_10[] = {'M','A','T','R','I','X','_','A','Y','1','0','\0' };
+    const char8_t matrix_Ay_11[] = {'M','A','T','R','I','X','_','A','Y','1','1','\0' };
 
     int16_t readCalData[20] = {0,};
     uint16_t readCalAddr[20] = {0,};
@@ -501,59 +501,59 @@ static void matrixDataTransfortToTerminal(void)
         switch(eepromAddr)
         {
             case EEPROM_BX00_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Bx_00, (uint16_t)strlen((matrix_Bx_00)));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Bx_00, (uint16_t)strlen((matrix_Bx_00)));
                 break;
 
             case EEPROM_BX01_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Bx_01, (uint16_t)strlen(matrix_Bx_01));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Bx_01, (uint16_t)strlen(matrix_Bx_01));
                 break;
 
             case EEPROM_BX02_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Bx_02, (uint16_t)strlen(matrix_Bx_02));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Bx_02, (uint16_t)strlen(matrix_Bx_02));
                 break;
 
             case EEPROM_BY10_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_By_10, (uint16_t)strlen(matrix_By_10));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_By_10, (uint16_t)strlen(matrix_By_10));
                 break;
 
             case EEPROM_BY11_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_By_11, (uint16_t)strlen(matrix_By_11));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_By_11, (uint16_t)strlen(matrix_By_11));
                 break;
 
             case EEPROM_BY12_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_By_12, (uint16_t)strlen(matrix_By_12));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_By_12, (uint16_t)strlen(matrix_By_12));
                 break;
 
             case EEPROM_BZ20_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Bz_20, (uint16_t)strlen(matrix_Bz_20));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Bz_20, (uint16_t)strlen(matrix_Bz_20));
                 break;
 
             case EEPROM_BZ21_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Bz_21, (uint16_t)strlen(matrix_Bz_21));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Bz_21, (uint16_t)strlen(matrix_Bz_21));
                 break;
 
             case EEPROM_BZ22_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Bz_22, (uint16_t)strlen(matrix_Bz_22));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Bz_22, (uint16_t)strlen(matrix_Bz_22));
                 break;
 
             case EEPROM_AX00_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Ax_00, (uint16_t)strlen(matrix_Ax_00));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Ax_00, (uint16_t)strlen(matrix_Ax_00));
                 break;
 
             case EEPROM_AX01_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Ax_01, (uint16_t)strlen(matrix_Ax_01));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Ax_01, (uint16_t)strlen(matrix_Ax_01));
                 break;
 
             case EEPROM_AY10_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Ay_10, (uint16_t)strlen(matrix_Ay_10));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Ay_10, (uint16_t)strlen(matrix_Ay_10));
                 break;
 
             case EEPROM_AY11_RA_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)matrix_Ay_11, (uint16_t)strlen(matrix_Ay_11));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)matrix_Ay_11, (uint16_t)strlen(matrix_Ay_11));
                 break;
 
             default :
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)error, 7U);
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)error, 7U);
                 break;
 
         }
@@ -562,19 +562,19 @@ static void matrixDataTransfortToTerminal(void)
         if(readCalData[index] < 0){
             myread = readCalData[index] * -1;
             // 2.2.1 ∫Œ»£∏¶ ≈ÕπÃ≥Œ∑Œ ¿¸º€
-            SCI_writeCharArray(SCIA_BASE, (const char_t*)minus, 1U);
+            SCI_writeCharArray(SCIA_BASE, (const char8_t*)minus, 1U);
         }else{
             myread = readCalData[index];
             // 2.2.2 ∫Œ»£∏¶ ≈ÕπÃ≥Œ∑Œ ¿¸º€
-            SCI_writeCharArray(SCIA_BASE, (const char_t*)plus, 1U);
+            SCI_writeCharArray(SCIA_BASE, (const char8_t*)plus, 1U);
         }
 
         // 2.3.  myRead ¿˝¥Î∞™¿ª ≈ÕπÃ≥Œ∑Œ ¿¸º€«—¥Ÿ.
         int32_t mystr = (int32_t)myread;
         (void)LToStr(mystr,msg,6);
         StrZeroFill(msg,6);
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)msg, 6U);
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 4U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)msg, 6U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 4U);
 
     }
 }
@@ -582,16 +582,16 @@ static void matrixDataTransfortToTerminal(void)
 
 static void sub_matrixDataTransfortToTerminal(void)
 {
-    char_t msg[100];
+    char8_t msg[100];
 
-    const char_t plus[] = {'+'};
-    const char_t minus[] = {'-'};
-    const char_t end[] = {'\r', '\n','\r', '\n'};
-    const char_t error[] = {'e','r','r','o','r','\r','\n','\0'};
+    const char8_t plus[] = {'+'};
+    const char8_t minus[] = {'-'};
+    const char8_t end[] = {'\r', '\n','\r', '\n'};
+    const char8_t error[] = {'e','r','r','o','r','\r','\n','\0'};
 
-    const char_t checksum[] = {'C','H','E','C','K','_','S','U','M',' ',' ','\0' };
-    const char_t version[] = {'V','E','R','S','I','O','N',' ',':',' ',' ','\0' };
-    const char_t crcRead[] = {'C','R','C','R','E','A','D',' ',':',' ',' ','\0' };
+    const char8_t checksum[] = {'C','H','E','C','K','_','S','U','M',' ',' ','\0' };
+    const char8_t version[] = {'V','E','R','S','I','O','N',' ',':',' ',' ','\0' };
+    const char8_t crcRead[] = {'C','R','C','R','E','A','D',' ',':',' ',' ','\0' };
 
 
     int16_t readCalData[20] = {0,};
@@ -628,13 +628,13 @@ static void sub_matrixDataTransfortToTerminal(void)
         switch(eepromAddr)
         {
             case EEPROM_VERSION_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)version, (uint16_t)strlen(version));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)version, (uint16_t)strlen(version));
                 break;
             case EEPROM_CHK_CRC_ADDRESS:
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)crcRead, (uint16_t)strlen(crcRead));
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)crcRead, (uint16_t)strlen(crcRead));
                 break;
             default :
-                SCI_writeCharArray(SCIA_BASE, (const char_t*)error, 7U);
+                SCI_writeCharArray(SCIA_BASE, (const char8_t*)error, 7U);
                 break;
 
         }
@@ -643,19 +643,19 @@ static void sub_matrixDataTransfortToTerminal(void)
         if(readCalData[index] < 0){
             myread = readCalData[index] * -1;
             // 2.2.1 ∫Œ»£∏¶ ≈ÕπÃ≥Œ∑Œ ¿¸º€
-            SCI_writeCharArray(SCIA_BASE, (const char_t*)minus, 1U);
+            SCI_writeCharArray(SCIA_BASE, (const char8_t*)minus, 1U);
         }else{
             myread = readCalData[index];
             // 2.2.2 ∫Œ»£∏¶ ≈ÕπÃ≥Œ∑Œ ¿¸º€
-            SCI_writeCharArray(SCIA_BASE, (const char_t*)plus, 1U);
+            SCI_writeCharArray(SCIA_BASE, (const char8_t*)plus, 1U);
         }
 
         // 2.3.  myRead ¿˝¥Î∞™¿ª ≈ÕπÃ≥Œ∑Œ ¿¸º€«—¥Ÿ.
         int32_t mystr = (int32_t)myread;
         (void)LToStr(mystr,msg,6);
         StrZeroFill(msg,6);
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)msg, 6U);
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 4U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)msg, 6U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 4U);
 
     }
 }
@@ -670,19 +670,19 @@ uint16_t rDataPointA[100];  ≈ÕπÃ≥Œ∑Œ∫Œ≈Õ ∏Ì∑… ºˆΩ≈¿ª ¿ß«— πˆ∆€
 */
 static void calAcceSet(void)
 {
-    const char_t* comma = ",";
-    const char_t end[] = {'\r', '\n'};
+    const char8_t* comma = ",";
+    const char8_t end[] = {'\r', '\n'};
 
-    char_t buffer[100] = {0,};
+    char8_t buffer[100] = {0,};
 
     int16_t i;
     for(i=0; i<100; i++)
     {
-        buffer[i] = (char_t)rDataPointA[i];
+        buffer[i] = (char8_t)rDataPointA[i];
     }
 
 	// 1. ºˆΩ≈µ» πÆ¿⁄ø≠∑Œ ∫Œ≈Õ comma ¥‹¿ß ∫–¿⁄ø≠∑Œ ∫–∏Æ
-    const char_t* tempacc = strtok(&rDataPointA[7],comma);
+    const char8_t* tempacc = strtok(&rDataPointA[7],comma);
 
     if( tempacc != NULL)
     {
@@ -719,8 +719,8 @@ static void calAcceSet(void)
         }
 
         // 8. µ•¿Ã≈Õ ¿˙¿Â »ƒ øœ∑· ack ∏¶ ≈ÕπÃ≥Œø° ¿¸º€ «—¥Ÿ.
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)buffer, (uint16_t)strlen(buffer));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 2U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)buffer, (uint16_t)strlen(buffer));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 2U);
 
     }
     else
@@ -739,19 +739,19 @@ uint16_t rDataPointA[100];   ≈ÕπÃ≥Œ∑Œ∫Œ≈Õ ∏Ì∑… ºˆΩ≈¿ª ¿ß«—  πˆ∆€
 */
 static void calFluxSet(void)
 {
-    const char_t* comma = ",";
-    const char_t end[] = {'\r', '\n'};
+    const char8_t* comma = ",";
+    const char8_t end[] = {'\r', '\n'};
 
-    char_t buffer[100] = {0,};
+    char8_t buffer[100] = {0,};
 
     int16_t i;
     for(i=0; i<100; i++)
     {
-        buffer[i] = (char_t)rDataPointA[i];
+        buffer[i] = (char8_t)rDataPointA[i];
     }
 
         // 1. ºˆΩ≈µ» πÆ¿⁄ø≠∑Œ ∫Œ≈Õ comma ¥‹¿ß ∫–¿⁄ø≠∑Œ ∫–∏Æ
-    const char_t* tempflux = strtok(&rDataPointA[6],comma);
+    const char8_t* tempflux = strtok(&rDataPointA[6],comma);
 
     if( tempflux != NULL)
     {
@@ -797,27 +797,27 @@ static void calFluxSet(void)
         }
 
         // 10. µ•¿Ã≈Õ ¿˙¿Â »ƒ øœ∑· ack ∏¶ ≈ÕπÃ≥Œø° ¿¸º€ «—¥Ÿ.
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)buffer, (uint16_t)strlen(buffer));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 2U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)buffer, (uint16_t)strlen(buffer));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 2U);
     }
 }
 
 
 static void flux_rightAngleSet(void)
 {
-    const char_t* comma = ",";
-    const char_t end[] = {'\r', '\n'};
+    const char8_t* comma = ",";
+    const char8_t end[] = {'\r', '\n'};
 
-    char_t buffer[100] = {0,};
+    char8_t buffer[100] = {0,};
 
     int16_t i;
     for(i=0; i<100; i++)
     {
-        buffer[i] = (char_t)rDataPointA[i];
+        buffer[i] = (char8_t)rDataPointA[i];
     }
 
     // 1. ºˆΩ≈µ» πÆ¿⁄ø≠∑Œ ∫Œ≈Õ comma ¥‹¿ß ∫–¿⁄ø≠∑Œ ∫–∏Æ
-    const char_t* right = strtok(&rDataPointA[5],comma);
+    const char8_t* right = strtok(&rDataPointA[5],comma);
 
     if( right != NULL)
     {
@@ -880,27 +880,27 @@ static void flux_rightAngleSet(void)
         }
 
         // 10. µ•¿Ã≈Õ ¿˙¿Â »ƒ øœ∑· ack ∏¶ ≈ÕπÃ≥Œø° ¿¸º€ «—¥Ÿ.
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)buffer, (uint16_t)strlen(buffer));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 2U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)buffer, (uint16_t)strlen(buffer));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 2U);
     }
 
 }
 
 static void accel_rightAngleSet(void)
 {
-    const char_t* comma = ",";
-    const char_t end[] = {'\r', '\n'};
+    const char8_t* comma = ",";
+    const char8_t end[] = {'\r', '\n'};
 
-    char_t buffer[100] = {0,};
+    char8_t buffer[100] = {0,};
 
     int16_t i;
     for(i=0; i<100; i++)
     {
-        buffer[i] = (char_t)rDataPointA[i];
+        buffer[i] = (char8_t)rDataPointA[i];
     }
 
     // 1. ºˆΩ≈µ» πÆ¿⁄ø≠∑Œ ∫Œ≈Õ comma ¥‹¿ß ∫–¿⁄ø≠∑Œ ∫–∏Æ
-    const char_t* right = strtok(&rDataPointA[5],comma);
+    const char8_t* right = strtok(&rDataPointA[5],comma);
 
     if( right != NULL)
     {
@@ -936,26 +936,26 @@ static void accel_rightAngleSet(void)
         }
 
         // 10. µ•¿Ã≈Õ ¿˙¿Â »ƒ øœ∑· ack ∏¶ ≈ÕπÃ≥Œø° ¿¸º€ «—¥Ÿ.
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)buffer, (uint16_t)strlen(buffer));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 2U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)buffer, (uint16_t)strlen(buffer));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 2U);
     }
 }
 
 static void calModeFluxSet(void)
 {
-    const char_t* comma = ",";
-    const char_t end[] = {'\r', '\n'};
+    const char8_t* comma = ",";
+    const char8_t end[] = {'\r', '\n'};
 
-    char_t buffer[100] = {0,};
+    char8_t buffer[100] = {0,};
 
     int16_t i;
     for(i=0; i<100; i++)
     {
-        buffer[i] = (char_t)rDataPointA[i];
+        buffer[i] = (char8_t)rDataPointA[i];
     }
 
     // 1. ºˆΩ≈µ» πÆ¿⁄ø≠∑Œ ∫Œ≈Õ comma ¥‹¿ß ∫–¿⁄ø≠∑Œ ∫–∏Æ
-    const char_t *tempcal = strtok(&rDataPointA[6],comma);
+    const char8_t *tempcal = strtok(&rDataPointA[6],comma);
     if( tempcal != NULL)
     {
         // 2. √ππ¯¬∞ ¥‹¿ß πÆ¿⁄ø≠¿∫ x√‡ ∞°º”µµ ¿ÃµÊ πÆ¿⁄ø≠¿ª gain_Ax ¡§ºˆ∑Œ ∫Ø»Ø «—¥Ÿ.
@@ -983,26 +983,26 @@ static void calModeFluxSet(void)
         }
 
         // 7. µ•¿Ã≈Õ ¿˙¿Â »ƒ øœ∑· ack ∏¶ ≈ÕπÃ≥Œø° ¿¸º€ «—¥Ÿ.
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)buffer, (uint16_t)strlen(buffer));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 2U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)buffer, (uint16_t)strlen(buffer));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 2U);
     }
 }
 
 static void chk_ver_Set(void)
 {
-    const char_t* comma = ",";
-    const char_t end[] = {'\r', '\n'};
+    const char8_t* comma = ",";
+    const char8_t end[] = {'\r', '\n'};
 
-    char_t buffer[100] = {0,};
+    char8_t buffer[100] = {0,};
 
     int16_t i;
     for(i=0; i<100; i++)
     {
-        buffer[i] = (char_t)rDataPointA[i];
+        buffer[i] = (char8_t)rDataPointA[i];
     }
 
     // 1. ºˆΩ≈µ» πÆ¿⁄ø≠∑Œ ∫Œ≈Õ comma ¥‹¿ß ∫–¿⁄ø≠∑Œ ∫–∏Æ
-    const char_t *chk = strtok(&rDataPointA[5],comma);
+    const char8_t *chk = strtok(&rDataPointA[5],comma);
     if( chk != NULL)
     {
         int16_t version = atoi(chk);
@@ -1019,8 +1019,8 @@ static void chk_ver_Set(void)
         }
 
         // 7. µ•¿Ã≈Õ ¿˙¿Â »ƒ øœ∑· ack ∏¶ ≈ÕπÃ≥Œø° ¿¸º€ «—¥Ÿ.
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)buffer, (uint16_t)strlen(buffer));
-        SCI_writeCharArray(SCIA_BASE, (const char_t*)end, 2U);
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)buffer, (uint16_t)strlen(buffer));
+        SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 2U);
     }
 
 }
@@ -1036,13 +1036,17 @@ void writeEepromCRC16(void)
 
 
 #if 1
-void sendUart(float64_t bx, float64_t by, float64_t bz, float64_t ax, float64_t ay, uint16_t angle)
+void sendUart(float64_t bx, float64_t by, float64_t bz, float64_t ax, float64_t ay, float64_t brx, float64_t bry, uint16_t angle)
 {
-    char_t *msg2 = NULL;
+    char8_t *msg2 = NULL;
 
 
     sprintf(msg2,"%d, %d, %d, ", (int)bx, (int)by, (int)bz);
     SCI_writeCharArray(SCIA_BASE, (uint16_t*)msg2, strlen(msg2));
+
+    sprintf(msg2,"%d, %d, ", (int)brx, (int)bry);
+    SCI_writeCharArray(SCIA_BASE, (uint16_t*)msg2, strlen(msg2));
+
 
     sprintf(msg2,"%d, %d, ", (int16_t)(ax*10000), (int16_t)(ay*10000));
     SCI_writeCharArray(SCIA_BASE, (uint16_t*)msg2, strlen(msg2));
@@ -1055,7 +1059,7 @@ void sendUart(float64_t bx, float64_t by, float64_t bz, float64_t ax, float64_t 
 
 void calsendUart(uint16_t cnt, uint16_t angle)
 {
-    char_t *msg2 = NULL;
+    char8_t *msg2 = NULL;
 
     sprintf(msg2,"rot:%d, calBx:%d \r\n", cnt, angle);
     SCI_writeCharArray(SCIA_BASE, (uint16_t*)msg2, strlen(msg2));

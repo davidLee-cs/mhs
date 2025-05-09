@@ -65,8 +65,8 @@ void operation_mode(void)
 	// 4. 상태 값을 SFI로 전송
     mhs_status_trans(NORMAL_MODE, ssmData);
 
-#if 0
-    sendUart(Box, Boy, Boz, g0x, g0y, AngleAy);
+#if 1
+    sendUart(Box, Boy, Boz, g0x, g0y, gFluxrx, gFluxry, AngleAy);
 #endif
 
 }
