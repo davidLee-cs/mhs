@@ -46,7 +46,7 @@ void operation_mode(void)
         mhsensor_data.MagHeading = AngleAy;
     }
 
-	// 3. CBIT 수행
+	// 3. CBIT 수행, 에러 발생 시 STATUS_BCD_FW, 정상이면  STATUS_BCD_NORMAL 을 데이터 전송 시 상태비트 ssmData 에 저장
     uint16_t errorCbit =  checkCbit();
     if((errorCbit == 1U) || (bParameterError == 1U))
     {
@@ -57,6 +57,7 @@ void operation_mode(void)
         ssmData = STATUS_BCD_NORMAL;
     }
 
+    // 4. cal보정이 안되어있으면 STATUS_NO_COMPUT_DATA 를 ssmData에 저장
     if(mhsensor_calibration_Data.ssm == 1U)
     {
         ssmData = STATUS_NO_COMPUT_DATA;
@@ -65,7 +66,7 @@ void operation_mode(void)
 	// 4. 상태 값을 SFI로 전송
     mhs_status_trans(NORMAL_MODE, ssmData);
 
-#if 1
+#if 0
     sendUart(Box, Boy, Boz, g0x, g0y, gFluxrx, gFluxry, AngleAy);
 #endif
 

@@ -32,7 +32,11 @@
  adc에서 필터링 데이터를 이용하여 전압 값으로 변환
  입력 전역변수 :
       필터된 입력값 : ema[ADC_CH_INDEX_VOLYAGE_28V], ema[ADC_CH_INDEX_VOLYAGE_5V], ema[ADC_CH_INDEX_VOLYAGE_3p3V], ema[ADC_CH_INDEX_VOLYAGE_1p2V]
- 출력 : voltage28v, voltage5v, voltage3v3, voltage1v2
+ 출력 :
+      mhsensor_sensor_Data.voltage28v
+      mhsensor_sensor_Data.voltage5v
+      mhsensor_sensor_Data.voltage3v3
+      mhsensor_sensor_Data.voltage1v2
 
  ratio_Res = (R1 / (R1 + R2))
 

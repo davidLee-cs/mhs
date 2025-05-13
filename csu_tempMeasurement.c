@@ -16,7 +16,7 @@
 // adc에서 필터링 데이터를 이용하여 온도 값으로 변환
 // 입력 전역변수 : 
 //		필터된 입력값 : ema[ADC_CH_INDEX_VOLYAGE_TEMPERATUR] 
-// 출력 : boardTemperature
+// 출력 : mhsensor_sensor_Data.tempValue : 온도 저장
 // 출력 보드 온도  = ADC_getTemperatureC(필터된 입력값, refVolt)
 void MeasureBoardTemperature(void)
 {

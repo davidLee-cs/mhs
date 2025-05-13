@@ -32,11 +32,18 @@ static void converterToArinc429(void);
 static void libConverterToArinc429(int16_t *pmag, float64_t fluxOut);
 
 static float64_t gConstant_B[3][3] =
-        { {1.0L, 0.0L, 0.0L},
-          {0.0L, 1.0L, 0.0L},
-          {0.0L, 0.0L, 1.0L}
+        { {1.0L, 0.0L, 0.0L},       //x축 행렬 3x3
+          {0.0L, 1.0L, 0.0L},       //y축 행렬 3x3
+          {0.0L, 0.0L, 1.0L}        //z축 행렬 3x3
         };
 
+
+
+// eeprom에 저장된 자기장 축보정 행력 값을 읽어 gConstant_B 저장
+// 입력 전역변수 :
+//      gConstant_B[][] : 자기장 축보정값 행력 3x3 저장
+// 이력 :
+//    2024.05.23 : 이충순 : 초기 작성
 
 void flux_matrix_init(void)
 {
@@ -92,7 +99,7 @@ void MeasureFlux(void)
         Result_calibration[i] = Constx + Consty + Constz;
     }
 
-
+    // 3. cal 모드 일때는 cal 옵셋 보정값을 제외하고 고유 자기장 값만 저장한다. 일반 모드에서는 cal 옵셋을 처리한 후 저장한다.
     if(calibration_mode == 1U)
     {
         realBx = (int16_t)Result_calibration[0];
@@ -107,6 +114,7 @@ void MeasureFlux(void)
     }
 
 
+    // 4. 각 축별 최대(100uT)이상, 최소(-100uT)이하이면 최대 설정값으로 저장
     if(realBx > 10000)
     {
         Box = 10000.0L;
@@ -147,9 +155,7 @@ void MeasureFlux(void)
         Boz = (float64_t)realBz;
     }
 
-
-
-	// 3. 측정된 자기장을 ARINC429 형식으로 변환
+	// 5. 측정된 자기장을 ARINC429 형식으로 변환
 	converterToArinc429();
 }
 

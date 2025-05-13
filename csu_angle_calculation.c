@@ -10,10 +10,6 @@
 #include <math.h>
 #include "mhs_project.h"
 
-float64_t gFluxrx;
-float64_t gFluxry;
-
-
 static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t by, float64_t bz);
 
 // 기능 : 정북 기준 방위각 계산
@@ -57,44 +53,7 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
     float32_t atanB = 0.0;
     float64_t math_r = 0.0L;
     float64_t Arm = 0.0L;
-    float64_t Ap = 0.0L;
-    float64_t Ar = 0.0L;
 
-
-#if 0
-    float64_t Ap = (0.0L);
-    float64_t Ar = (0.0L);
-    Ap = -apm;
-    Ar = -arm;
-    float64_t arm = (float64_t)(asin(((float32_t)gy/cos((float32_t)apm))));
-
-#endif
-#if 0
-    float64_t apm = (float64_t)(-asin((float32_t)gx));
-    if(apm == 0.0L)
-    {
-        newAr = 0.0L;
-    }
-    else
-    {
-        newAr = gy/(float64_t)cos((float32_t)apm);
-    }
-
-    Brx = (float64_t)(sqrt(1.0-pow((float32_t)gx, 2.0))*bx) + (float64_t)(gx*newAr*by) - (float64_t)(gx*sqrt(1.0-pow((float32_t)newAr, 2.0))*bz);
-    Bry = (float64_t)(sqrt(1.0-pow((float32_t)newAr, 2.0))*by) - (newAr*bz);
-
-    if((Brx == 0.0L ) || (Bry == 0.0L))
-    {
-        atanB = 0.0;
-    }
-    else
-    {
-       atanB = (float32_t)(Bry / Brx);
-    }
-
-#endif
-
-#if 1
 
     // 1. 자기장 보정 벡터 계산
     float64_t Apm = (float64_t)(asin((float32_t)gx));
@@ -108,8 +67,6 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
         Arm = (float64_t)(-asin((float32_t)math_r));
     }
 
-    Ap = -Apm;
-    Ar = -Arm;
     float64_t testAp = (float64_t)(sqrt(1.0-pow((float32_t)gx, 2.0)));
     float64_t cosAp = gy / testAp;
 
@@ -117,9 +74,6 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
     Brx = (float64_t)(sqrt(1.0-pow((float32_t)gx, 2.0))*bx) - (float64_t)(gx*cosAp*by) + (float64_t)(gx*sqrt(1.0-pow((float32_t)cosAp, 2.0))*bz);
     Bry = (float64_t)(sqrt(1.0-pow((float32_t)cosAp, 2.0))*by) + (cosAp*bz);
 
-
-    gFluxrx = Brx;
-    gFluxry = Bry;
     if((Brx == 0.0L ) || (Bry == 0.0L))
     {
         atanB = 0.0;
@@ -129,7 +83,6 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
        atanB = (float32_t)(Bry / Brx);
     }
 
-#endif
     // 3. atan 함수와 조건문을 통해 기울기 Ay를 계산
     //    Bnx > 0.0: Bnx가 양수일 때는 atan(Bny / Bnx)를 그대로 사용
     //    Bnx < 0.0와 Bny >= 0.0: Bnx가 음수이면서 Bny가 양수일 때는 180도(π)를 더함.

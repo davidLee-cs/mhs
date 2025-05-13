@@ -106,7 +106,6 @@ void initADCSOC(void)
     // 1. initValue()를 이용하여 자기장, 가속도 보정 변수 초기화
     initValue();
 
-#ifdef NEW_BOARD
     // 2. 16bit ADCA 모듈의 SOC(Sample and Hold Circuit) 채널별  설정
     ADC_setupSOC(ADCD_BASE, ADC_SOC_NUMBER0, ADC_TRIGGER_EPWM1_SOCA,
                  ADC_CH_ADCIN0_ADCIN1, 63);
@@ -133,35 +132,6 @@ void initADCSOC(void)
     ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER4, ADC_TRIGGER_EPWM1_SOCA,
                  ADC_CH_ADCIN13, 200);
 
-#else
-    // 2. 16bit ADCA 모듈의 SOC(Sample and Hold Circuit) 채널별  설정
-    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER0, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN0_ADCIN1, 63);
-    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER1, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN2_ADCIN3, 63);
-    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER2, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN4_ADCIN5, 63);
-    ADC_setupSOC(ADCA_BASE, ADC_SOC_NUMBER3, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN12_ADCIN13, 63);
-
-    // 3. 16bit ADCB 모듈의 SOC(Sample and Hold Circuit) 채널별  설정
-    ADC_setupSOC(ADCB_BASE, ADC_SOC_NUMBER0, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN0_ADCIN1, 63);
-    ADC_setupSOC(ADCB_BASE, ADC_SOC_NUMBER1, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN2_ADCIN3, 63);
-    ADC_setupSOC(ADCB_BASE, ADC_SOC_NUMBER2, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN4_ADCIN5, 63);
-
-    // 4. 12bit ADCD 모듈의 SOC(Sample and Hold Circuit) 채널별  설정
-    ADC_setupSOC(ADCD_BASE, ADC_SOC_NUMBER0, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN0, 14);
-    ADC_setupSOC(ADCD_BASE, ADC_SOC_NUMBER1, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN1, 14);
-    ADC_setupSOC(ADCD_BASE, ADC_SOC_NUMBER2, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN2, 14);
-    ADC_setupSOC(ADCD_BASE, ADC_SOC_NUMBER3, ADC_TRIGGER_EPWM1_SOCA,
-                 ADC_CH_ADCIN3, 14);
-#endif
 
     // 5. ADC_INT_NUMBER1 인터럽트가 ADC_SOC_NUMBER3 변환 완료 시 발생
     ADC_setInterruptSource(ADCA_BASE, ADC_INT_NUMBER1, ADC_SOC_NUMBER3);
@@ -182,6 +152,12 @@ ADCA 모듈에서 ADC 변환 완료 시 발생하는 인터럽트 서비스 루틴 함수
 입출력 전역변수
 
 int16_t ema[12];   지수이동평균(EMA)필터된 값을 저장하는 버퍼
+int16_t filterBx : 지수이동평균(EMA)필터된 Bx 값
+int16_t filterBy : 지수이동평균(EMA)필터된 By 값
+int16_t filterBz : 지수이동평균(EMA)필터된 Bz 값
+int16_t filterAx : 지수이동평균(EMA)필터된 Ax 값
+int16_t filterAy : 지수이동평균(EMA)필터된 Ay 값
+
 */
 __interrupt void adcA1ISR(void)
 {
@@ -198,28 +174,14 @@ __interrupt void adcA1ISR(void)
     uint16_t gadcvalue9=0;
     uint16_t gadcvalue10=0;
 
-    int16_t gBxADC;
-    int16_t gByADC;
-    int16_t gBzADC;
-    int16_t gAxADC;
-    int16_t gAyADC;
-    int16_t gAzADC;
-
     uint16_t result_0, result_1, result_2;
     uint16_t result_a0, result_a1;
 
 	// 1. x,y,z축 자기장 센서 데이터 읽기 및 변환
-#ifdef NEW_BOARD
+
     read0 =  ADC_readResult(ADCDRESULT_BASE, ADC_SOC_NUMBER0);  // x
     read1 =  ADC_readResult(ADCDRESULT_BASE, ADC_SOC_NUMBER1);  // y
     read2 =  ADC_readResult(ADCDRESULT_BASE, ADC_SOC_NUMBER2);  // z
-#else
-    read0 =  ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER0);  // x
-    read1 =  ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER1);  // y
-    read2 =  ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER2);  // z
-
-#endif
-
 
     ema[ADC_CH_INDEX_FLUX_X] = ema_filter((float64_t)read0, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_FLUX_X]);
     ema[ADC_CH_INDEX_FLUX_Y] = ema_filter((float64_t)read1, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_FLUX_Y]);
@@ -271,7 +233,6 @@ __interrupt void adcA1ISR(void)
 
     ema[ADC_CH_INDEX_ACCEL_X] = ema_filter((float64_t)adcax0, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_ACCEL_X]);
     ema[ADC_CH_INDEX_ACCEL_Y] = ema_filter((float64_t)adcax1, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_ACCEL_Y]);
-//    ema[ADC_CH_INDEX_ACCEL_Z] = ema_filter((float64_t)gAzADC, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_ACCEL_Z]);
 
     // 6. ADCB모듈의 SOC 번호 0의 결과를 읽어 가속도 x 축 데이터(accread)로 변환
     //    단, 읽어온 값이 0x7FFFU보다 크면 그대로 사용하고, 작다면 보정하여 부호화
@@ -299,69 +260,41 @@ __interrupt void adcA1ISR(void)
         accread[1] = (int16_t)result_a1;
     }
 
-    // 8. ADCB모듈의 SOC 번호 2의 결과를 읽어 가속도 z 축 데이터(accread)로 변환
-    //    단, 읽어온 값이 0x7FFFU보다 크면 그대로 사용하고, 작다면 보정하여 부호화
-
     accread[2] = 0;
 
 
-	// 9. ADCD와 ADCA 모듈의 결과 값을 읽어, 전압, 온도 등과 같은 추가적인 값들을 gadcvalue6에서 gadcvalue10에 저장
-#ifdef NEW_BOARD
+	// 8. ADCD와 ADCA 모듈의 결과 값을 읽어, 전압, 온도 등과 같은 추가적인 값들을 gadcvalue6에서 gadcvalue10에 저장
     gadcvalue6 = (uint16_t)ADC_readPPBResult(ADCARESULT_BASE, ADC_PPB_NUMBER1);
     gadcvalue7 = (uint16_t)ADC_readPPBResult(ADCARESULT_BASE, ADC_PPB_NUMBER2);
     gadcvalue8 = (uint16_t)ADC_readPPBResult(ADCARESULT_BASE, ADC_PPB_NUMBER3);
     gadcvalue9 = (uint16_t)ADC_readPPBResult(ADCARESULT_BASE, ADC_PPB_NUMBER4);
     gadcvalue10 = (uint16_t)ADC_readResult(ADCARESULT_BASE, ADC_SOC_NUMBER4);
 
-
-#else
-
-    gadcvalue6 = (uint32_t)ADC_readResult(ADCDRESULT_BASE, ADC_SOC_NUMBER0);
-    gadcvalue7 = (uint32_t)ADC_readResult(ADCDRESULT_BASE, ADC_SOC_NUMBER1);
-    gadcvalue8 = (uint32_t)ADC_readResult(ADCDRESULT_BASE, ADC_SOC_NUMBER2);
-    gadcvalue9 = (uint32_t)ADC_readResult(ADCDRESULT_BASE, ADC_SOC_NUMBER3);
-
-#endif
-
-	// 10. ema 필터를 위해 자기장 값들을 각 변수에 저장 
-#ifdef NEW_BOARD
+	// 9. ema 필터를 위해 자기장 값들을 각 변수에 저장
     filterBx = (int16_t)fluxread[0];  // x
     filterBy = (int16_t)fluxread[1];  // y
     filterBz = (int16_t)fluxread[2];  // z
-#else
-    gBxADC = (int16_t)fluxread[2];  // x
-    gByADC = (int16_t)fluxread[1];  // y
-    gBzADC = (int16_t)fluxread[0];
-#endif
 
     filterAx = (int16_t)accread[0];
     filterAy = (int16_t)accread[1];
-//    gAzADC = (int16_t)accread[2];
 
-	// 11. 각 센서 데이터 및 전압 값을 ema_filter 함수를 이용해 지수 이동 평균 필터를 적용하여 ema 배열에 저장.
-//    ema[ADC_CH_INDEX_FLUX_X] = ema_filter((float64_t)gBxADC, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_FLUX_X]);
-//    ema[ADC_CH_INDEX_FLUX_Y] = ema_filter((float64_t)gByADC, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_FLUX_Y]);
-//    ema[ADC_CH_INDEX_FLUX_Z] = ema_filter((float64_t)gBzADC, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_FLUX_Z]);
-//    ema[ADC_CH_INDEX_ACCEL_X] = ema_filter((float64_t)gAxADC, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_ACCEL_X]);
-//    ema[ADC_CH_INDEX_ACCEL_Y] = ema_filter((float64_t)gAyADC, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_ACCEL_Y]);
-//    ema[ADC_CH_INDEX_ACCEL_Z] = ema_filter((float64_t)gAzADC, EMA_FILTER_ALPHA, ema[ADC_CH_INDEX_ACCEL_Z]);
+	// 10. 각 센서 데이터 및 전압 값을 ema_filter 함수를 이용해 지수 이동 평균 필터를 적용하여 ema 배열에 저장.
+    ema[ADC_CH_INDEX_VOLYAGE_28V] = ema_filter((float64_t)gadcvalue6, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_28V]);
+    ema[ADC_CH_INDEX_VOLYAGE_5V] = ema_filter((float64_t)gadcvalue7, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_5V]);
+    ema[ADC_CH_INDEX_VOLYAGE_3p3V] = ema_filter((float64_t)gadcvalue8, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_3p3V]);
+    ema[ADC_CH_INDEX_VOLYAGE_1p2V] = ema_filter((float64_t)gadcvalue9, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_1p2V]);
+    ema[ADC_CH_INDEX_VOLYAGE_TEMPERATUR] = ema_filter((float64_t)gadcvalue10, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_TEMPERATUR]);
 
-//    ema[ADC_CH_INDEX_VOLYAGE_28V] = ema_filter((float64_t)gadcvalue6, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_28V]);
-//    ema[ADC_CH_INDEX_VOLYAGE_5V] = ema_filter((float64_t)gadcvalue7, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_5V]);
-//    ema[ADC_CH_INDEX_VOLYAGE_3p3V] = ema_filter((float64_t)gadcvalue8, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_3p3V]);
-//    ema[ADC_CH_INDEX_VOLYAGE_1p2V] = ema_filter((float64_t)gadcvalue9, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_1p2V]);
-//    ema[ADC_CH_INDEX_VOLYAGE_TEMPERATUR] = ema_filter((float64_t)gadcvalue10, EMA_FILTER_ALPHA_VOLT, ema[ADC_CH_INDEX_VOLYAGE_TEMPERATUR]);
-
-	// 12. 인터럽트 플래그를 클리어하고, 오버플로우 발생 여부를 확인
+	// 11. 인터럽트 플래그를 클리어하고, 오버플로우 발생 여부를 확인
     ADC_clearInterruptStatus(ADCA_BASE, ADC_INT_NUMBER1);
     if(TRUE == ADC_getInterruptOverflowStatus(ADCA_BASE, ADC_INT_NUMBER1))
     {
-		//12.1  오버플로우가 발생했을 경우 인터럽트 오버플로우 플래그와 상태를 초기화
+		//11.1  오버플로우가 발생했을 경우 인터럽트 오버플로우 플래그와 상태를 초기화
         ADC_clearInterruptOverflowStatus(ADCA_BASE, ADC_INT_NUMBER1);
         ADC_clearInterruptStatus(ADCA_BASE, ADC_INT_NUMBER1);
     }
 
-	// 13. 그룹 1 ACK 신호를 클리어하여 다음 인터럽트를 수락할 수 있도록 준비
+	// 12. 그룹 1 ACK 신호를 클리어하여 다음 인터럽트를 수락할 수 있도록 준비
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP1);
 }
 

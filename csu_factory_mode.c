@@ -63,6 +63,7 @@ void factory_mode(void)
 
     int16_t cnt;
 
+    // 1. 처음 팩토리 모드로 동작 시 팩토리 모드림을 알려주는 문장을 통신 터미널에 아스키 코드 전송
     if(gfirstOpen_factory == 1U)
     {
         gfirstOpen_factory = 0U;
@@ -76,10 +77,10 @@ void factory_mode(void)
     }
 
 
-	// 1. 터미널로부터 수신 완료된 명령이 있으면
+	// 2. 터미널로부터 수신 완료된 명령이 있으면
     if(gRx_done == 1U)
     {
-    	// 1.1 수신데이터가 start 명령이면, 측정된 센서 데이터를 터미널로 전송하는 함수가 작동하도록 bSendUartData 플레그를 true 로 변경한다.
+    	// 2.1 수신데이터가 start 명령이면, 측정된 센서 데이터를 터미널로 전송하는 함수가 작동하도록 bSendUartData 플레그를 true 로 변경한다.
     	//     start 가 되면 자기장, 가속도 게인 및 옵셋 값을 초기화 한 시킴.
         if(strncmp(rDataPointA, startCmd, 6) == 0)
         {
@@ -98,34 +99,36 @@ void factory_mode(void)
 			Offset_Bz = 0;
 #endif
 
+			// 2.1.1 eeprom 에서 있는 자기장, 가속도 게인 및 옵셋 값 등을 읽음.
             read_parameter();
 
             bSendUartData = 1U;
         }
 
-		// 1.2 수신데이터가 stop 명령이면, 측정된 센서 데이터를 터미널로 전송하는 함수가 작동하지 않도록도록 bSendUartData 플레그를 false 로 변경한다.
+		// 2.2 수신데이터가 stop 명령이면, 측정된 센서 데이터를 터미널로 전송하는 함수가 작동하지 않도록도록 bSendUartData 플레그를 false 로 변경한다.
         if(strncmp(rDataPointA, stopCmd, 5) == 0)
         {
             bSendUartData = 0U;
         }
 
+        // 2.3 추가 명령어 수신확인 함수
         eepromDataReadCmd();
         sub_function_mode();
 
 
-		// 1.6 수신 버퍼 clear
+		// 2.4 수신 버퍼 clear
         for(cnt=0; cnt<100; cnt++)
         {
             rDataPointA[cnt] = 0;
         }
 
-		// 1.7 수신데이터 천리 완료 표시
+		// 2.5 수신데이터 천리 완료 표시
         gRx_done = 0U;
         gRx_cnt = 0;
-		// 1.8 200 msec 시간 지연
+
     }
 
-	// 2. start 상태 (bSendUartData True) 이면 자기장과 가속도를 측정하여 status_transfer_to_terminal() 를 호출하여 측정 데이터를 터미널로 전송 한다.
+	// 3. start 상태 (bSendUartData True) 이면 자기장과 가속도를 측정하여 status_transfer_to_terminal() 를 호출하여 측정 데이터를 터미널로 전송 한다.
     if(bSendUartData == 1U)
     {
         MeasureFlux();
@@ -136,6 +139,14 @@ void factory_mode(void)
 
 }
 
+/*
+ 기능 설명
+ factory 모드에서는 eeprom 데이터 읽기 명령어 입력 시 eeprom 내부 데이터 읽기
+
+ 전역 변수 설명
+ rDataPointA[100]:   터미널로부터 명령 수신을 위한  버퍼
+
+*/
 static void eepromDataReadCmd(void){
 
     const char8_t eepromReadCmd[] = {'$','R','E','A','D','\0'};
@@ -149,6 +160,15 @@ static void eepromDataReadCmd(void){
     }
 }
 
+
+/*
+ 기능 설명
+ 입력된 명령어 확인하는 함수
+
+ 전역 변수 설명
+ rDataPointA[100]:   터미널로부터 명령 수신을 위한  버퍼
+
+*/
 static void sub_function_mode(void)
 {
 
@@ -162,37 +182,37 @@ static void sub_function_mode(void)
     const char8_t crc16Cmd[] = {'$','C','R','C','\0'};
 #endif
 
-    // 1.4 수신데이터가 보정한 가속도 센서 파라미터 값 저장 명령이면, 보정한 가속도 센서 파라미터 값인  x,y,z축 gain, offset 값을 eeprom에 저장한다.
+    // 1. 수신데이터가 보정한 가속도 센서 파라미터 값 저장 명령이면, 보정한 가속도 센서 파라미터 값인  x,y,z축 gain, offset 값을 eeprom에 저장한다.
     if(strncmp(rDataPointA, calAccelCmd, 6) == 0)
     {
-//            $ACCEL,100,100,0,0,1\r
         calAcceSet();
     }
 
-    // 1.5 수신데이터가 보정한 자기센 센서 파리메터 저장 명령이면, 보정한 자기장 센서 파라미터 값인 x,y,z축 gain, offset 값을 eeprom에 저장한다.
+    // 2. 수신데이터가 보정한 자기센 센서 파리메터 저장 명령이면, 보정한 자기장 센서 파라미터 값인 x,y,z축 gain, offset 값을 eeprom에 저장한다.
     if(strncmp(rDataPointA, calFluxCmd, 5) == 0)
     {
-//            $FLUX,10000,10000,10000,0,0,0,1\r
         calFluxSet();
     }
 
+    // 3. 수신데이터가 항공기 자기장 보정 옵셋 데이터 저장 명령이면, 보정한 보정 자기장 센서 파라미터 값인 x,y,z축 값을 eeprom에 저장한다.
     if(strncmp(rDataPointA, calModeOffsetCmd, 5) == 0)
     {
         calModeFluxSet();
     }
 
-
+    // 4. 수신데이터가 보정한 가속도 축보정 명령이면, 행력 2x2 값을 eeprom에 저장한다.
     if(strncmp(rDataPointA, fluxrightAnglesetCmd, 4) == 0)
     {
         flux_rightAngleSet();
     }
 
+    // 5. 수신데이터가 보정한 자기장 축보정 명령이면, 행력 3x3 값을 eeprom에 저장한다.
     if(strncmp(rDataPointA, accelrightAnglesetCmd, 4) == 0)
     {
         accel_rightAngleSet();
     }
 
-
+    // 6. 수신데이터가 보정한 소프트웨어 버전 명령이면, 소프트웨어 버전값을  eeprom에 저장한다.
     if(strncmp(rDataPointA, versionCmd, 4) == 0)
     {
         chk_ver_Set();
@@ -347,7 +367,7 @@ static void calibrationDataTransfortToTerminal(void)
 
 /*
 기능설명
-eeprom에 저장되어 있는 자기장, 기속도 보정 데이터를 터미널에 전송하는 함수
+eeprom에 저장되어 있는 항공기 보정 옵셋 자기장 데이터를 터미널에 전송하는 함수
 
 전역 변수 설명
 RX_MsgBuffer[MAX_BUFFER_SIZE];  EEPROM 에서 읽은 데이터를 ISR과 다른 csu와 공유하는 버퍼
@@ -435,11 +455,17 @@ static void sub_calibrationDataTransfortToTerminal(void)
         SCI_writeCharArray(SCIA_BASE, (const char8_t*)msg, 6U);
         SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 4U);
 
-        // 2.4 1 byte 전송 완료까지 대기
-
     }
 }
 
+
+/*
+기능설명
+eeprom에 저장되어 있는 각 축보정 데이터를 터미널에 전송하는 함수
+
+전역 변수 설명
+RX_MsgBuffer[MAX_BUFFER_SIZE];  EEPROM 에서 읽은 데이터를 ISR과 다른 csu와 공유하는 버퍼
+*/
 static void matrixDataTransfortToTerminal(void)
 {
     char8_t msg[100];
@@ -579,7 +605,13 @@ static void matrixDataTransfortToTerminal(void)
     }
 }
 
+/*
+기능설명
+eeprom에 저장되어 있는 소프트웨어 버전 및 CRC16 데이터를 터미널에 전송하는 함수
 
+전역 변수 설명
+RX_MsgBuffer[MAX_BUFFER_SIZE];  EEPROM 에서 읽은 데이터를 ISR과 다른 csu와 공유하는 버퍼
+*/
 static void sub_matrixDataTransfortToTerminal(void)
 {
     char8_t msg[100];
@@ -589,7 +621,6 @@ static void sub_matrixDataTransfortToTerminal(void)
     const char8_t end[] = {'\r', '\n','\r', '\n'};
     const char8_t error[] = {'e','r','r','o','r','\r','\n','\0'};
 
-    const char8_t checksum[] = {'C','H','E','C','K','_','S','U','M',' ',' ','\0' };
     const char8_t version[] = {'V','E','R','S','I','O','N',' ',':',' ',' ','\0' };
     const char8_t crcRead[] = {'C','R','C','R','E','A','D',' ',':',' ',' ','\0' };
 
@@ -802,7 +833,14 @@ static void calFluxSet(void)
     }
 }
 
+/*
+기능설명
+ 터미널에서 자기장 축보정값을 입력 받아 각 값을 파싱 후 행력 3x3 값을 eeprom에 저장 후
+ 터미널에 완료 ack 전송 함수
 
+전역변수 설명
+uint16_t rDataPointA[100];   터미널로부터 명령 수신을 위한  버퍼
+*/
 static void flux_rightAngleSet(void)
 {
     const char8_t* comma = ",";
@@ -886,6 +924,14 @@ static void flux_rightAngleSet(void)
 
 }
 
+/*
+기능설명
+ 터미널에서 가속도 축보정값을 입력 받아 각 값을 파싱 후 행력 2x2 값을 eeprom에 저장 후
+ 터미널에 완료 ack 전송 함수
+
+전역변수 설명
+uint16_t rDataPointA[100];   터미널로부터 명령 수신을 위한  버퍼
+*/
 static void accel_rightAngleSet(void)
 {
     const char8_t* comma = ",";
@@ -923,7 +969,7 @@ static void accel_rightAngleSet(void)
         // 6. 다섯전째 단위 문자열은 직각도 eeprom 저장 유무를 위한 정수 변환.
         int16_t testSave = atoi(right) ;
 
-        // 9. 변환된 gain_Bx, gain_By, gain_Bz, offset_Bx, offset_By, offset_Bz 값을 eeprom에 저장한다.
+        // 7. 변환된 gain_Bx, gain_By, gain_Bz, offset_Bx, offset_By, offset_Bz 값을 eeprom에 저장한다.
         if(testSave == 1)
         {
             (void)data_write_to_eeprom(EEPROM_AX00_RA_ADDRESS, (uint16_t)(x00));
@@ -935,12 +981,20 @@ static void accel_rightAngleSet(void)
             writeEepromCRC16();
         }
 
-        // 10. 데이터 저장 후 완료 ack 를 터미널에 전송 한다.
+        // 8. 데이터 저장 후 완료 ack 를 터미널에 전송 한다.
         SCI_writeCharArray(SCIA_BASE, (const char8_t*)buffer, (uint16_t)strlen(buffer));
         SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 2U);
     }
 }
 
+/*
+기능설명
+ 터미널에서 항공기 고유 자기장 옵셋값을 입력 받아 eeprom에 저장 후
+ 터미널에 완료 ack 전송 함수
+
+전역변수 설명
+uint16_t rDataPointA[100];   터미널로부터 명령 수신을 위한  버퍼
+*/
 static void calModeFluxSet(void)
 {
     const char8_t* comma = ",";
@@ -982,12 +1036,19 @@ static void calModeFluxSet(void)
             writeEepromCRC16();
         }
 
-        // 7. 데이터 저장 후 완료 ack 를 터미널에 전송 한다.
+        // 6. 데이터 저장 후 완료 ack 를 터미널에 전송 한다.
         SCI_writeCharArray(SCIA_BASE, (const char8_t*)buffer, (uint16_t)strlen(buffer));
         SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 2U);
     }
 }
 
+/*
+기능설명
+ 터미널에서 소프트웨어 버전을 입력 받아 eeprom에 저장 후  터미널에 완료 ack 전송 함수
+
+전역변수 설명
+uint16_t rDataPointA[100];   터미널로부터 명령 수신을 위한  버퍼
+*/
 static void chk_ver_Set(void)
 {
     const char8_t* comma = ",";
@@ -1008,7 +1069,7 @@ static void chk_ver_Set(void)
         int16_t version = atoi(chk);
         chk = strtok(NULL, comma);
 
-        // 5. 다섯전째 다섯전째 단위 문자열은 y축 가속도 옵셋 eeprom 저장 유무를 위한 정수 변환.
+        // 1.1 다섯전째 다섯전째 단위 문자열은 y축 가속도 옵셋 eeprom 저장 유무를 위한 정수 변환.
         int16_t testSave = atoi(chk) ;
 
         if(testSave == 1)
@@ -1018,7 +1079,7 @@ static void chk_ver_Set(void)
             writeEepromCRC16();
         }
 
-        // 7. 데이터 저장 후 완료 ack 를 터미널에 전송 한다.
+        // 1.2 데이터 저장 후 완료 ack 를 터미널에 전송 한다.
         SCI_writeCharArray(SCIA_BASE, (const char8_t*)buffer, (uint16_t)strlen(buffer));
         SCI_writeCharArray(SCIA_BASE, (const char8_t*)end, 2U);
     }
@@ -1026,6 +1087,13 @@ static void chk_ver_Set(void)
 }
 
 
+/*
+기능설명
+ eeprom에 저장된 데이터를 읽고 crc 데이터를 해당 EEPROM_CHK_CRC_ADDRESS 주소에 CRC16 값을 저장한다.
+
+전역변수 설명
+uint16_t eepromcrc; eeprom CRC 저장
+*/
 void writeEepromCRC16(void)
 {
     read_parameter();
@@ -1035,7 +1103,7 @@ void writeEepromCRC16(void)
 }
 
 
-#if 1
+#if 0
 void sendUart(float64_t bx, float64_t by, float64_t bz, float64_t ax, float64_t ay, float64_t brx, float64_t bry, uint16_t angle)
 {
     char8_t *msg2 = NULL;

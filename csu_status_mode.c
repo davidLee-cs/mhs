@@ -68,16 +68,11 @@ void status_mode(void)
 	{
 		Can_State_Ptr = &status_mode;
 	}
-#ifdef NEW_BOARD
     else if((Discrete_1_val == 1U) && (Discrete_2_val == 0U))
-#else
-    else if(Discrete_1_val == 1U)
-#endif
     {
         calibration_mode = 1U;
         Can_State_Ptr = &calibrationMode;
     } 
-#ifdef NEW_BOARD
     else if ((Discrete_1_val == 0U) && (Discrete_2_val == 1U))
     {
         calibration_mode = 0U;
@@ -85,14 +80,6 @@ void status_mode(void)
         Interrupt_enable(INT_mySCI0_TX);
         Can_State_Ptr = &factory_mode;
     }
-#else
-    else if (Discrete_2_val == 1U)
-    {
-        Can_State_Ptr = &factory_mode;
-        gfirstOpen_factory = 1U;
-    }
-
-#endif
     else 
     {
         calibration_mode = 0U;

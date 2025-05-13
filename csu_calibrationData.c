@@ -47,7 +47,24 @@ static uint16_t FLASH_READ_u16(uint32_t offset);
 // int16_t mhsensor_calibration_Data.calOffsetBx  //  자기장 x축 calibration 모드 옵셋
 // int16_t mhsensor_calibration_Data.calOffsetBy  // 자기장 y축 calibration 모드 옵셋
 // int16_t mhsensor_calibration_Data.calOffsetBz   // 자기장 z축 calibration 모드 옵셋
+//mhsensor_fluxrightAngle_Data.matrix_x00  //자기장 x축 행렬 00
+//mhsensor_fluxrightAngle_Data.matrix_x01  //자기장 x축 행렬 01
+//mhsensor_fluxrightAngle_Data.matrix_x02  //자기장 x축 행렬 02
+//mhsensor_fluxrightAngle_Data.matrix_y10  //자기장 y축 행렬 10
+//mhsensor_fluxrightAngle_Data.matrix_y11  //자기장 y축 행렬 11
+//mhsensor_fluxrightAngle_Data.matrix_y12  //자기장 y축 행렬 12
+//mhsensor_fluxrightAngle_Data.matrix_z20  //자기장 z축 행렬 20
+//mhsensor_fluxrightAngle_Data.matrix_z21  //자기장 z축 행렬 21
+//mhsensor_fluxrightAngle_Data.matrix_z22  //자기장 z축 행렬 22
+//mhsensor_accelrightAngle_Data.matrix_x00 //가속도 x축 행렬 00
+//mhsensor_accelrightAngle_Data.matrix_x01 //가속도 x축 행렬 01
+//mhsensor_accelrightAngle_Data.matrix_y10 //가속도 y축 행렬 10
+//mhsensor_accelrightAngle_Data.matrix_y11 //가속도 y축 행렬 11
 // uint16_t  bParameterError // eeprom 으로부터 파라미터 읽는 상태 확인(1 : error, 0 : No error)
+// mhsensor_calibration_Data.ssm : eeprom error 체크
+// eepromcrc : eeprom CRC16
+// gversion_code : 소프트웨어 버전
+// gCheckSum_code : 전체코드 check sum
 void read_parameter(void)
 {
     uint16_t error = 0U;
@@ -56,21 +73,35 @@ void read_parameter(void)
     uint32_t i=0U;
 
 	// 1. EEPROM 주소에서 대상의 임시 변수에 로딩
-	//    EEPROM_GAIN_AX_ADDRESS : Gain_Ax
-	//    EEPROM_GAIN_AY_ADDRESS : Gain_Ay
-	//    EEPROM_GAIN_AZ_ADDRESS : Gain_Az
-	//    EEPROM_OFFSET_AX_ADDRESS : Offset_Ax
-	//    EEPROM_OFFSET_AY_ADDRESS : Offset_Ay
-	//    EEPROM_OFFSET_AZ_ADDRESS : Offset_Az
-	//    EEPROM_GAIN_BX_ADDRESS : Gain_Bx
-	//    EEPROM_GAIN_BY_ADDRESS : Gain_By
-	//    EEPROM_GAIN_BZ_ADDRESS : Gain_Bz
-	//    EEPROM_OFFSET_BX_ADDRESS : Offset_Bx
-	//    EEPROM_OFFSET_BY_ADDRESS : Offset_By
-	//    EEPROM_OFFSET_BZ_ADDRESS : Offset_Bz
-	//    EEPROM_BX_CAL_OFFSET_ADDRESS : calOffsetBx
-	//    EEPROM_BY_CAL_OFFSET_ADDRESS : calOffsetBy
-	//    EEPROM_BZ_CAL_OFFSET_ADDRESS : calOffsetBz
+	//  EEPROM_GAIN_AX_ADDRESS : Gain_Ax
+	//  EEPROM_GAIN_AY_ADDRESS : Gain_Ay
+	//  EEPROM_GAIN_AZ_ADDRESS : Gain_Az
+	//  EEPROM_OFFSET_AX_ADDRESS : Offset_Ax
+	//  EEPROM_OFFSET_AY_ADDRESS : Offset_Ay
+	//  EEPROM_OFFSET_AZ_ADDRESS : Offset_Az
+	//  EEPROM_GAIN_BX_ADDRESS : Gain_Bx
+	//  EEPROM_GAIN_BY_ADDRESS : Gain_By
+	//  EEPROM_GAIN_BZ_ADDRESS : Gain_Bz
+	//  EEPROM_OFFSET_BX_ADDRESS : Offset_Bx
+	//  EEPROM_OFFSET_BY_ADDRESS : Offset_By
+	//  EEPROM_OFFSET_BZ_ADDRESS : Offset_Bz
+	//  EEPROM_BX_CAL_OFFSET_ADDRESS : calOffsetBx
+	//  EEPROM_BY_CAL_OFFSET_ADDRESS : calOffsetBy
+	//  EEPROM_BZ_CAL_OFFSET_ADDRESS : calOffsetBz
+    //  EEPROM_BX00_RA_ADDRESS  : x축 행렬 00
+    //  EEPROM_BX01_RA_ADDRESS  : x축 행렬 01
+    //  EEPROM_BX02_RA_ADDRESS  : x축 행렬 02
+    //  EEPROM_BY10_RA_ADDRESS  : y축 행렬 10
+    //  EEPROM_BY11_RA_ADDRESS  : y축 행렬 11
+    //  EEPROM_BY12_RA_ADDRESS  : y축 행렬 12
+    //  EEPROM_BZ20_RA_ADDRESS  : z축 행렬 20
+    //  EEPROM_BZ21_RA_ADDRESS  : z축 행렬 21
+    //  EEPROM_BZ22_RA_ADDRESS  : z축 행렬 22
+    //  EEPROM_AX00_RA_ADDRESS  : x축 행렬 00 가속도
+    //  EEPROM_AX01_RA_ADDRESS  : x축 행렬 01 가속도
+    //  EEPROM_AY10_RA_ADDRESS  : y축 행렬 10 가속도
+    //  EEPROM_AY11_RA_ADDRESS  : y축 행렬 11 가속도
+    //  EEPROM_VERSION_ADDRESS  : 소프트웨어 버전
 	error = data_read_from_eeprom(EEPROM_GAIN_AX_ADDRESS, &eepromBuffer[0]);
 	error |= data_read_from_eeprom(EEPROM_GAIN_AY_ADDRESS, &eepromBuffer[1]);
 	eepromBuffer[2] = 0;
@@ -108,8 +139,9 @@ void read_parameter(void)
     error |= data_read_from_eeprom(EEPROM_CHK_CRC_ADDRESS, &resultcrc);  // eeprom crc16
 
     size_t data_len = (size_t)(sizeof(eepromBuffer) / sizeof(eepromBuffer[0]));
-    eepromcrc = crc16_modbus_little_endian(eepromBuffer, data_len);
 
+    // 2. eeprom crc16 확인 후 저장된 crc16와 다르면 에러 설정
+    eepromcrc = crc16_modbus_little_endian(eepromBuffer, data_len);
 
     if((uint16_t)resultcrc != eepromcrc)
     {
@@ -196,7 +228,7 @@ void read_parameter(void)
         mhsensor_accelrightAngle_Data.matrix_y11 = (float64_t)eepromBuffer[27] * 0.0001L;
 
 
-        // 코드 전체 checksum
+        // 2.1 코드 전체 checksum을 확인
         gCheckSum_code = (uint16_t)eepromBuffer[28];
 
         gCheckSum_code = 0U;
@@ -208,14 +240,14 @@ void read_parameter(void)
         // 코드 버전
         gversion_code = (uint16_t)eepromBuffer[29];
 
-
+        // 2.2 eeprom에서 읽은 가속도 및 자기장 행렬 값을 변수에 저장
         accel_matrix_init();
         flux_matrix_init();
 
 	}
 	else
 	{
-        // 옥천보정
+        //2.3 eeprom 데어터 읽기 에러 발생 시 dufault 값으로 설정
         mhsensor_calibration_Data.Gain_Bx = -0.965251;
         mhsensor_calibration_Data.Gain_By = -0.949307;
         mhsensor_calibration_Data.Gain_Bz = -0.954563;
@@ -255,7 +287,7 @@ void read_parameter(void)
 
 	}
 
-
+	// 3. caloffset x,y,z 값이 모두 0 이면 항공기 보정이 안되어 있는 상태이기 때문에 항공기 보정 완려 전까지 mhsensor_calibration_Data.ssm = 1 로 설정하여 STATUS_NO_COMPUT_DATA 상태로 유지
 	if((mhsensor_calibration_Data.calOffsetBx == 0) && (mhsensor_calibration_Data.calOffsetBy == 0) && (mhsensor_calibration_Data.calOffsetBz == 0))
 	{
 	    mhsensor_calibration_Data.ssm = 0x01;

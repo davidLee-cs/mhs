@@ -174,7 +174,7 @@ void mhs_status_trans(uint16_t paddingbit, uint16_t StatusMatrix)
     TxBusWord[4] |= (uint32_t)arinc429_error.eepromError << EEP_ERROR;
     TxBusWord[4] |= (uint32_t)arinc429_error.label << LABEL;
 
-    // 9. 소프트웨어 버전을 SFI_MHS04 포멧에 맞도록 전송할 hi3587 tx 버퍼(TxBusWord[4])에 저장
+    // 9. 소프트웨어 버전을 SFI_MHS04 포멧에 맞도록 전송할 hi3587 tx 버퍼(TxBusWord[5])에 저장
     //    parity(1bit): 프로토콜의 parity 에서 0(deflult : Odd Parity)
     //    ssm   (2bit): status Matrix 입력 (00 : normal, 01: No computed Data, 10: function Test, 11: Not used)
     //    version (16bit) : 4bit 4bit, 4bit, 4bit
@@ -185,8 +185,7 @@ void mhs_status_trans(uint16_t paddingbit, uint16_t StatusMatrix)
     TxBusWord[5] = 0;
     TxBusWord[5] |= (uint32_t)arinc429_error.parity << PARITY;
     TxBusWord[5] |= ssm << SSM;
-//    uint16_t version = gversion_code;  // (16bit)
-    uint16_t version = 0xA123;  // (16bit)
+    uint16_t version = gversion_code;  // (16bit)
     TxBusWord[5] |= (uint32_t)version << VER;
     TxBusWord[5] |= (uint32_t)arinc429_error.label << LABEL;
 
@@ -199,13 +198,6 @@ void mhs_status_trans(uint16_t paddingbit, uint16_t StatusMatrix)
 
 	// 10. HI3579 를 쓰기모드로 변경하기 위하여 1 byte 의 dummy 데이터를 전송한다.
     txOpCode (0x12);
-
-
-//    498             00000001001001100000000000001100b
-//    7015    0x1B67  00000011011011001110000011000000b
-//    8336    0x2090  00000100000100100000000011000001b
-//    -7697   0xE1EF  00011100001111011110000011000010b
-
 
 }
 
