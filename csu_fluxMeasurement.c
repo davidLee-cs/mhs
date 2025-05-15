@@ -13,7 +13,7 @@
 #include "mhs_project.h"
 
 
-#define MAG_RESOLUTION      (10000.0/32768.0L)  // range / 2^15
+#define MAG_RESOLUTION      (32768.0L/200.0L)  // +/-range / 2^15
 
 float64_t Box = 0.0L;  //자기장 x축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000 
 float64_t Boy = 0.0L;  //자기장 y축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000 
@@ -47,6 +47,7 @@ static float64_t gConstant_B[3][3] =
 
 void flux_matrix_init(void)
 {
+    // 1. eeprom에 읽은 각 x,y,z 축의 축보정값을 각 행력 gConstant 3x3 변수에 저장한다.
     gConstant_B[0][0] = mhsensor_fluxrightAngle_Data.matrix_x00;
     gConstant_B[0][1] = mhsensor_fluxrightAngle_Data.matrix_x01;
     gConstant_B[0][2] = mhsensor_fluxrightAngle_Data.matrix_x02;
@@ -165,9 +166,13 @@ void MeasureFlux(void)
 // 출력 전역변수 : mhsensor_data
 static void converterToArinc429(void)
 {
-    libConverterToArinc429(&mhsensor_data.Mag_x, Box);
-    libConverterToArinc429(&mhsensor_data.Mag_y, Boy);
-    libConverterToArinc429(&mhsensor_data.Mag_z, Boz);
+    float64_t xaxis = Box * 0.01L;
+    float64_t yaxis = Box * 0.01L;
+    float64_t zaxis = Box * 0.01L;
+
+    libConverterToArinc429(&mhsensor_data.Mag_x, xaxis);
+    libConverterToArinc429(&mhsensor_data.Mag_y, yaxis);
+    libConverterToArinc429(&mhsensor_data.Mag_z, zaxis);
 }
 
 
@@ -187,7 +192,7 @@ static void libConverterToArinc429(int16_t *pmag, float64_t fluxOut)
     // 1. 필터된 자기장 값이 음수이면 psigmag 값을 1, 양수이면 0으로 설정, 자기장 값을 레졸류션값으로 나누어 데이터를 본환한다.
     // 변환된 자기장 값은 14이내로 표현해야 한다.
 
-    flux = fluxOut / MAG_RESOLUTION;
+    flux = fluxOut * MAG_RESOLUTION;
     returntMagnectic = (int16_t)flux;
 
     *pmag  =  returntMagnectic;

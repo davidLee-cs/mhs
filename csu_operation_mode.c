@@ -63,7 +63,7 @@ void operation_mode(void)
         ssmData = STATUS_NO_COMPUT_DATA;
     }
 
-	// 4. 상태 값을 SFI로 전송
+	// 5. 상태 값을 SFI로 전송
     mhs_status_trans(NORMAL_MODE, ssmData);
 
 #if 0

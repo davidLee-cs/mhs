@@ -158,44 +158,6 @@ void read_parameter(void)
 	if (error==0U)
 	{
 
-#if 0
-	    //보정값
-//	    ACCEL_X_GAIN:   +000183
-//	    ACCEL_Y_GAIN:   +000218
-//	    ACCEL_Z_GAIN:   +000000
-//	    ACCEL_X_OFFSET: -000214
-//	    ACCEL_Y_OFFSET: -000900
-//	    ACCEL_Z_OFFSET: +000000
-//	    FLUX__X_GAIN:   +010610
-//	    FLUX__Y_GAIN:   +010580
-//	    FLUX__Z_GAIN:   +010600
-//	    FLUX__X_OFFSET: +000010
-//	    FLUX__Y_OFFSET: +000130
-//	    FLUX__Z_OFFSET: +000060
-//	    CAL__X__OFFSET: +000000
-//	    CAL__Y__OFFSET: +000000
-//	    CAL__Z__OFFSET: +000000
-
-        mhsensor_calibration_Data.Gain_Bx = 1.0517;
-        mhsensor_calibration_Data.Gain_By = 1.0541;
-        mhsensor_calibration_Data.Gain_Bz = 1.0550;
-        mhsensor_calibration_Data.Offset_Bx   = 2;
-        mhsensor_calibration_Data.Offset_By   = 198;
-        mhsensor_calibration_Data.Offset_Bz   = 28;
-
-        mhsensor_calibration_Data.Gain_Ax = 0.000179;
-        mhsensor_calibration_Data.Gain_Ay = 0.000206;
-        mhsensor_calibration_Data.Gain_Az = 0.0001;
-        mhsensor_calibration_Data.Offset_Ax   = -195;
-        mhsensor_calibration_Data.Offset_Ay   = -912;
-        mhsensor_calibration_Data.Offset_Az   = 0;
-
-        mhsensor_calibration_Data.calOffsetBx = 1;
-        mhsensor_calibration_Data.calOffsetBy = 1;
-        mhsensor_calibration_Data.calOffsetBz = 1;
-
-#endif
-
 	    mhsensor_calibration_Data.Gain_Ax = (float64_t)eepromBuffer[0] / 1000000.0L;
 	    mhsensor_calibration_Data.Gain_Ay = (float64_t)eepromBuffer[1] / 1000000.0L;
 	    mhsensor_calibration_Data.Gain_Az = (float64_t)eepromBuffer[2];
@@ -282,8 +244,8 @@ void read_parameter(void)
         mhsensor_accelrightAngle_Data.matrix_y11 = 1.0L;
 
 
-        gCheckSum_code = 0U;
-        gversion_code = 0xA000U;
+        gCheckSum_code = 0xEEEEU;
+        gversion_code = 0x0001U;
 
 	}
 
@@ -354,6 +316,19 @@ uint16_t data_write_to_eeprom(uint32_t address, uint16_t data)
     return error;
 }
 
+
+//기능설명
+//calibration mode엣 eeprom 주소에 특정 데이터를 저장하는 함수
+//
+//입출력 변수 설명
+//uint32_t address : eeprom에서 저장할 주소
+//uint16_t data :  eeprom에 기록할 데이터
+//return 값 : eeprom 쓰기 오류 발생 상황 (1: 오류 발생, 0 : 정상 작동)
+//
+//입출력 전역 변수 설명
+//uint32_t ControlAddr; // Read/Write 할 EEPROM 의 주소. (i2c address 아님)
+//uint16_t TX_MsgBuffer[64];// EEPROM 에 기록할 데이터를 ISR과 다른 csu와 공유하는 버퍼
+//struct I2CHandle EEPROM;     // eeprom 의 I2C 인터페이스를 정보
 uint16_t data_write_to_eeprom_calibraion(uint32_t address, uint16_t data)
 {
     uint16_t error = 0U;
@@ -431,7 +406,14 @@ static uint16_t data_read_from_eeprom(uint32_t address, int16_t * pdata)
 	return ret_status;
 }
 
+//기능 설명
 // CRC-16-MODBUS 계산 함수 (리틀엔디안 방식)
+//
+//입출력 변수 설명
+//data: int16_t 타입의 데이터 배열 (16비트 정수)
+//length: 배열의 길이 (int16_t 단위 개수)
+//return 값 : crc 16bit
+
 static uint16_t crc16_modbus_little_endian(const int16_t* data, size_t length) {
     uint16_t crc = 0xFFFFU;
     const uint16_t polynomial = 0xA001U;
@@ -440,7 +422,7 @@ static uint16_t crc16_modbus_little_endian(const int16_t* data, size_t length) {
     uint8_t crcbytes[2];
 
     for (i = 0U; i < length; i++) {
-        // Little-endian: LSB 먼저 처리
+        // 1. Little-endian: LSB 먼저 처리
         uint16_t crcdata = (uint16_t)data[i];
         uint16_t low = crcdata & 0x00FFU;
         uint16_t high = (crcdata >> 8) & 0x00FFU;
@@ -448,6 +430,7 @@ static uint16_t crc16_modbus_little_endian(const int16_t* data, size_t length) {
         crcbytes[0] = (uint8_t)low;         // 하위 바이트
         crcbytes[1] = (uint8_t)high;   // 상위 바이트
 
+        // 2. 각 바이트에 대해 8비트씩 CRC 연산 수행, XOR 연산 후, CRC의 LSB가 1이면 다항식과 XOR 아니면 그냥 우측 쉬프트
         for (b = 0; b < 2; ++b) {
             crc ^= crcbytes[b];
             for (j = 0; j < 8; ++j) {
@@ -461,13 +444,20 @@ static uint16_t crc16_modbus_little_endian(const int16_t* data, size_t length) {
         }
     }
 
+    // 3. CRC-16 결과값 리턴
     return crc;
 }
 
 
+//기능 설명
+// DSP 전체 플래시 메모리 check sum 하기 위해 특정 메모리에서 데이터 읽어오는 함수
+//입출력 변수 설명
+//uint32_t offset : 전체 플래시 메모리 사이즈
+//return 값 : 플래시 메모리 데이터 리턴
 
 static uint16_t FLASH_READ_u16(uint32_t offset)
 {
+    // 1. Flash 메모리 offset 주소의 데이터를 읽어 리턴한다.
     uint16_t *addr = (uint16_t *)((uint32_t)FLASH_BASE_ADDR + offset);
     return *addr;
 }

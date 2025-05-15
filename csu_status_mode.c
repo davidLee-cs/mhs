@@ -47,11 +47,7 @@ void status_mode(void)
         Discrete_2_val_new = GPIO_readPin(DISCRETE_2);
         loop_count++;
 
-#ifdef NEW_BOARD
         if(((Discrete_1_val == Discrete_1_val_new) && (Discrete_2_val == Discrete_2_val_new)) || (loop_count > LOOP_COUNT_LIMIT))
-#else
-        if((Discrete_1_val == Discrete_1_val_new)|| (loop_count > LOOP_COUNT_LIMIT))
-#endif
         {
             break;
         }

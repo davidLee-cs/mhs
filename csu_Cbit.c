@@ -36,7 +36,7 @@ uint16_t checkCbit(void)
 {
     uint16_t error = 0U;
 
-	// 1. 자기장 범위 검사 후 리턴값이 확인 
+	// 1. 자기장 범위 검사 후 리턴값을 확인
 	// 리턴값 : 1 (error), 0 (No error)
     if(mag_acc_check() != 0U)
     {
@@ -48,6 +48,7 @@ uint16_t checkCbit(void)
         arinc429_error.fluxError = 0U;
     }
 
+    // 2. 온도 범위 검사 후 리턴값을 확인
     if(temp_check() != 0U)
     {
         error = 1U;
@@ -58,6 +59,7 @@ uint16_t checkCbit(void)
         arinc429_error.tempError = 0U;
     }
 
+    // 3. 전압 범위 검사 후 리턴값을 확인
     if(volt_check() != 0U)
     {
         error = 1U;
@@ -132,7 +134,7 @@ static uint16_t volt_check(void)
 {
     uint16_t error = 0U;
 
-    // 1. 필터된 자기장 Box,Boy,Boz 축의 값을 -70 uT ~ +70 uT 범위 안에 있으면 0, 벗어나면 1로 error 을 설정 하고 error을 반환
+    // 1. 필터된 각 전압값이 에러 범위 안에 있으면 0, 벗어나면 1로 error 을 설정 하고 error을 반환
     if((mhsensor_sensor_Data.voltage28v > VOLT_28_MORE) || (mhsensor_sensor_Data.voltage28v < VOLT_28_LESS))
     {
         error = 1U;

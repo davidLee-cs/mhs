@@ -77,7 +77,7 @@ void factory_mode(void)
     }
 
 
-	// 2. 터미널로부터 수신 완료된 명령이 있으면
+	// 2. 터미널로부터 수신 완료된 명령이 있으면 명령어 확인한다.
     if(gRx_done == 1U)
     {
     	// 2.1 수신데이터가 start 명령이면, 측정된 센서 데이터를 터미널로 전송하는 함수가 작동하도록 bSendUartData 플레그를 true 로 변경한다.
@@ -150,7 +150,7 @@ void factory_mode(void)
 static void eepromDataReadCmd(void){
 
     const char8_t eepromReadCmd[] = {'$','R','E','A','D','\0'};
-    // 1.3 수신데이터가 eeprom 에 저장된 calibarion  전송 명령이면, calibrationDataTransfortToTerminal() 를 수행하여 eeprom 에 저장된 데이터를 터미너로 전송한다.
+    // 1. 수신데이터가 eeprom 에 저장된 calibarion  전송 명령이면, calibrationDataTransfortToTerminal() 를 수행하여 eeprom 에 저장된 데이터를 터미너로 전송한다.
     if(strncmp(rDataPointA, eepromReadCmd, 5) == 0)
     {
         calibrationDataTransfortToTerminal();
@@ -810,7 +810,7 @@ static void calFluxSet(void)
         int16_t offset_Bz = atoi(tempflux) ;
         tempflux = strtok(NULL, comma);
 
-        // 8. 다섯전째 단위 문자열은 y축 가속도 옵셋 eeprom 저장 유무를 위한 정수 변환.
+        // 8. 일곱번째째 단위 문자열은 y축 가속도 옵셋 eeprom 저장 유무를 위한 정수 변환.
         int16_t testSave = atoi(tempflux) ;
 
         // 9. 변환된 gain_Bx, gain_By, gain_Bz, offset_Bx, offset_By, offset_Bz 값을 eeprom에 저장한다.
@@ -969,7 +969,7 @@ static void accel_rightAngleSet(void)
         // 6. 다섯전째 단위 문자열은 직각도 eeprom 저장 유무를 위한 정수 변환.
         int16_t testSave = atoi(right) ;
 
-        // 7. 변환된 gain_Bx, gain_By, gain_Bz, offset_Bx, offset_By, offset_Bz 값을 eeprom에 저장한다.
+        // 7. 변환된 gain_Ax, gain_Ay, offset_Ax, offset_Ay 값을 eeprom에 저장한다.
         if(testSave == 1)
         {
             (void)data_write_to_eeprom(EEPROM_AX00_RA_ADDRESS, (uint16_t)(x00));
@@ -989,8 +989,7 @@ static void accel_rightAngleSet(void)
 
 /*
 기능설명
- 터미널에서 항공기 고유 자기장 옵셋값을 입력 받아 eeprom에 저장 후
- 터미널에 완료 ack 전송 함수
+ 터미널에서 항공기 고유 자기장 옵셋값을 입력 받아 eeprom에 저장 후 터미널에 완료 ack 전송 함수
 
 전역변수 설명
 uint16_t rDataPointA[100];   터미널로부터 명령 수신을 위한  버퍼
@@ -1096,8 +1095,11 @@ uint16_t eepromcrc; eeprom CRC 저장
 */
 void writeEepromCRC16(void)
 {
+    //1. eeprom 데이털르 읽는다.
     read_parameter();
+    //2. eepromcrc CRC 데이터를 eeprom 의 EEPROM_CHK_CRC_ADDRESS 주소에 저장한다.
     (void)data_write_to_eeprom(EEPROM_CHK_CRC_ADDRESS, (uint16_t)eepromcrc);
+    //3. eeprom 데이털르 읽는다.
     read_parameter();
 
 }

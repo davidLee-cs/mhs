@@ -55,7 +55,7 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
     float64_t Arm = 0.0L;
 
 
-    // 1. 자기장 보정 벡터 계산
+    // 1. x축 가속도에 따른 기울기 계산
     float64_t Apm = (float64_t)(asin((float32_t)gx));
     if(Apm == 0.0L)
     {
@@ -67,10 +67,11 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
         Arm = (float64_t)(-asin((float32_t)math_r));
     }
 
+    // 2.  Apm 각도에 기반한 z축 보정
     float64_t testAp = (float64_t)(sqrt(1.0-pow((float32_t)gx, 2.0)));
     float64_t cosAp = gy / testAp;
 
-    // 2. sqrt(1 - pow(가속도, 2))와 같은 항은 기울기에 따라 축이 회전할 때 벡터 크기를 조정
+    // 3. 기울기 보정된 자기장 벡터 Brx, Bry 계산
     Brx = (float64_t)(sqrt(1.0-pow((float32_t)gx, 2.0))*bx) - (float64_t)(gx*cosAp*by) + (float64_t)(gx*sqrt(1.0-pow((float32_t)cosAp, 2.0))*bz);
     Bry = (float64_t)(sqrt(1.0-pow((float32_t)cosAp, 2.0))*by) + (cosAp*bz);
 
@@ -83,7 +84,7 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
        atanB = (float32_t)(Bry / Brx);
     }
 
-    // 3. atan 함수와 조건문을 통해 기울기 Ay를 계산
+    // 4. atan 함수와 조건문을 통해 기울기 Ay를 계산
     //    Bnx > 0.0: Bnx가 양수일 때는 atan(Bny / Bnx)를 그대로 사용
     //    Bnx < 0.0와 Bny >= 0.0: Bnx가 음수이면서 Bny가 양수일 때는 180도(π)를 더함.
     //    Bnx < 0.0와 Bny <= 0.0: Bnx와 Bny 모두 음수일 때는 180도(π)를 더해 각도를 조정
@@ -111,7 +112,7 @@ static float64_t tiltAngle(float64_t gx, float64_t gy, float64_t bx, float64_t b
 
     lastAy = Ay;
 
-    // 4. 기울기 리런 : 범위 (0 ~ 2π)
+    // 5. 기울기 리런 : 범위 (0 ~ 2π)
     return Ay;
 }
 

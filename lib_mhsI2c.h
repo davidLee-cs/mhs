@@ -166,11 +166,9 @@ void handleI2C_ErrorCondition(struct I2CHandle *I2C_Params);
 uint16_t I2C_TransmitSlaveAddress_ControlBytes(struct I2CHandle *I2C_Params);
 uint16_t checkBusStatus(uint32_t base);
 void Write_Read_TX_RX_FIFO(struct I2CHandle *I2C_Params);
-void I2C_wait(uint32_t base);
 
 
 extern void eepromInit(void);
-void WaitUntilDone(void);
 uint16_t data_Read(uint32_t address);
 extern uint16_t TX_MsgBuffer[MAX_BUFFER_SIZE];
 extern uint16_t RX_MsgBuffer[MAX_BUFFER_SIZE];

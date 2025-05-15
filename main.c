@@ -40,14 +40,13 @@ void main(void)
     while(1)
     {
 
-#if 0
-		static uint16_t jump = 6;
+#if 1
+		static uint16_t jump = 7;
 
         if(jump == 4U)      Can_State_Ptr = &status_mode;
         else if(jump == 5U)      Can_State_Ptr = &calibrationMode;
         else if(jump == 6U)      Can_State_Ptr = &factory_mode;
         else if(jump == 7U)      Can_State_Ptr = &operation_mode;
-        else                    Can_State_Ptr = &IdleMode;
 #endif
 
 		//5. 50mS 주기로 모드 상태 전환

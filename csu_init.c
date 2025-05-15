@@ -37,21 +37,21 @@ void dspinit(void)
     ASysCtl_enableTemperatureSensor();
     delay_uS(500.0L);
 
-	// 6. 글로벌 인터럽트를 활성화
     EINT;
     ERTM;
 
-	// 7. EPROM과 특정 모듈 초기화
+	// 6. EPROM과 특정 모듈 초기화
     eepromInit();
-	// 8. HI 3587 리셋
+	// 7. HI 3587 리셋
     mrInit();
 
-	// 9. ADC 변환을 트리거하기 위해 EPWM의 SOCA  활성화
+	// 8. ADC 변환을 트리거하기 위해 EPWM의 SOCA  활성화
     EPWM_enableADCTrigger(EPWM1_BASE, EPWM_SOC_A);
 
-	// 10. EPWM의 카운터 모드를 UP 모드로 설정
+	// 9. EPWM의 카운터 모드를 UP 모드로 설정
     EPWM_setTimeBaseCounterMode(EPWM1_BASE, EPWM_COUNTER_MODE_UP);
 
+    // 10. ADC 채널 후처리 옵셋 보정값 설정
     setupPPBOffset();
 
 }
@@ -105,16 +105,9 @@ static void init_interrupt(void)
     Interrupt_register(INT_SCIC_RX, &INT_mySCI0_RX_ISR);
 
 	// 3. ADC 해상도 설정
-#ifdef NEW_BOARD
     configureADC(ADCA_BASE, ADC_RESOLUTION_12_BIT);		// volt.	
     configureADC(ADCB_BASE, ADC_RESOLUTION_16_BIT);		// accel
     configureADC(ADCD_BASE, ADC_RESOLUTION_16_BIT);		// flux
-#else
-    configureADC(ADCA_BASE, ADC_RESOLUTION_16_BIT);
-    configureADC(ADCB_BASE, ADC_RESOLUTION_16_BIT);
-    configureADC(ADCD_BASE, ADC_RESOLUTION_12_BIT);
-
-#endif
 
     CPUTimer_enableInterrupt(myCPUTIMER0_BASE);
 
@@ -130,33 +123,3 @@ static void init_interrupt(void)
     Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP9);
 
 }
-
-#if 0
-void configCPUTimer(uint32_t cpuTimer, float32_t freq, float32_t period)
-{
-    uint32_t temp;
-
-    //
-    // Initialize timer period:
-    //
-    temp = (uint32_t)(freq / 1000000 * period);
-    CPUTimer_setPeriod(cpuTimer, temp);
-
-    //
-    // Set pre-scale counter to divide by 1 (SYSCLKOUT):fff
-    //
-    CPUTimer_setPreScaler(cpuTimer, 0U);
-
-    //
-    // Initializes timer control register. The timer is stopped, reloaded,
-    // free run disabled, and interrupt enabled.
-    // Additionally, the free and soft bits are set
-    //
-    CPUTimer_stopTimer(cpuTimer);
-    CPUTimer_reloadTimerCounter(cpuTimer);
-    CPUTimer_setEmulationMode(cpuTimer,
-                              CPUTIMER_EMULATIONMODE_STOPAFTERNEXTDECREMENT);
-    CPUTimer_enableInterrupt(cpuTimer);
-
-}
-#endif

@@ -190,13 +190,13 @@ void mhs_status_trans(uint16_t paddingbit, uint16_t StatusMatrix)
     TxBusWord[5] |= (uint32_t)arinc429_error.label << LABEL;
 
 
-	// 8. writeTxFIFO()를 이용하여 arinc429 프로토콜 TxBusWord[0..3]를 전송
+	// 10. writeTxFIFO()를 이용하여 arinc429 프로토콜 TxBusWord[0..3]를 전송
     writeTxFIFO(DATA_6_LEN);
 
-	// 9. readStatusReg()를 이용하여 전송 상태를 확인. (여기서는 완료까지 대기 하지 않는다. 대기는 다음번 본 함수가 실행시 추행함.)
+	// 11. readStatusReg()를 이용하여 전송 상태를 확인. (여기서는 완료까지 대기 하지 않는다. 대기는 다음번 본 함수가 실행시 추행함.)
     (void)readStatusReg();
 
-	// 10. HI3579 를 쓰기모드로 변경하기 위하여 1 byte 의 dummy 데이터를 전송한다.
+	// 12. HI3579 를 쓰기모드로 변경하기 위하여 1 byte 의 dummy 데이터를 전송한다.
     txOpCode (0x12);
 
 }
