@@ -27,18 +27,19 @@ static float64_t gConstant_A[2][2] =
 
 
 
-
-// 기능 : 가속도 센서의 축 보정 상수값 입력
-// 입력 전역변수 :
-//  mhsensor_accelrightAngle_Data.matrix_x00; //
-//  mhsensor_accelrightAngle_Data.matrix_x01;
-//  mhsensor_accelrightAngle_Data.matrix_y10;
-//  mhsensor_accelrightAngle_Data.matrix_y11;
-// 출력 전역변수:
-//  gConstant_A[0][0]
-//  gConstant_A[0][1]
-//  gConstant_A[1][0]
-//  gConstant_A[1][1]
+/*
+ 기능 : 가속도 센서의 축 보정 상수값 입력
+ 입력 전역변수 :
+  가속도 행열 2x2 mhsensor_accelrightAngle_Data.matrix_x00;
+  가속도 행열 2x2 mhsensor_accelrightAngle_Data.matrix_x01;
+  가속도 행열 2x2 mhsensor_accelrightAngle_Data.matrix_y10;
+  가속도 행열 2x2 mhsensor_accelrightAngle_Data.matrix_y11;
+ 출력 전역변수:
+  행렬 상수 : gConstant_A[0][0]
+  행렬 상수 : gConstant_A[0][1]
+  행렬 상수 : gConstant_A[1][0]
+  행렬 상수 : gConstant_A[1][1]
+*/
 void accel_matrix_init(void)
 {
     // 1. 가속도 x축 행열 (2x2) 상수 입력

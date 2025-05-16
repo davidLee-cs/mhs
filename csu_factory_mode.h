@@ -7,8 +7,7 @@
 void factory_mode(void);
 void writeEepromCRC16(void);
 
-#if 1
-//void sendUart(float64_t bx, float64_t by, float64_t bz, float64_t ax, float64_t ay, uint16_t angle);
+#if 0
 void sendUart(float64_t bx, float64_t by, float64_t bz, float64_t ax, float64_t ay, float64_t brx, float64_t bry, uint16_t angle);
 void calsendUart(uint16_t cnt, uint16_t angle);
 #endif

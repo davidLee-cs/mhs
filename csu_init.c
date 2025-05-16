@@ -29,7 +29,7 @@ void dspinit(void)
 	// 2. GPIO 핀, 통신 인터페이스, 전원 장치 등을 설정
     Board_init();
 
-    Interrupt_disable(INT_mySCI0_TX);
+
 	// 4. 인터럽트 핸들러와 벡터 테이블을 초기화
     init_interrupt();
 
@@ -79,7 +79,7 @@ static void device_set(void)
 // 기능설명 :  와치독 타이머 및 HI 3587 리셋 시키는 함수
 static void mrInit(void)
 {
-
+    Interrupt_disable(INT_mySCI0_TX);
 	// 1.워치독 타이머를 클리어
     GPIO_writePin(CLR_WDT, 1);
 	// HI 3587 리셋 

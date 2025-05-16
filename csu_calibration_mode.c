@@ -28,12 +28,12 @@ static void detect_rotation(float64_t sensor_value);
 // 기능 : discrete_1 스위치가 LOW 이면 cal과 CBIT 을 수행하고, MHS가 2회 이상 회전 후에 eeprom 모드에 데이터 저장하고 ssm 상태를 cal 모드에서 noraml 모드로 변경한다.
 //       단, CBIT 수행 시 에러가 발생 이후에는 ssm 상태를  STATUS_BCD_FW 상태로 전송한다.
 // 입출력 전역변수
-// float64_t Box;  //자기장 x축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
-// float64_t Boy;  //자기장 y축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
-// float64_t Boz;  //자기장 z축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
-// mhsensor_calibration_Data.calOffsetBx;    // 자기장 x축 calibration 모드 옵셋
-// mhsensor_calibration_Data.calOffsetBy;    // 자기장 y축 calibration 모드 옵셋
-// mhsensor_calibration_Data.calOffsetBz;    // 자기장 z축 calibration 모드 옵셋
+// bx float64_t Box;  //자기장 x축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
+// by float64_t Boy;  //자기장 y축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
+// bz float64_t Boz;  //자기장 z축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
+// 옵셋 mhsensor_calibration_Data.calOffsetBx;    // 자기장 x축 calibration 모드 옵셋
+// 옵셋 mhsensor_calibration_Data.calOffsetBy;    // 자기장 y축 calibration 모드 옵셋
+// 옵셋 mhsensor_calibration_Data.calOffsetBz;    // 자기장 z축 calibration 모드 옵셋
 
 // 이력 :
 //      2024.05.23 : 이충순 : 초기 작성
@@ -236,15 +236,15 @@ void calibrationMode(void)
     Can_State_Ptr = &calibrationMode;//calibration mode
 }
 
-// 기능 : calibration 모드 진행 중 회전을 확인하는 함수
-// 입출력 전역변수
-// float64_t sensor_value;  //자기장 x축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
-// static uint16_t emaCnt;          // 일정 시간동안 지연 시간을 주기 위한 카운터;
-// static int16_t cw_rotations;     // CW 방향 회전 횟수
-// static uint16_t calRotationDone; // MHS 회전 완료 플래그
-
-// 이력 :
-//      2024.05.23 : 이충순 : 초기 작성
+/* 기능 : calibration 모드 진행 중 회전을 확인하는 함수
+  입출력 전역변수
+  sensor_value     자기장 x축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000
+  emaCnt           일정 시간동안 지연 시간을 주기 위한 카운터;
+  cw_rotations     CW 방향 회전 횟수
+  calRotationDone  MHS 회전 완료 플래그
+  이력 :
+      2024.05.23 : 이충순 : 초기 작성
+*/
 static void detect_rotation(float64_t sensor_value) {
 
     static uint16_t is_increasing = 0U;  // 현재 값이 증가 중인지 여부
@@ -264,11 +264,7 @@ static void detect_rotation(float64_t sensor_value) {
     else
     {
         // 1.1 회전 시 측정값 차이가 0.2uT 이하이면 현재 회전 중지로 판단하고 회전 감시를 하지 않고 return 시킴.
-        if(fabsl(sensor_value - baseline) < 20.0L)
-        {
-            return;
-        }
-        else
+        if(fabsl(sensor_value - baseline) > 20.0L)
         {
 
             // 1.1.1 센서 값이 증가한 후, 기울기가 양수이면 한 바퀴 증가 시킨 후 is_increasing 상태를 1로 설정하여 현재 회전 상태 유지

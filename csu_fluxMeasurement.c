@@ -166,13 +166,9 @@ void MeasureFlux(void)
 // 출력 전역변수 : mhsensor_data
 static void converterToArinc429(void)
 {
-    float64_t xaxis = Box * 0.01L;
-    float64_t yaxis = Box * 0.01L;
-    float64_t zaxis = Box * 0.01L;
-
-    libConverterToArinc429(&mhsensor_data.Mag_x, xaxis);
-    libConverterToArinc429(&mhsensor_data.Mag_y, yaxis);
-    libConverterToArinc429(&mhsensor_data.Mag_z, zaxis);
+    libConverterToArinc429(&mhsensor_data.Mag_x, Box);
+    libConverterToArinc429(&mhsensor_data.Mag_y, Boy);
+    libConverterToArinc429(&mhsensor_data.Mag_z, Boz);
 }
 
 
@@ -189,10 +185,13 @@ static void libConverterToArinc429(int16_t *pmag, float64_t fluxOut)
 {
     int16_t returntMagnectic;
     float64_t flux;
+    float64_t flux_uT;
     // 1. 필터된 자기장 값이 음수이면 psigmag 값을 1, 양수이면 0으로 설정, 자기장 값을 레졸류션값으로 나누어 데이터를 본환한다.
     // 변환된 자기장 값은 14이내로 표현해야 한다.
 
-    flux = fluxOut * MAG_RESOLUTION;
+    flux_uT = fluxOut * 0.01L;
+
+    flux = flux_uT * MAG_RESOLUTION;
     returntMagnectic = (int16_t)flux;
 
     *pmag  =  returntMagnectic;

@@ -40,7 +40,7 @@ void main(void)
     while(1)
     {
 
-#if 1
+#if 0
 		static uint16_t jump = 7;
 
         if(jump == 4U)      Can_State_Ptr = &status_mode;
