@@ -40,7 +40,7 @@ void initEPWM(void)
 
 	// 6. 클록 프리스케일러 설정
     EPWM_setClockPrescaler(EPWM1_BASE,
-                           EPWM_CLOCK_DIVIDER_1,
+                           EPWM_CLOCK_DIVIDER_2,
                            EPWM_HSCLOCK_DIVIDER_1);
 
 	// 7. 타임베이스 카운터 모드 설정

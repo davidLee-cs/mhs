@@ -14,6 +14,11 @@
 
 
 #define MAG_RESOLUTION      (32768.0L/200.0L)  // +/-range / 2^15
+#define MAX_100UH           (10000)
+#define MIN_100UH           (-10000)
+#define MAX_120UH           (12000)
+#define MIN_120UH           (-12000)
+
 
 float64_t Box = 0.0L;  //자기장 x축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000 
 float64_t Boy = 0.0L;  //자기장 y축, 단위 gauss, 정밀도 100nT , 범위    -10000 ~ +10000 
@@ -82,6 +87,9 @@ void MeasureFlux(void)
     int16_t realBy;
     int16_t realBz;
 
+    int16_t maxBvalue;
+    int16_t minBvalue;
+
     // 1.x,y,z 축별로 자기장값 계산 = (필터링 된 adc 값 - 옵셋) * 게인 
     int16_t fluxX0 = filterBx - mhsensor_calibration_Data.Offset_Bx;
     gAverageADC_B[0] = ((float64_t)(fluxX0)) * mhsensor_calibration_Data.Gain_Bx;
@@ -116,26 +124,37 @@ void MeasureFlux(void)
 
 
     // 4. 각 축별 최대(100uT)이상, 최소(-100uT)이하이면 최대 설정값으로 저장
-    if(realBx > 10000)
+    if(factory_Fluxmode == 1U)
     {
-        Box = 10000.0L;
+        maxBvalue = MAX_120UH;
+        minBvalue = MIN_120UH;
     }
-    else if(realBx < -10000)
+    else
     {
-        Box = -10000.0L;
+        maxBvalue = MAX_100UH;
+        minBvalue = MIN_100UH;
+    }
+
+    if(realBx > maxBvalue)
+    {
+        Box = (float64_t)maxBvalue;
+    }
+    else if(realBx < minBvalue)
+    {
+        Box = (float64_t)minBvalue;
     }
     else
     {
         Box = (float64_t)realBx;
     }
 
-    if(realBy > 10000)
+    if(realBy > maxBvalue)
     {
-        Boy = 10000.0L;
+        Boy = (float64_t)maxBvalue;
     }
-    else if(realBy < -10000)
+    else if(realBy < minBvalue)
     {
-        Boy = -10000.0L;
+        Boy = (float64_t)minBvalue;
     }
     else
     {
@@ -143,13 +162,13 @@ void MeasureFlux(void)
     }
 
 
-    if(realBz > 10000)
+    if(realBz > maxBvalue)
     {
-        Boz = 10000.0L;
+        Boz = (float64_t)maxBvalue;
     }
-    else if(realBz < -10000)
+    else if(realBz < minBvalue)
     {
-        Boz = -10000.0L;
+        Boz = (float64_t)minBvalue;
     }
     else
     {

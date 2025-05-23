@@ -20,6 +20,7 @@ void (*Can_State_Ptr)(void);        // 다음 수행될 모드를 가르키는 함수 포인터
 									// 다음 cycle  수행시 Can_State_Ptr 가 가르키는 모드 함수가 실행됨.
 
 uint16_t calibration_mode;
+uint16_t factory_Fluxmode;
 
 
 // 기능 : Discrete SW 1,2 를 통해 모드 선택하는 함수
@@ -67,18 +68,21 @@ void status_mode(void)
     else if((Discrete_1_val == 1U) && (Discrete_2_val == 0U))
     {
         calibration_mode = 1U;
+        factory_Fluxmode = 0U;
         Can_State_Ptr = &calibrationMode;
     } 
     else if ((Discrete_1_val == 0U) && (Discrete_2_val == 1U))
     {
         calibration_mode = 0U;
         gfirstOpen_factory = 1U;
+        factory_Fluxmode = 1U;
         Interrupt_enable(INT_mySCI0_TX);
         Can_State_Ptr = &factory_mode;
     }
     else 
     {
         calibration_mode = 0U;
+        factory_Fluxmode = 0U;
 		Can_State_Ptr = &operation_mode;
     };
 
