@@ -123,7 +123,8 @@ void MeasureFlux(void)
     }
 
 
-    // 4. 각 축별 최대(100uT)이상, 최소(-100uT)이하이면 최대 설정값으로 저장
+    // 4. 각 축별 최대, 최소값을 factory mode 일때는 +/-120 uT 설정,
+    // operation mode와 calibration mode는 +/-100uT 로 설정
     if(factory_Fluxmode == 1U)
     {
         maxBvalue = MAX_120UH;
@@ -160,7 +161,6 @@ void MeasureFlux(void)
     {
         Boy = (float64_t)realBy;
     }
-
 
     if(realBz > maxBvalue)
     {
